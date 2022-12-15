@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0225D73B581E7D28865A6AFC /* Pods_FineWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60083421A9AE12EAF7F583BB /* Pods_FineWeather.framework */; };
 		6677E510294A10E60045D348 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E50F294A10E60045D348 /* AppDelegate.swift */; };
 		6677E512294A10E60045D348 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E511294A10E60045D348 /* SceneDelegate.swift */; };
 		6677E514294A10E60045D348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E513294A10E60045D348 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		430820F355C38261D98FA865 /* Pods-FineWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.release.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.release.xcconfig"; sourceTree = "<group>"; };
+		60083421A9AE12EAF7F583BB /* Pods_FineWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FineWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6677E50C294A10E60045D348 /* FineWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6677E50F294A10E60045D348 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6677E511294A10E60045D348 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		6677E518294A10E70045D348 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6677E51B294A10E70045D348 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6677E51D294A10E70045D348 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.debug.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0225D73B581E7D28865A6AFC /* Pods_FineWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				6677E50E294A10E60045D348 /* FineWeather */,
 				6677E50D294A10E60045D348 /* Products */,
+				F5B128A1774BC0ADEEA5B5D9 /* Pods */,
+				7946217D6117E0AF5822CB78 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = FineWeather;
 			sourceTree = "<group>";
 		};
+		7946217D6117E0AF5822CB78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60083421A9AE12EAF7F583BB /* Pods_FineWeather.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5B128A1774BC0ADEEA5B5D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */,
+				430820F355C38261D98FA865 /* Pods-FineWeather.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6677E520294A10E70045D348 /* Build configuration list for PBXNativeTarget "FineWeather" */;
 			buildPhases = (
+				A9E63BF1E362AED41CFF0A38 /* [CP] Check Pods Manifest.lock */,
 				6677E508294A10E60045D348 /* Sources */,
 				6677E509294A10E60045D348 /* Frameworks */,
 				6677E50A294A10E60045D348 /* Resources */,
+				9AF94666783E938CC60099A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -103,7 +130,7 @@
 				};
 			};
 			buildConfigurationList = 6677E507294A10E60045D348 /* Build configuration list for PBXProject "FineWeather" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AF94666783E938CC60099A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FineWeather/Pods-FineWeather-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FineWeather/Pods-FineWeather-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FineWeather/Pods-FineWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9E63BF1E362AED41CFF0A38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FineWeather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6677E508294A10E60045D348 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		6677E521294A10E70045D348 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +380,7 @@
 		};
 		6677E522294A10E70045D348 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430820F355C38261D98FA865 /* Pods-FineWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
