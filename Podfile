@@ -8,6 +8,7 @@ target 'FineWeather' do
   pod 'Alamofire'
   pod 'RealmSwift', '~>10'  
   pod 'SideMenu'
+  pod 'SnapKit', '~> 5.6.0'
 
   # Pods for FineWeather
 

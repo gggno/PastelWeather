@@ -6,11 +6,13 @@ PODS:
   - RealmSwift (10.32.1):
     - Realm (= 10.32.1)
   - SideMenu (6.5.0)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Alamofire
   - RealmSwift (~> 10)
   - SideMenu
+  - SnapKit (~> 5.6.0)
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SideMenu
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   Realm: fd821b81e5479be497cc5bca2e020f707d8323eb
   RealmSwift: 8635e4cc524790916d72b0ffa51c1a91f4ec9668
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: efb8c44b7738bace49d51986729a41836c3ab7e2
+PODFILE CHECKSUM: 749adb1958a284044f30ced1805906466c833511
 
 COCOAPODS: 1.11.2
