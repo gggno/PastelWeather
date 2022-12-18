@@ -12,9 +12,11 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = .systemYellow
-        self.title = "경기도"
-        self.navigationController?.navigationBar.backgroundColor = .blue
+        self.title = "경기도 부천시"
+        
+            
         
         let contentLabel: UILabel = {
             let label = UILabel()
@@ -28,8 +30,7 @@ class MainViewController: UIViewController {
         let containerView: UIView = {
             let view = UIView()
             
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .brown
+            view.backgroundColor = .red
             view.addSubview(contentLabel)
             
             return view
@@ -46,7 +47,6 @@ class MainViewController: UIViewController {
             let scroll = UIScrollView()
             scroll.alwaysBounceVertical = true // 항상 세로
             scroll.isUserInteractionEnabled = true // 사용자의 상호작용
-            scroll.translatesAutoresizingMaskIntoConstraints = false
             
             scroll.addSubview(containerView)
             

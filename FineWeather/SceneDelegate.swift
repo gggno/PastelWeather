@@ -23,6 +23,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let mainVC = MainViewController() // 처음 보일 viewController
         let naviVC = UINavigationController(rootViewController: mainVC)
+        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = .purple
+            naviVC.navigationBar.standardAppearance = navBarAppearance
+            naviVC.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         window?.rootViewController = naviVC // 위에서 만든 viewController를 첫 화면으로 띄우기
         
         window?.makeKeyAndVisible() // 화면에 보이게끔
