@@ -16,6 +16,17 @@ class MainViewController: UIViewController {
         self.view.backgroundColor = .systemYellow
         self.title = "경기도 부천시"
         
+        self.navigationItem.leftBarButtonItem = {
+            let button = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(sideMenuBtnClicked(_:)))
+            
+            return button
+        }()
+        self.navigationItem.rightBarButtonItem = {
+            let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
+            
+            return button
+        }()
+        
         let titleView: UIView = {
             let view = UIView()
             
@@ -109,7 +120,16 @@ class MainViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
     
+    // 버튼 클릭 메서드
+    @objc func sideMenuBtnClicked(_ sender: UIButton) {
+         print("MainVC - sideMenuBtnClicked() called")
+     }
+    
+    @objc func plusBtnClicked(_ sender: UIButton) {
+        print("MainVC - plusBtnClicked() called")
+
     }
 
 }
