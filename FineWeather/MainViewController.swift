@@ -14,19 +14,25 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemYellow
+        
+        // MARK: - 메인화면 내비게이션 요소 설정
         self.title = "경기도 부천시"
         
         self.navigationItem.leftBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(sideMenuBtnClicked(_:)))
-            
-            return button
-        }()
-        self.navigationItem.rightBarButtonItem = {
-            let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
+            button.tintColor = .white
             
             return button
         }()
         
+        self.navigationItem.rightBarButtonItem = {
+            let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
+            button.tintColor = .white
+            
+            return button
+        }()
+        
+        // MARK: - 스크롤뷰에 넣을 요소 설정
         let titleView: UIView = {
             let view = UIView()
             
@@ -125,10 +131,15 @@ class MainViewController: UIViewController {
     // 버튼 클릭 메서드
     @objc func sideMenuBtnClicked(_ sender: UIButton) {
          print("MainVC - sideMenuBtnClicked() called")
+        let sideMenu = SideMenuNavigation(rootViewController: SideMenuViewController())
+        
+        present(sideMenu, animated: true)
      }
     
     @objc func plusBtnClicked(_ sender: UIButton) {
         print("MainVC - plusBtnClicked() called")
+        
+        self.navigationController?.pushViewController(PlusViewController(), animated: true)
 
     }
 
