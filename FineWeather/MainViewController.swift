@@ -53,8 +53,42 @@ class MainViewController: UIViewController {
             return label
         }()
         
-        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", temp: "10도")
-        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", temp: "1도")
+        let titleInTempNum: UILabel = {
+            let label = UILabel()
+            label.backgroundColor = .magenta
+            label.textAlignment = .center
+            label.font = label.font.withSize(40)
+            label.text = "-7"
+            
+            return label
+        }()
+        
+        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red, temp: "10도")
+        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue, temp: "1도")
+        
+        let titleInTempStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [titleInmaxTempStackView, titleInminTempStackView])
+            
+            stackView.axis = .vertical
+            stackView.spacing = 20
+            stackView.alignment = .fill
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        let titleInTopTempStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [titleInTempNum, titleInTempStackView])
+            
+            stackView.axis = .horizontal
+            stackView.spacing = 20
+            stackView.alignment = .center
+            stackView.distribution = .equalSpacing
+            
+            return stackView
+        }()
+        
+        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white, temp: "-13도")
         
         
         let titleView: UIView = {
@@ -63,8 +97,8 @@ class MainViewController: UIViewController {
             view.backgroundColor = .systemCyan
             view.addSubview(titleInImageView)
             view.addSubview(titleInWeatherTextLabel)
-            view.addSubview(titleInmaxTempStackView)
-            view.addSubview(titleInminTempStackView)
+            view.addSubview(titleInTopTempStackView)
+            view.addSubview(titleInBottomStackView)
             
             return view
         }()
@@ -108,7 +142,7 @@ class MainViewController: UIViewController {
         titleInImageView.snp.makeConstraints { make in
             make.size.equalTo(90)
             make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(20)
         }
         
         titleInWeatherTextLabel.snp.makeConstraints { make in
@@ -118,19 +152,19 @@ class MainViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-20)
         }
         
-        titleInmaxTempStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-10)
+        titleInTopTempStackView.snp.makeConstraints { make in
+            make.top.equalTo(titleInImageView.snp.top)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
-        titleInminTempStackView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-20)
-            make.trailing.equalToSuperview().offset(-10)
+        titleInBottomStackView.snp.makeConstraints { make in
+            make.top.equalTo(titleInTopTempStackView.snp.bottom).offset(30)
+            make.leading.equalTo(titleInTopTempStackView.snp.leading)
+            make.trailing.equalTo(titleInTopTempStackView.snp.trailing)
         }
-        
         
         titleView.snp.makeConstraints { make in
-            make.size.equalTo(180)
+            make.size.equalTo(170)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
