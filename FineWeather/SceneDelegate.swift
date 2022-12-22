@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = .purple
+            navBarAppearance.backgroundColor = .clear
             naviVC.navigationBar.standardAppearance = navBarAppearance
             naviVC.navigationBar.scrollEdgeAppearance = navBarAppearance
         }

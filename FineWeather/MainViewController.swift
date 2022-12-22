@@ -33,10 +33,38 @@ class MainViewController: UIViewController {
         }()
         
         // MARK: - 스크롤뷰에 넣을 요소 설정
+        
+        // MARK: - titleView 요소 설정
+        let titleInImageView: UIImageView = {
+            let imageView = UIImageView()
+            
+            imageView.image = UIImage(systemName: "sun.max.fill")
+            imageView.backgroundColor = .white
+            
+            return imageView
+        }()
+        
+        let titleInWeatherTextLabel: UILabel = {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.backgroundColor = .white
+            label.text = "맑음"
+            
+            return label
+        }()
+        
+        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", temp: "10도")
+        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", temp: "1도")
+        
+        
         let titleView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .gray
+            view.backgroundColor = .systemCyan
+            view.addSubview(titleInImageView)
+            view.addSubview(titleInWeatherTextLabel)
+            view.addSubview(titleInmaxTempStackView)
+            view.addSubview(titleInminTempStackView)
             
             return view
         }()
@@ -68,7 +96,7 @@ class MainViewController: UIViewController {
         let containerView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .red
+            view.backgroundColor = .clear
             view.addSubview(titleView)
             view.addSubview(titleView2)
             view.addSubview(titleView3)
@@ -77,11 +105,35 @@ class MainViewController: UIViewController {
             return view
         }()
         
+        titleInImageView.snp.makeConstraints { make in
+            make.size.equalTo(90)
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(10)
+        }
+        
+        titleInWeatherTextLabel.snp.makeConstraints { make in
+            make.width.equalTo(90)
+            make.height.equalTo(30)
+            make.leading.equalTo(titleInImageView.snp.leading)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+        
+        titleInmaxTempStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-10)
+        }
+        
+        titleInminTempStackView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-10)
+        }
+        
+        
         titleView.snp.makeConstraints { make in
             make.size.equalTo(180)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(30)
+            make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
         titleView2.snp.makeConstraints { make in
@@ -166,5 +218,4 @@ struct MainViewControllerPresentable_PreviewProvider: PreviewProvider {
             .ignoresSafeArea()
     }
 }
-
 #endif
