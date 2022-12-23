@@ -37,7 +37,33 @@ class MainViewController: UIViewController {
         // MARK: - titleView 요소 설정
         let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: "-9", maxTmp: "-7", minTmp: "-13", fellTmp: "-20")
         
-        let titleView2: UIView = {
+        // MARK: - dayWeatherView 요소 설정
+        let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
+        let dayInstackView2 = CustomDayStackView().dayStackViewSetting(time: "오후 10시", image: "sun.max.fill", tmp: "-12")
+        
+        let dayWeatherView: UIView = {
+            let view = UIView()
+            
+            view.backgroundColor = .systemGreen
+            
+            view.addSubview(dayInstackView1)
+            view.addSubview(dayInstackView2)
+            return view
+        }()
+        
+        dayInstackView1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
+            make.leading.equalToSuperview().offset(10)
+        }
+        dayInstackView2.snp.makeConstraints { make in
+            make.top.equalTo(dayInstackView1.snp.top)
+            make.bottom.equalTo(dayInstackView1.snp.bottom)
+            make.leading.equalTo(dayInstackView1.snp.trailing).offset(20)
+        }
+        
+        
+        let emptyView3: UIView = {
             let view = UIView()
             
             view.backgroundColor = .gray
@@ -45,15 +71,7 @@ class MainViewController: UIViewController {
             return view
         }()
         
-        let titleView3: UIView = {
-            let view = UIView()
-            
-            view.backgroundColor = .gray
-            
-            return view
-        }()
-        
-        let titleView4: UIView = {
+        let emptyView4: UIView = {
             let view = UIView()
             
             view.backgroundColor = .gray
@@ -66,13 +84,16 @@ class MainViewController: UIViewController {
             
             view.backgroundColor = .clear
             view.addSubview(titleView)
-            view.addSubview(titleView2)
-            view.addSubview(titleView3)
-            view.addSubview(titleView4)
+            view.addSubview(dayWeatherView)
+            view.addSubview(emptyView3)
+            view.addSubview(emptyView4)
 
             return view
         }()
         
+        // MARK: - 스크롤뷰에 넣을 요소 레이아웃
+        
+        // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
             make.size.equalTo(170)
             make.top.equalToSuperview()
@@ -80,23 +101,24 @@ class MainViewController: UIViewController {
             make.leading.equalTo(containerView.snp.leading).offset(30)
         }
         
-        titleView2.snp.makeConstraints { make in
-            make.size.equalTo(240)
+        dayWeatherView.snp.makeConstraints { make in
+            make.size.equalTo(150)
+            
             make.top.equalTo(titleView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
-        titleView3.snp.makeConstraints { make in
+        emptyView3.snp.makeConstraints { make in
             make.size.equalTo(340)
-            make.top.equalTo(titleView2.snp.bottom).offset(40)
+            make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
-        titleView4.snp.makeConstraints { make in
+        emptyView4.snp.makeConstraints { make in
             make.size.equalTo(440)
-            make.top.equalTo(titleView3.snp.bottom).offset(40)
+            make.top.equalTo(emptyView3.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)

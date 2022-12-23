@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// titleView 구성
 extension MainViewController {
     
     func titleViewSetting(presentImage: String, presentText: String, presentTmp: String, maxTmp: String, minTmp: String, fellTmp: String) -> UIView {
