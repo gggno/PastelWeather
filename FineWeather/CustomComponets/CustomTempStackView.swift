@@ -33,7 +33,7 @@ class CustomTempStackView: UIStackView {
         tempNameLabel.textColor = tempNameColor
         
         stackView.axis = .horizontal
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         

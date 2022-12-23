@@ -35,73 +35,7 @@ class MainViewController: UIViewController {
         // MARK: - 스크롤뷰에 넣을 요소 설정
         
         // MARK: - titleView 요소 설정
-        let titleInImageView: UIImageView = {
-            let imageView = UIImageView()
-            
-            imageView.image = UIImage(systemName: "sun.max.fill")
-            imageView.backgroundColor = .white
-            
-            return imageView
-        }()
-        
-        let titleInWeatherTextLabel: UILabel = {
-            let label = UILabel()
-            label.textAlignment = .center
-            label.backgroundColor = .white
-            label.text = "맑음"
-            
-            return label
-        }()
-        
-        let titleInTempNum: UILabel = {
-            let label = UILabel()
-            label.backgroundColor = .magenta
-            label.textAlignment = .center
-            label.font = label.font.withSize(40)
-            label.text = "-7"
-            
-            return label
-        }()
-        
-        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red, temp: "10도")
-        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue, temp: "1도")
-        
-        let titleInTempStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [titleInmaxTempStackView, titleInminTempStackView])
-            
-            stackView.axis = .vertical
-            stackView.spacing = 20
-            stackView.alignment = .fill
-            stackView.distribution = .fillEqually
-            
-            return stackView
-        }()
-        
-        let titleInTopTempStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [titleInTempNum, titleInTempStackView])
-            
-            stackView.axis = .horizontal
-            stackView.spacing = 20
-            stackView.alignment = .center
-            stackView.distribution = .equalSpacing
-            
-            return stackView
-        }()
-        
-        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white, temp: "-13도")
-        
-        
-        let titleView: UIView = {
-            let view = UIView()
-            
-            view.backgroundColor = .systemCyan
-            view.addSubview(titleInImageView)
-            view.addSubview(titleInWeatherTextLabel)
-            view.addSubview(titleInTopTempStackView)
-            view.addSubview(titleInBottomStackView)
-            
-            return view
-        }()
+        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: "-9", maxTmp: "-7", minTmp: "-13", fellTmp: "-20")
         
         let titleView2: UIView = {
             let view = UIView()
@@ -139,56 +73,32 @@ class MainViewController: UIViewController {
             return view
         }()
         
-        titleInImageView.snp.makeConstraints { make in
-            make.size.equalTo(90)
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(20)
-        }
-        
-        titleInWeatherTextLabel.snp.makeConstraints { make in
-            make.width.equalTo(90)
-            make.height.equalTo(30)
-            make.leading.equalTo(titleInImageView.snp.leading)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        
-        titleInTopTempStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleInImageView.snp.top)
-            make.trailing.equalToSuperview().offset(-20)
-        }
-        
-        titleInBottomStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleInTopTempStackView.snp.bottom).offset(30)
-            make.leading.equalTo(titleInTopTempStackView.snp.leading)
-            make.trailing.equalTo(titleInTopTempStackView.snp.trailing)
-        }
-        
         titleView.snp.makeConstraints { make in
             make.size.equalTo(170)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(20)
+            make.leading.equalTo(containerView.snp.leading).offset(30)
         }
         
         titleView2.snp.makeConstraints { make in
             make.size.equalTo(240)
             make.top.equalTo(titleView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(30)
+            make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
         titleView3.snp.makeConstraints { make in
             make.size.equalTo(340)
             make.top.equalTo(titleView2.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(30)
+            make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
         titleView4.snp.makeConstraints { make in
             make.size.equalTo(440)
             make.top.equalTo(titleView3.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(30)
+            make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
         }
         

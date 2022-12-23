@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0225D73B581E7D28865A6AFC /* Pods_FineWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60083421A9AE12EAF7F583BB /* Pods_FineWeather.framework */; };
 		66524D7D295485B700263F00 /* CustomTempStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66524D7C295485B700263F00 /* CustomTempStackView.swift */; };
+		6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */; };
 		6677E510294A10E60045D348 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E50F294A10E60045D348 /* AppDelegate.swift */; };
 		6677E512294A10E60045D348 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E511294A10E60045D348 /* SceneDelegate.swift */; };
 		6677E519294A10E70045D348 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6677E518294A10E70045D348 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		430820F355C38261D98FA865 /* Pods-FineWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.release.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.release.xcconfig"; sourceTree = "<group>"; };
 		60083421A9AE12EAF7F583BB /* Pods_FineWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FineWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66524D7C295485B700263F00 /* CustomTempStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTempStackView.swift; sourceTree = "<group>"; };
+		6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_TitleView.swift"; sourceTree = "<group>"; };
 		6677E50C294A10E60045D348 /* FineWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6677E50F294A10E60045D348 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6677E511294A10E60045D348 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 			path = CustomComponets;
 			sourceTree = "<group>";
 		};
+		6657B50929559145007D9E71 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
 		6677E503294A10E60045D348 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 		6677E50E294A10E60045D348 /* FineWeather */ = {
 			isa = PBXGroup;
 			children = (
+				6657B50929559145007D9E71 /* Extention */,
 				66524D7E295485F300263F00 /* CustomComponets */,
 				6677E50F294A10E60045D348 /* AppDelegate.swift */,
 				6677E511294A10E60045D348 /* SceneDelegate.swift */,
@@ -228,6 +239,7 @@
 				6677E512294A10E60045D348 /* SceneDelegate.swift in Sources */,
 				667D502F2950A185002453AA /* PlusViewController.swift in Sources */,
 				667D50332950A42D002453AA /* SideMenuViewController.swift in Sources */,
+				6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */,
 				668256E0294B544A007D5F27 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
