@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
             return button
         }()
         
-        // MARK: - 스크롤뷰에 넣을 요소 설정
+        // MARK: - 메인 스크롤뷰에 넣을 요소 설정
         
         // MARK: - titleView 요소 설정
         let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: "-9", maxTmp: "-7", minTmp: "-13", fellTmp: "-20")
@@ -40,28 +40,43 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
         let dayInstackView2 = CustomDayStackView().dayStackViewSetting(time: "오후 10시", image: "sun.max.fill", tmp: "-12")
+        let dayInstackView3 = CustomDayStackView().dayStackViewSetting(time: "오후 11시", image: "sun.max.fill", tmp: "-13")
+        let dayInstackView4 = CustomDayStackView().dayStackViewSetting(time: "오전 01시", image: "sun.max.fill", tmp: "-14")
+        let dayInstackView5 = CustomDayStackView().dayStackViewSetting(time: "오전 02시", image: "sun.max.fill", tmp: "-14")
+        let dayInstackView6 = CustomDayStackView().dayStackViewSetting(time: "오전 03시", image: "sun.max.fill", tmp: "-15")
+        let dayInstackView7 = CustomDayStackView().dayStackViewSetting(time: "오전 04시", image: "sun.max.fill", tmp: "-15")
+        
+        let hstackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [dayInstackView1, dayInstackView2, dayInstackView3, dayInstackView4, dayInstackView5, dayInstackView6, dayInstackView7])
+            
+            stackView.axis = .horizontal
+            stackView.spacing = 10
+            stackView.alignment = .fill
+            stackView.distribution = .fillEqually
+            
+            return stackView
+        }()
+        
+        let dayInScrollView: UIScrollView = {
+            let scrollView = UIScrollView()
+            
+            scrollView.alwaysBounceHorizontal = true
+            scrollView.isUserInteractionEnabled = true
+            
+            scrollView.addSubview(hstackView)
+            
+            return scrollView
+        }()
         
         let dayWeatherView: UIView = {
             let view = UIView()
             
             view.backgroundColor = .systemGreen
             
-            view.addSubview(dayInstackView1)
-            view.addSubview(dayInstackView2)
+            view.addSubview(dayInScrollView)
+            
             return view
         }()
-        
-        dayInstackView1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
-            make.leading.equalToSuperview().offset(10)
-        }
-        dayInstackView2.snp.makeConstraints { make in
-            make.top.equalTo(dayInstackView1.snp.top)
-            make.bottom.equalTo(dayInstackView1.snp.bottom)
-            make.leading.equalTo(dayInstackView1.snp.trailing).offset(20)
-        }
-        
         
         let emptyView3: UIView = {
             let view = UIView()
@@ -91,7 +106,7 @@ class MainViewController: UIViewController {
             return view
         }()
         
-        // MARK: - 스크롤뷰에 넣을 요소 레이아웃
+        // MARK: - 메인 스크롤뷰에 넣을 요소 레이아웃
         
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
@@ -99,14 +114,31 @@ class MainViewController: UIViewController {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
+            make.bottom.equalTo(dayWeatherView.snp.top).offset(-40)
+        }
+        
+        // MARK: - dayWeatherView 요소 레이아웃
+        
+        dayInstackView1.snp.makeConstraints { make in
+            make.width.equalTo(80)
+        }
+        
+        hstackView.snp.makeConstraints { make in
+            make.height.equalTo(dayInScrollView.frameLayoutGuide.snp.height)
+            make.edges.equalTo(dayInScrollView.contentLayoutGuide.snp.edges)
         }
         
         dayWeatherView.snp.makeConstraints { make in
-            make.size.equalTo(150)
-            
-            make.top.equalTo(titleView.snp.bottom).offset(40)
+
             make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            
+//            make.edges.equalTo(dayInScrollView.contentLayoutGuide.snp.edges)
+//            make.height.equalTo(dayInScrollView.frameLayoutGuide.snp.height)
+        }
+        
+        dayInScrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
         emptyView3.snp.makeConstraints { make in

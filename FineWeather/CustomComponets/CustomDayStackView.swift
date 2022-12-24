@@ -32,7 +32,7 @@ class CustomDayStackView: UIStackView {
         let stackView = UIStackView(arrangedSubviews: [dayInTimeLabel, dayInImageView, dayInTmpLabel])
         
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 25
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         
