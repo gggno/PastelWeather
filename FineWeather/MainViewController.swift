@@ -110,15 +110,13 @@ class MainViewController: UIViewController {
         
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
-            make.size.equalTo(170)
+            make.height.equalTo(170)
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
-            make.bottom.equalTo(dayWeatherView.snp.top).offset(-40)
         }
         
         // MARK: - dayWeatherView 요소 레이아웃
-        
         dayInstackView1.snp.makeConstraints { make in
             make.width.equalTo(80)
         }
@@ -129,12 +127,9 @@ class MainViewController: UIViewController {
         }
         
         dayWeatherView.snp.makeConstraints { make in
-
             make.centerX.equalToSuperview()
+            make.top.equalTo(titleView.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(20)
-            
-//            make.edges.equalTo(dayInScrollView.contentLayoutGuide.snp.edges)
-//            make.height.equalTo(dayInScrollView.frameLayoutGuide.snp.height)
         }
         
         dayInScrollView.snp.makeConstraints { make in
@@ -142,14 +137,14 @@ class MainViewController: UIViewController {
         }
         
         emptyView3.snp.makeConstraints { make in
-            make.size.equalTo(340)
+            make.height.equalTo(340)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
         emptyView4.snp.makeConstraints { make in
-            make.size.equalTo(440)
+            make.height.equalTo(440)
             make.top.equalTo(emptyView3.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
