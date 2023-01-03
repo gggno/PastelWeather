@@ -103,6 +103,14 @@ extension MainViewController {
             make.centerX.equalTo(titleInTopTempStackView.snp.centerX)
         }
         
+        let weatherAPI = WeatherAPI()
+        weatherAPI.currentWeather(date: self.date, baseTime: self.time.rawValue) { response in
+            
+            print(response.response?.body?.items.item[0])
+            print((response.response?.body?.items.item[0].fcstValue)!)
+            titleInTempNum.text = (response.response?.body?.items.item[0].fcstValue)! + "˚"
+        }
+        
         return titleView
     }
 }

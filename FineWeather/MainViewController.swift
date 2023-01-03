@@ -7,9 +7,20 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class MainViewController: UIViewController {
-
+    
+    var date: String = {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYYMMdd"
+        
+        return formatter.string(from: date)
+    }()  
+    
+    var time: BaseTime = .fourteen
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,9 +44,11 @@ class MainViewController: UIViewController {
         }()
         
         // MARK: - 메인 스크롤뷰에 넣을 요소 설정
+        let weatherAPI = WeatherAPI()
         
         // MARK: - titleView 요소 설정
-        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: "-9", maxTmp: "-7", minTmp: "-13", fellTmp: "-20")
+        
+        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: self.tmp, maxTmp: "-7", minTmp: "-13", fellTmp: "-20") // 이곳에서의 tmp = -5
         
         // MARK: - dayWeatherView 요소 설정
         let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
@@ -102,7 +115,7 @@ class MainViewController: UIViewController {
             view.addSubview(dayWeatherView)
             view.addSubview(emptyView3)
             view.addSubview(emptyView4)
-
+            
             return view
         }()
         
@@ -118,7 +131,7 @@ class MainViewController: UIViewController {
         
         // MARK: - dayWeatherView 요소 레이아웃
         dayInstackView1.snp.makeConstraints { make in
-            make.width.equalTo(80)
+            make.width.equalTo(70)
         }
         
         hstackView.snp.makeConstraints { make in
@@ -171,23 +184,36 @@ class MainViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        
+        
+    }
+    
+    enum BaseTime: String {
+        case two = "0200"
+        case five = "0500"
+        case eight = "0800"
+        case eleven = "1100"
+        case fourteen = "1400"
+        case seventeen = "1700"
+        case twenty = "2000"
+        case twentyThree = "2300"
     }
     
     // 버튼 클릭 메서드
     @objc func sideMenuBtnClicked(_ sender: UIButton) {
-         print("MainVC - sideMenuBtnClicked() called")
+        print("MainVC - sideMenuBtnClicked() called")
         let sideMenu = SideMenuNavigation(rootViewController: SideMenuViewController())
         
         present(sideMenu, animated: true)
-     }
+    }
     
     @objc func plusBtnClicked(_ sender: UIButton) {
         print("MainVC - plusBtnClicked() called")
         
         self.navigationController?.pushViewController(PlusViewController(), animated: true)
-
     }
-
+    
 }
 
 #if DEBUG
