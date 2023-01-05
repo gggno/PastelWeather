@@ -11,15 +11,93 @@ import Alamofire
 
 class MainViewController: UIViewController {
     
-    var date: String = {
-        let date = Date()
+    var baseDate: String = {
+        let time = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYYMMdd"
+        formatter.dateFormat = "HH00"
         
-        return formatter.string(from: date)
-    }()  
+        // 현재시간이 0000~0200이면 전날 날짜의 2300시로 조회
+        if formatter.string(from: time) == "0000" || formatter.string(from: time) == "0100" || formatter.string(from: time) == "0200" {
+            let date = Date(timeIntervalSinceNow: -86400)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        }
+        // 현재시간이 0300~2300이면 오늘 날짜의 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300시로 조회
+        else {
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        }
+    }()
     
-    var time: BaseTime = .fourteen
+    var baseTime: String = {
+        let time = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH00"
+        
+        switch Int(formatter.string(from: time))! {
+        case 0000...0199:
+            print("0000...0159")
+            print("2300") // 어제 2300
+            return "2300"
+            
+        case 0200...0499:
+            print("0200...0459")
+            print("0200")
+            return "0200"
+            
+        case 0500...0799:
+            print("0500...0759")
+            print("0500")
+            return "0500"
+
+        case 0800...1099:
+            print("0800...1059")
+            print("0800")
+            return "0800"
+
+        case 1100...1399:
+            print("1100...1359")
+            print("1100")
+            return "1100"
+
+        case 1400...1699:
+            print("1400...1659")
+            print("1400")
+            return "1400"
+
+        case 1700...1999:
+            print("1700...1959")
+            print("1700")
+            return "1700"
+
+        case 2000...2299:
+            print("2000...2259")
+            print("2000")
+            return "2000"
+
+        case 2300...2359:
+            print("2300...2359")
+            print("2300") // 오늘 2300
+            return "2300"
+
+        default:
+            print("default")
+            return "0000"
+        }
+    }()
+    
+    var currentTime: String = {
+        let time = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH00"
+        
+        return formatter.string(from: time)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +126,7 @@ class MainViewController: UIViewController {
         
         // MARK: - titleView 요소 설정
         
-        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", presentTmp: self.tmp, maxTmp: "-7", minTmp: "-13", fellTmp: "-20") // 이곳에서의 tmp = -5
+        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", maxTmp: "-7", minTmp: "-13", fellTmp: "-20") // 매개변수 다 제거할 예정
         
         // MARK: - dayWeatherView 요소 설정
         let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
@@ -187,17 +265,6 @@ class MainViewController: UIViewController {
         
         
         
-    }
-    
-    enum BaseTime: String {
-        case two = "0200"
-        case five = "0500"
-        case eight = "0800"
-        case eleven = "1100"
-        case fourteen = "1400"
-        case seventeen = "1700"
-        case twenty = "2000"
-        case twentyThree = "2300"
     }
     
     // 버튼 클릭 메서드

@@ -11,7 +11,7 @@ import UIKit
 // titleView 구성
 extension MainViewController {
     
-    func titleViewSetting(presentImage: String, presentText: String, presentTmp: String, maxTmp: String, minTmp: String, fellTmp: String) -> UIView {
+    func titleViewSetting(presentImage: String, presentText: String, maxTmp: String, minTmp: String, fellTmp: String) -> UIView {
         
         let titleInImageView: UIImageView = {
             let imageView = UIImageView()
@@ -36,7 +36,7 @@ extension MainViewController {
             label.backgroundColor = .magenta
             label.textAlignment = .center
             label.font = label.font.withSize(40)
-            label.text = presentTmp + "˚"
+            // label.text는 통신 후에 결정
             
             return label
         }()
@@ -104,11 +104,22 @@ extension MainViewController {
         }
         
         let weatherAPI = WeatherAPI()
-        weatherAPI.currentWeather(date: self.date, baseTime: self.time.rawValue) { response in
+        weatherAPI.currentWeather(baseDate: self.baseDate, baseTime: self.baseTime) { response in
+            var index = 0
+            let difference = abs(Int(self.currentTime)! - Int(self.baseTime)!)
             
-            print(response.response?.body?.items.item[0])
-            print((response.response?.body?.items.item[0].fcstValue)!)
-            titleInTempNum.text = (response.response?.body?.items.item[0].fcstValue)! + "˚"
+            if difference == 2300 || difference == 100 {
+                index = 0
+            } else if difference == 2200 || difference == 200 {
+                index = 1
+            } else if difference == 2100 || difference == 300 {
+                index = 2
+            }
+            print("index: \(index)")
+            print(response.response?.body?.items.item[index])
+            print((response.response?.body?.items.item[index].fcstValue)!)
+            
+            titleInTempNum.text = (response.response?.body?.items.item[index].fcstValue)! + "˚"
         }
         
         return titleView

@@ -51,14 +51,14 @@ class WeatherAPI {
     }
     
     
-    func currentWeather(date: String, baseTime: String, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
+    func currentWeather(baseDate: String, baseTime: String, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
         
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
             "dataType" : "JSON",
-            "numOfRows" : 5,
+            "numOfRows" : 36,
             "pageNo" : 1,
-            "base_date" : date,
+            "base_date" : baseDate,
             "base_time" : baseTime,
             "nx" : 56,
             "ny" : 125
