@@ -20,7 +20,7 @@
 		667D50332950A42D002453AA /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D50322950A42D002453AA /* SideMenuViewController.swift */; };
 		668256E0294B544A007D5F27 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668256DF294B544A007D5F27 /* MainViewController.swift */; };
 		66CC510C295ABCBE00C47EEC /* CurrentTmpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510B295ABCBE00C47EEC /* CurrentTmpRequest.swift */; };
-		66CC510E295ABDBE00C47EEC /* CurrentTmpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* CurrentTmpResponse.swift */; };
+		66CC510E295ABDBE00C47EEC /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 		667D50322950A42D002453AA /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		668256DF294B544A007D5F27 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		66CC510B295ABCBE00C47EEC /* CurrentTmpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTmpRequest.swift; sourceTree = "<group>"; };
-		66CC510D295ABDBE00C47EEC /* CurrentTmpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTmpResponse.swift; sourceTree = "<group>"; };
+		66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.debug.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				66CC510B295ABCBE00C47EEC /* CurrentTmpRequest.swift */,
-				66CC510D295ABDBE00C47EEC /* CurrentTmpResponse.swift */,
+				66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -259,7 +259,7 @@
 				667D502F2950A185002453AA /* PlusViewController.swift in Sources */,
 				667D50332950A42D002453AA /* SideMenuViewController.swift in Sources */,
 				6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */,
-				66CC510E295ABDBE00C47EEC /* CurrentTmpResponse.swift in Sources */,
+				66CC510E295ABDBE00C47EEC /* WeatherResponse.swift in Sources */,
 				668256E0294B544A007D5F27 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

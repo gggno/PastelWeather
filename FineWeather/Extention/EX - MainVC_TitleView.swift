@@ -13,6 +13,7 @@ extension MainViewController {
     
     func titleViewSetting(presentImage: String, presentText: String, maxTmp: String, minTmp: String, fellTmp: String) -> UIView {
         
+        //MARK: - UI 로직
         let titleInImageView: UIImageView = {
             let imageView = UIImageView()
             
@@ -103,7 +104,10 @@ extension MainViewController {
             make.centerX.equalTo(titleInTopTempStackView.snp.centerX)
         }
         
+        //MARK: - 데이터 로직
         let weatherAPI = WeatherAPI()
+        
+        // 현재 온도 구현 로직
         weatherAPI.currentWeather(baseDate: self.baseDate, baseTime: self.baseTime) { response in
             var index = 0
             let difference = abs(Int(self.currentTime)! - Int(self.baseTime)!)
@@ -111,15 +115,22 @@ extension MainViewController {
             if difference == 2300 || difference == 100 {
                 index = 0
             } else if difference == 2200 || difference == 200 {
-                index = 1
+                index = 12
             } else if difference == 2100 || difference == 300 {
-                index = 2
+                index = 24
             }
-            print("index: \(index)")
-            print(response.response?.body?.items.item[index])
-            print((response.response?.body?.items.item[index].fcstValue)!)
             
-            titleInTempNum.text = (response.response?.body?.items.item[index].fcstValue)! + "˚"
+            print(response.response?.body?.items.item[index])
+            if let currentTmp = response.response?.body?.items.item[index].fcstValue {
+                // 현재온도
+                titleInTempNum.text = currentTmp + "˚"
+            } else { titleInTempNum.text = "-99" + "˚" }
+        }
+        
+        weatherAPI.maxMinWeather(baseDate: self.baseDate, currentTime: self.currentTime) { response in
+            print(response.response?.body?.items.item[0])
+            
+        
         }
         
         return titleView

@@ -68,7 +68,7 @@ class WeatherAPI {
             
             switch response.result {
             case .success(let value):
-                
+                print("현재 온도 통신 성공")
                 completion(value)
                 
             case .failure(let error):
@@ -77,7 +77,51 @@ class WeatherAPI {
         }
     }
     
-    func maxMinWeather(date: String, baseTime: String) { // 최저, 최고 온도 요청
+    func maxMinWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저, 최고 온도 요청
+        // 0000~0200이면 전날 날짜의 2000로 조회
+        // 0300~2300이면 오늘 날짜의 0200로 조회(0200으로 조회해야 tmn이 나옴)
+        // 해야할것
+        // 1.현재시간 0023인데 0200이 조회가 됨 0500는 안됨 -> 지금 시간 기준으로 가장 가깝게 업데이트 되는 시간으로 시험해보기(똑같긴 함.)
+        // 2. 이 함수를 어디에 호출하여 화면에 뿌려줄지...
+        var settingTime = "0200"
+        var settingNumOfRows = 12
+        var settingPageNo = 5
+        
+        if Int(currentTime)! <= 0200 {
+            settingTime = "2000"
+            settingNumOfRows = 12
+            settingPageNo = 11
+            
+        } else {
+            settingTime = "0200"
+            settingNumOfRows = 12
+            settingPageNo = 5
+        }
+        print("basedate:\(baseDate)")
+        print("maxMinTime: \(settingTime)")
+        
+        let params: Parameters = [
+            "serviceKey" : self.serviceKey,
+            "dataType" : "JSON",
+            "numOfRows" : settingNumOfRows,
+            "pageNo" : settingPageNo,
+            "base_date" : baseDate,
+            "base_time" : settingTime,
+            "nx" : 56,
+            "ny" : 125
+        ]
+        
+        AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
+            
+            switch response.result {
+            case .success(let value):
+                print("최고 최저 온도 통신 성공")
+                completion(value)
+                
+            case.failure(let error):
+                print("최고 최저 온도 통신 실패 에러 메시지: \(error)")
+            }
+        }
         
     }
     

@@ -40,50 +40,45 @@ class MainViewController: UIViewController {
         formatter.dateFormat = "HH00"
         
         switch Int(formatter.string(from: time))! {
-        case 0000...0199:
-            print("0000...0159")
-            print("2300") // 어제 2300
+        case 0000...0259:
+            print("0000...0259")
+            print("어제의 2300") // 어제 2300
             return "2300"
             
-        case 0200...0499:
-            print("0200...0459")
+        case 0300...0559:
+            print("0200...0559")
             print("0200")
             return "0200"
             
-        case 0500...0799:
-            print("0500...0759")
+        case 0600...0859:
+            print("0500...0859")
             print("0500")
             return "0500"
 
-        case 0800...1099:
-            print("0800...1059")
+        case 0900...1159:
+            print("0800...1159")
             print("0800")
             return "0800"
 
-        case 1100...1399:
-            print("1100...1359")
+        case 1200...1459:
+            print("1100...1459")
             print("1100")
             return "1100"
 
-        case 1400...1699:
-            print("1400...1659")
+        case 1500...1759:
+            print("1400...1759")
             print("1400")
             return "1400"
 
-        case 1700...1999:
-            print("1700...1959")
+        case 1800...2059:
+            print("1700...2059")
             print("1700")
             return "1700"
 
-        case 2000...2299:
-            print("2000...2259")
+        case 2100...2359:
+            print("2000...2359")
             print("2000")
             return "2000"
-
-        case 2300...2359:
-            print("2300...2359")
-            print("2300") // 오늘 2300
-            return "2300"
 
         default:
             print("default")
@@ -91,6 +86,7 @@ class MainViewController: UIViewController {
         }
     }()
     
+    // bsseTime과 차이를 비교하여 인덱스 값을 구하기 위한 용도
     var currentTime: String = {
         let time = Date()
         let formatter = DateFormatter()
