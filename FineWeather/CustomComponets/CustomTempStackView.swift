@@ -41,8 +41,7 @@ class CustomTempStackView: UIStackView {
                     self.tempLabel.text = "_ _" + "˚"
                 }
             }
-            tempNameLabel.text = tempName + ":"
-            tempLabel.text = "40" + "˚"
+            
         } else if tempName == "최저" {
             print("최저 온도")
             weatherAPI.minWeather(baseDate: DateValue.baseDate, currentTime: DateValue.currentTime) { response in
@@ -57,8 +56,45 @@ class CustomTempStackView: UIStackView {
             
         } else if tempName == "체감온도" {
             print("체감 온도")
-            tempNameLabel.text = tempName + ":"
-            tempLabel.text = "-50" + "˚"
+            
+            weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime) { response in
+                var index = 0
+                let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
+                
+                if difference == 2300 || difference == 100 {
+                    index = 0
+                } else if difference == 2200 || difference == 200 {
+                    index = 12
+                } else if difference == 2100 || difference == 300 {
+                    index = 24
+                }
+                
+                print("feelTmp: \(response.response?.body?.items.item[index])")
+                print("feelWSD: \(response.response?.body?.items.item[index+4])")
+                
+                guard let tmp = response.response?.body?.items.item[index].fcstValue else { return }
+                guard let wsd = response.response?.body?.items.item[index+4].fcstValue else { return }
+                print(tmp, wsd)
+                
+                let t = Double(tmp)! // 온도
+                let v = pow(Double(wsd)!, 0.16) // 풍속
+                
+                var tmpCal: Double?
+                tmpCal = round(13.12 + 0.6215 * t - 11.37 * v + 0.3965 * v * t)
+                
+                print(String(Int(tmpCal!)))
+                self.tempNameLabel.text = tempName + ":"
+                self.tempLabel.text = String(Int(tmpCal!)) + "˚"
+                
+//                if let feelTmp = tmpCal {
+//                    // 현재온도
+//                    self.tempNameLabel.text = tempName + ":"
+//                    self.tempLabel.text = feelTmp + "˚"
+//                } else {
+//                    self.tempNameLabel.text = tempName + ":"
+//                    self.tempLabel.text = "_ _" + "˚"
+//                }
+            }
         }
         
         tempNameLabel.textColor = tempNameColor
