@@ -11,7 +11,7 @@ import UIKit
 // titleView 구성
 extension MainViewController {
     
-    func titleViewSetting(presentImage: String, presentText: String, maxTmp: String, minTmp: String, fellTmp: String) -> UIView {
+    func titleViewSetting(presentImage: String, presentText: String, feelTmp: String) -> UIView {
         
         //MARK: - UI 로직
         let titleInImageView: UIImageView = {
@@ -37,13 +37,14 @@ extension MainViewController {
             label.backgroundColor = .magenta
             label.textAlignment = .center
             label.font = label.font.withSize(40)
+            label.text = "_ _"
             // label.text는 통신 후에 결정
             
             return label
         }()
         
-        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red, temp: maxTmp + "˚")
-        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue, temp: minTmp + "˚")
+        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red)
+        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue)
         
         let titleInTempStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [titleInmaxTempStackView, titleInminTempStackView])
@@ -67,7 +68,7 @@ extension MainViewController {
             return stackView
         }()
         
-        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white, temp: fellTmp)
+        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white)
         
         let titleView: UIView = {
             let view = UIView()
@@ -108,9 +109,9 @@ extension MainViewController {
         let weatherAPI = WeatherAPI()
         
         // 현재 온도 구현 로직
-        weatherAPI.currentWeather(baseDate: self.baseDate, baseTime: self.baseTime) { response in
+        weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime) { response in
             var index = 0
-            let difference = abs(Int(self.currentTime)! - Int(self.baseTime)!)
+            let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
             
             if difference == 2300 || difference == 100 {
                 index = 0
@@ -124,14 +125,10 @@ extension MainViewController {
             if let currentTmp = response.response?.body?.items.item[index].fcstValue {
                 // 현재온도
                 titleInTempNum.text = currentTmp + "˚"
-            } else { titleInTempNum.text = "-99" + "˚" }
+            } else { titleInTempNum.text = "_ _" }
         }
         
-        weatherAPI.maxMinWeather(baseDate: self.baseDate, currentTime: self.currentTime) { response in
-            print(response.response?.body?.items.item[0])
-            
         
-        }
         
         return titleView
     }

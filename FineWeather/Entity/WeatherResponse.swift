@@ -77,7 +77,7 @@ class WeatherAPI {
         }
     }
     
-    func maxMinWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저, 최고 온도 요청
+    func minWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저, 최고 온도 요청
         // 0000~0200이면 전날 날짜의 2000로 조회
         // 0300~2300이면 오늘 날짜의 0200로 조회(0200으로 조회해야 tmn이 나옴)
         // 해야할것
@@ -98,7 +98,7 @@ class WeatherAPI {
             settingPageNo = 5
         }
         print("basedate:\(baseDate)")
-        print("maxMinTime: \(settingTime)")
+        print("minTime: \(settingTime)")
         
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
@@ -115,14 +115,57 @@ class WeatherAPI {
             
             switch response.result {
             case .success(let value):
-                print("최고 최저 온도 통신 성공")
+                print("최저 온도 통신 성공")
                 completion(value)
                 
             case.failure(let error):
-                print("최고 최저 온도 통신 실패 에러 메시지: \(error)")
+                print("최저 온도 통신 실패 에러 메시지: \(error)")
             }
         }
+    }
+    
+    func maxWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) {
+        // 0000~1100이면 전날 날짜의 2000로 조회
+        // 1200~2300이면 오늘 날짜의 1100로 조회
+        var settingTime = "1100"
+        var settingNumOfRows = 12
+        var settingPageNo = 5
         
+        if Int(currentTime)! <= 0200 {
+            settingTime = "2000"
+            settingNumOfRows = 12
+            settingPageNo = 17
+            
+        } else {
+            settingTime = "1100"
+            settingNumOfRows = 12
+            settingPageNo = 5
+        }
+        print("basedate:\(baseDate)")
+        print("maxTime: \(settingTime)")
+        
+        let params: Parameters = [
+            "serviceKey" : self.serviceKey,
+            "dataType" : "JSON",
+            "numOfRows" : settingNumOfRows,
+            "pageNo" : settingPageNo,
+            "base_date" : baseDate,
+            "base_time" : settingTime,
+            "nx" : 56,
+            "ny" : 125
+        ]
+        
+        AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
+            
+            switch response.result {
+            case .success(let value):
+                print("최고 온도 통신 성공")
+                completion(value)
+                
+            case.failure(let error):
+                print("최고 온도 통신 실패 에러 메시지: \(error)")
+            }
+        }
     }
     
     
