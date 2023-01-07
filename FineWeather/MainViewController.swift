@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
         
         // MARK: - titleView 요소 설정
         
-        let titleView = titleViewSetting(presentImage: "sun.max.fill", presentText: "맑음", feelTmp: "-20") // 매개변수 다 제거할 예정
+        let titleView = titleViewSetting() // 매개변수 다 제거할 예정
         
         // MARK: - dayWeatherView 요소 설정
         let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")

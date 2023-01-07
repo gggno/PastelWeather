@@ -77,7 +77,7 @@ class WeatherAPI {
         }
     }
     
-    func minWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저, 최고 온도 요청
+    func minWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저 온도 요청
         // 0000~0200이면 전날 날짜의 2000로 조회
         // 0300~2300이면 오늘 날짜의 0200로 조회(0200으로 조회해야 tmn이 나옴)
         // 해야할것
@@ -124,7 +124,7 @@ class WeatherAPI {
         }
     }
     
-    func maxWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) {
+    func maxWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
         // 0000~1100이면 전날 날짜의 2000로 조회
         // 1200~2300이면 오늘 날짜의 1100로 조회
         var settingTime = "1100"
@@ -164,6 +164,32 @@ class WeatherAPI {
                 
             case.failure(let error):
                 print("최고 온도 통신 실패 에러 메시지: \(error)")
+            }
+        }
+    }
+    
+    func lookWeather(baseDate: String, baseTime: String, completion: @escaping (WeatherResponse) -> Void) {
+        
+        let params: Parameters = [
+            "serviceKey" : self.serviceKey,
+            "dataType" : "JSON",
+            "numOfRows" : 36,
+            "pageNo" : 1,
+            "base_date" : baseDate,
+            "base_time" : baseTime,
+            "nx" : 56,
+            "ny" : 125
+        ]
+        
+        AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
+            
+            switch response.result {
+            case .success(let value):
+                print("날씨 상태 통신 성공")
+                completion(value)
+                
+            case .failure(let error):
+                print("날씨 상태 통신 실패 에러 메시지: \(error)")
             }
         }
     }
