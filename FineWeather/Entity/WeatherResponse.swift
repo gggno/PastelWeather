@@ -131,12 +131,12 @@ class WeatherAPI {
         var settingNumOfRows = 12
         var settingPageNo = 5
         
-        if Int(currentTime)! <= 0200 {
+        if Int(currentTime)! <= 0200 { // 어제 날짜로 조회
             settingTime = "2000"
             settingNumOfRows = 12
-            settingPageNo = 17
+            settingPageNo = 20
             
-        } else {
+        } else {                        // 오늘 날짜로 조회
             settingTime = "1100"
             settingNumOfRows = 12
             settingPageNo = 5

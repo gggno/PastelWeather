@@ -26,7 +26,7 @@ extension MainViewController {
         let titleInWeatherTextLabel: UILabel = {
             let label = UILabel()
             label.textAlignment = .center
-            label.backgroundColor = .white
+            label.backgroundColor = .clear
             label.text = "_ _"
             
             return label

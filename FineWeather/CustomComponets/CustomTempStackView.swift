@@ -32,13 +32,25 @@ class CustomTempStackView: UIStackView {
         if tempName == "최고" {
             print("최고 온도")
             weatherAPI.maxWeather(baseDate: DateValue.baseDate, currentTime: DateValue.currentTime) { response in
-                print("max:\(response.response?.body?.items.item[0])")
-                if let maxTmp = response.response?.body?.items.item[0].fcstValue {
-                    self.tempNameLabel.text = tempName + ":"
-                    self.tempLabel.text = maxTmp + "˚"
+                
+                if response.response?.body?.items.item[0].baseDate == response.response?.body?.items.item[0].fcstDate {
+                    print("날짜 같음max:\(response.response?.body?.items.item[0])")
+                    if let maxTmp = response.response?.body?.items.item[0].fcstValue {
+                        self.tempNameLabel.text = tempName + ":"
+                        self.tempLabel.text = maxTmp + "˚"
+                    } else {
+                        self.tempNameLabel.text = tempName + ":"
+                        self.tempLabel.text = "_ _"
+                    }
                 } else {
-                    self.tempNameLabel.text = tempName + ":"
-                    self.tempLabel.text = "_ _"
+                    print("날짜 다름max:\(response.response?.body?.items.item[1])")
+                    if let maxTmp = response.response?.body?.items.item[1].fcstValue {
+                        self.tempNameLabel.text = tempName + ":"
+                        self.tempLabel.text = maxTmp + "˚"
+                    } else {
+                        self.tempNameLabel.text = tempName + ":"
+                        self.tempLabel.text = "_ _"
+                    }
                 }
             }
             
