@@ -11,10 +11,16 @@ import Alamofire
 
 class MainViewController: UIViewController {
     
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .systemYellow
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         
         // MARK: - 메인화면 내비게이션 요소 설정
         self.title = "경기도 부천시"
@@ -197,6 +203,7 @@ class MainViewController: UIViewController {
 
 #if DEBUG
 import SwiftUI
+import CoreLocation
 
 struct MainViewControllerPresentable: UIViewControllerRepresentable {
     func  updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
