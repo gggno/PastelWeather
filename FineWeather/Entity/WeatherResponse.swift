@@ -1,7 +1,8 @@
 import Foundation
+import CoreLocation
 import Alamofire
 
-class WeatherAPI {
+class WeatherAPI: NSObject {
     
     private let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
     
@@ -50,8 +51,7 @@ class WeatherAPI {
         var resultMsg: String
     }
     
-    
-    func currentWeather(baseDate: String, baseTime: String, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
+    func currentWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
         
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
@@ -60,8 +60,8 @@ class WeatherAPI {
             "pageNo" : 1,
             "base_date" : baseDate,
             "base_time" : baseTime,
-            "nx" : 56,
-            "ny" : 125
+            "nx" : lat,
+            "ny" : lon
         ]
         
         AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
@@ -77,7 +77,7 @@ class WeatherAPI {
         }
     }
     
-    func minWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최저 온도 요청
+    func minWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최저 온도 요청
         // 0000~0200이면 전날 날짜의 2000로 조회
         // 0300~2300이면 오늘 날짜의 0200로 조회(0200으로 조회해야 tmn이 나옴)
         // 해야할것
@@ -107,8 +107,8 @@ class WeatherAPI {
             "pageNo" : settingPageNo,
             "base_date" : baseDate,
             "base_time" : settingTime,
-            "nx" : 56,
-            "ny" : 125
+            "nx" : lat,
+            "ny" : lon
         ]
         
         AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
@@ -124,7 +124,7 @@ class WeatherAPI {
         }
     }
     
-    func maxWeather(baseDate: String, currentTime: String, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
+    func maxWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
         // 0000~1100이면 전날 날짜의 2000로 조회
         // 1200~2300이면 오늘 날짜의 1100로 조회
         var settingTime = "1100"
@@ -151,8 +151,8 @@ class WeatherAPI {
             "pageNo" : settingPageNo,
             "base_date" : baseDate,
             "base_time" : settingTime,
-            "nx" : 56,
-            "ny" : 125
+            "nx" : lat,
+            "ny" : lon
         ]
         
         AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
@@ -168,7 +168,7 @@ class WeatherAPI {
         }
     }
     
-    func lookWeather(baseDate: String, baseTime: String, completion: @escaping (WeatherResponse) -> Void) {
+    func lookWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) {
         
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
@@ -177,8 +177,8 @@ class WeatherAPI {
             "pageNo" : 1,
             "base_date" : baseDate,
             "base_time" : baseTime,
-            "nx" : 56,
-            "ny" : 125
+            "nx" : lat,
+            "ny" : lon
         ]
         
         AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in

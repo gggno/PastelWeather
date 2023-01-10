@@ -12,6 +12,8 @@ import Alamofire
 class MainViewController: UIViewController {
     
     let locationManager = CLLocationManager()
+    var lat = 0
+    var lon = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +24,17 @@ class MainViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        // MARK: - 메인화면 내비게이션 요소 설정
-        self.title = "경기도 부천시"
+        // 타이틀에 현재위치 출력
+        guard let currentLocation = locationManager.location else {return}
+        convertAddress(from: currentLocation)
         
+        let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
+        lat = Int(xy["nx"] ?? 0.0)
+        lon = Int(xy["ny"] ?? 0.0)
+        print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
+        print("int lat: \(lat), int lon: \(lon)")
+        
+        // MARK: - 메인화면 내비게이션 요소 설정
         self.navigationItem.leftBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(sideMenuBtnClicked(_:)))
             button.tintColor = .white
@@ -43,7 +53,6 @@ class MainViewController: UIViewController {
         let weatherAPI = WeatherAPI()
         
         // MARK: - titleView 요소 설정
-        
         let titleView = titleViewSetting() // 매개변수 다 제거할 예정
         
         // MARK: - dayWeatherView 요소 설정
@@ -184,6 +193,8 @@ class MainViewController: UIViewController {
         
         
     }
+    
+    
     
     // 버튼 클릭 메서드
     @objc func sideMenuBtnClicked(_ sender: UIButton) {

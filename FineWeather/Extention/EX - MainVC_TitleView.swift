@@ -43,8 +43,8 @@ extension MainViewController {
             return label
         }()
         
-        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red)
-        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue)
+        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red, lat: self.lat, lon: self.lon)
+        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue, lat: self.lat, lon: self.lon)
         
         let titleInTempStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [titleInmaxTempStackView, titleInminTempStackView])
@@ -68,7 +68,7 @@ extension MainViewController {
             return stackView
         }()
         
-        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white)
+        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white, lat: self.lat, lon: self.lon)
         
         let titleView: UIView = {
             let view = UIView()
@@ -109,7 +109,7 @@ extension MainViewController {
         let weatherAPI = WeatherAPI()
         
         // 현재 온도 구현 로직
-        weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime) { response in
+        weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
             var index = 0
             let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
             
@@ -128,7 +128,7 @@ extension MainViewController {
             } else { titleInTempNum.text = "_ _" }
         }
         
-        weatherAPI.lookWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime) { response in
+        weatherAPI.lookWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
             var index = 0
             let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
             
@@ -144,7 +144,7 @@ extension MainViewController {
 //                             (단기) 없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4)
 
             guard let sky = response.response?.body?.items.item[index].fcstValue else {return} // 하늘상태
-            guard let pty = response.response?.body?.items.item[index+1].fcstValue else {return}
+            guard let pty = response.response?.body?.items.item[index+1].fcstValue else {return} // 강수형태
             
             if sky == "1" { // 맑음
                 titleInImageView.image = UIImage(systemName: "sun.max.fill")
@@ -173,7 +173,6 @@ extension MainViewController {
             }
             
         }
-        
         
         return titleView
     }
