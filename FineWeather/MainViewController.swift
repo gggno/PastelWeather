@@ -27,10 +27,10 @@ class MainViewController: UIViewController {
         // 타이틀에 현재위치 출력
         guard let currentLocation = locationManager.location else {return}
         convertAddress(from: currentLocation)
-        
+         
         let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
-        lat = Int(xy["nx"] ?? 0.0)
-        lon = Int(xy["ny"] ?? 0.0)
+        lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
+        lon = Int(xy["ny"] ?? 126) // 용산구
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
         print("int lat: \(lat), int lon: \(lon)")
         

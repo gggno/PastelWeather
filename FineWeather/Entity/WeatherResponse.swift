@@ -125,13 +125,13 @@ class WeatherAPI: NSObject {
     }
     
     func maxWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
-        // 0000~1100이면 전날 날짜의 2000로 조회
-        // 1200~2300이면 오늘 날짜의 1100로 조회
+        // 0000~1159이면 전날 날짜의 2000로 조회
+        // 1200~2359이면 오늘 날짜의 1100로 조회
         var settingTime = "1100"
         var settingNumOfRows = 12
         var settingPageNo = 5
         
-        if Int(currentTime)! <= 0200 { // 어제 날짜로 조회
+        if Int(currentTime)! <= 1100 { // 어제 날짜로 조회
             settingTime = "2000"
             settingNumOfRows = 12
             settingPageNo = 20
