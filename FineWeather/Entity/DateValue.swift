@@ -32,6 +32,22 @@ class DateValue {
         }
     }()
     
+    static let maxBaseDate: String = {
+        if Int(currentTime)! <= 1100 { // 11시 이전이면 어제 날짜로 변환
+            let date = Date(timeIntervalSinceNow: -86400)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        } else { // 11시 이후면 오늘 날짜
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        }
+    }()
+    
     static let baseTime: String = {
         let time = Date()
         let formatter = DateFormatter()

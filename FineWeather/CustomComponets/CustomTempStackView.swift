@@ -31,7 +31,7 @@ class CustomTempStackView: UIStackView {
         
         if tempName == "최고" {
             print("최고 온도")
-            weatherAPI.maxWeather(baseDate: DateValue.baseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
+            weatherAPI.maxWeather(baseDate: DateValue.maxBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 
                 if response.response?.body?.items.item[0].baseDate == response.response?.body?.items.item[0].fcstDate {
                     print("날짜 같음max:\(response.response?.body?.items.item[0])")
