@@ -122,8 +122,13 @@ extension MainViewController: CLLocationManagerDelegate {
                let subLocality = placemark.subLocality {
                 //                    self.locationInfo = "\(state) " + "\(city) " + subLocality
                 //                    self.state = state
-                self.title = "\(state) \(city)"
+                if state != city { // 위치 지역이 동일하게 나와서 조건문을 추가 함
+                    self.title = "\(state) \(city)"
+                } else {
+                    self.title = "\(state) \(subLocality)"
+                }
                 print("state: \(state) city: \(city)")
+                print("state: \(state) subLocality: \(subLocality)")
             }
             
             if let country = placemark.country {
