@@ -104,7 +104,7 @@ extension MainViewController: CLLocationManagerDelegate {
             rs["lng"] = alon * RADDEG
         }
         print("rs: \(rs)")
-        print("rsNX: \(rs["nx"])")
+        print("rsNX: \(String(describing: rs["nx"]))")
         return rs
     }
     

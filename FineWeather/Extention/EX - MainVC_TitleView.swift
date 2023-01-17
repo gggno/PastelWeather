@@ -13,7 +13,7 @@ extension MainViewController {
     
     func titleViewSetting() -> UIView {
         
-        //MARK: - UI 로직
+        //MARK: - TitleView UI 로직
         let titleInImageView: UIImageView = {
             let imageView = UIImageView()
             
@@ -105,7 +105,7 @@ extension MainViewController {
             make.centerX.equalTo(titleInTopTempStackView.snp.centerX)
         }
         
-        //MARK: - 데이터 로직
+        //MARK: - TitleView 데이터 로직
         let weatherAPI = WeatherAPI()
         
         // 현재 온도 구현 로직
@@ -173,7 +173,6 @@ extension MainViewController {
             }
             
         }
-        
         return titleView
     }
 }

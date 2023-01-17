@@ -34,7 +34,7 @@ class CustomTempStackView: UIStackView {
             weatherAPI.maxWeather(baseDate: DateValue.maxBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 
                 if response.response?.body?.items.item[0].baseDate == response.response?.body?.items.item[0].fcstDate {
-                    print("날짜 같음max:\(response.response?.body?.items.item[0])")
+                    print("날짜 같음max: \(String(describing: response.response?.body?.items.item[0]))")
                     if let maxTmp = response.response?.body?.items.item[0].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
@@ -43,7 +43,7 @@ class CustomTempStackView: UIStackView {
                         self.tempLabel.text = "_ _"
                     }
                 } else {
-                    print("날짜 다름max:\(response.response?.body?.items.item[1])")
+                    print("날짜 다름max: \(String(describing: response.response?.body?.items.item[1]))")
                     if let maxTmp = response.response?.body?.items.item[1].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
@@ -81,8 +81,8 @@ class CustomTempStackView: UIStackView {
                     index = 24
                 }
                 
-                print("feelTmp: \(response.response?.body?.items.item[index])")
-                print("feelWSD: \(response.response?.body?.items.item[index+4])")
+                print("feelTmp: \(String(describing: response.response?.body?.items.item[index]))")
+                print("feelWSD: \(String(describing: response.response?.body?.items.item[index+4]))")
                 
                 guard let tmp = response.response?.body?.items.item[index].fcstValue else { return }
                 guard let wsd = response.response?.body?.items.item[index+4].fcstValue else { return }

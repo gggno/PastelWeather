@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class CustomDayStackView: UIStackView {
     
@@ -28,7 +29,10 @@ class CustomDayStackView: UIStackView {
         return label
     }()
     
-    func dayStackViewSetting(time: String, image: String, tmp: String ) -> UIStackView {
+    // MARK: - dayWeatherView 데이터 로직
+    
+    func  dayStackViewSetting(time: String, image: String, tmp: String ) -> UIStackView {
+        
         let stackView = UIStackView(arrangedSubviews: [dayInTimeLabel, dayInImageView, dayInTmpLabel])
         
         stackView.axis = .vertical

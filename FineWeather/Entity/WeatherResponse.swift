@@ -1,5 +1,4 @@
 import Foundation
-import CoreLocation
 import Alamofire
 
 class WeatherAPI: NSObject {
@@ -51,8 +50,8 @@ class WeatherAPI: NSObject {
         var resultMsg: String
     }
     
+    // MARK: - titleView 세팅
     func currentWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
-        
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
             "dataType" : "JSON",
@@ -169,7 +168,6 @@ class WeatherAPI: NSObject {
     }
     
     func lookWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) {
-        
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
             "dataType" : "JSON",
@@ -194,5 +192,30 @@ class WeatherAPI: NSObject {
         }
     }
     
-    
+    // MARK: - dayWeatherView 세팅
+    func dayWeatherViewSetting(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> UIStackView) {
+        let params: Parameters = [
+            "serviceKey" : self.serviceKey,
+            "dataType" : "JSON",
+            "numOfRows" : 36,
+            "pageNo" : 1,
+            "base_date" : baseDate,
+            "base_time" : baseTime,
+            "nx" : lat,
+            "ny" : lon
+        ]
+        
+        AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseDecodable(of: WeatherResponse.self) { response in
+            
+            switch response.result {
+            case .success(let value):
+                print("24시 예보 통신 성공")
+                completion(value)
+                
+            case .failure(let error):
+                print("24시 예보 통신 실패 에러 메시지: \(error)")
+            }
+        }
+        
+    }
 }
