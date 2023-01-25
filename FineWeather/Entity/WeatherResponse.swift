@@ -193,7 +193,7 @@ class WeatherAPI: NSObject {
     }
     
     // MARK: - dayWeatherView 세팅
-    func dayWeatherViewSetting(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> UIStackView) {
+    func dayWeatherViewSetting(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) {
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
             "dataType" : "JSON",
@@ -216,6 +216,5 @@ class WeatherAPI: NSObject {
                 print("24시 예보 통신 실패 에러 메시지: \(error)")
             }
         }
-        
     }
 }
