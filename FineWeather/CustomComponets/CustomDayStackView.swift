@@ -15,44 +15,79 @@ class CustomDayStackView: UIStackView {
     // MARK: - dayWeatherView 데이터 로직
     let weatherAPI = WeatherAPI()
     
-    let dayInTimeLabel1: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
-    let dayInImageView1: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
-    
-    let dayInTmpLabel1: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
-    let dayInTimeLabel2: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
-    let dayInImageView2: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
-    
-    let dayInTmpLabel2: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
+//    let dayInTimeLabel1: UILabel = {
+//        let label = UILabel()
+//
+//        return label
+//    }()
+//
+//    let dayInImageView1: UIImageView = {
+//        let imageView = UIImageView()
+//
+//        return imageView
+//    }()
+//
+//    let dayInTmpLabel1: UILabel = {
+//        let label = UILabel()
+//
+//        return label
+//    }()
+//
+//    let dayInTimeLabel2: UILabel = {
+//        let label = UILabel()
+//
+//        return label
+//    }()
+//
+//    let dayInImageView2: UIImageView = {
+//        let imageView = UIImageView()
+//
+//        return imageView
+//    }()
+//
+//    let dayInTmpLabel2: UILabel = {
+//        let label = UILabel()
+//
+//        return label
+//    }()
     
     func dayWeatherMakeStack(lat: Int, lon: Int) -> UIStackView {
+        let dayInTimeLabel1: UILabel = {
+            let label = UILabel()
+            
+            return label
+        }()
+        
+        let dayInImageView1: UIImageView = {
+            let imageView = UIImageView()
+            
+            return imageView
+        }()
+        
+        let dayInTmpLabel1: UILabel = {
+            let label = UILabel()
+            
+            return label
+        }()
+        
+        let dayInTimeLabel2: UILabel = {
+            let label = UILabel()
+            
+            return label
+        }()
+        
+        let dayInImageView2: UIImageView = {
+            let imageView = UIImageView()
+            
+            return imageView
+        }()
+        
+        let dayInTmpLabel2: UILabel = {
+            let label = UILabel()
+            
+            return label
+        }()
+        
         let stack1 = stackElement(timeLabel: dayInTmpLabel1, ImageView: dayInImageView1, tmpLabel: dayInTmpLabel1)
         let stack2 = stackElement(timeLabel: dayInTmpLabel2, ImageView: dayInImageView2, tmpLabel: dayInTmpLabel2)
         let stack3 = dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
@@ -65,8 +100,9 @@ class CustomDayStackView: UIStackView {
         
         weatherAPI.dayWeatherViewSetting(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
             print("dayWeatherViewSetting: \(response)")
-            self.dayInTimeLabel1.text = "오후 1시"
-            self.dayInTmpLabel1.text = "-0"
+            dayInTimeLabel1.text = "오후 1시"
+            dayInImageView1.image = UIImage(systemName: "cloud.heavyrain.fill")
+            dayInTmpLabel1.text = "-0"
         }
         return stacks
     }
@@ -114,9 +150,9 @@ class CustomDayStackView: UIStackView {
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         
-        timeLabel.text = "오후 4시"
+        timeLabel.text = "정보 없음"
         ImageView.image = UIImage(systemName: "cloud.heavyrain.fill")
-        tmpLabel.text = "-19" + "˚"
+        tmpLabel.text = "정보 없음"
         
         return stackView
     }
