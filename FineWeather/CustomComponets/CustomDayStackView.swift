@@ -44,12 +44,12 @@ class CustomDayStackView: UIStackView {
         var stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9, stack10, stack11, stack12, stack13, stack14, stack15, stack16, stack17, stack18, stack19, stack20, stack21, stack22, stack23, stack24])
         
         weatherAPI.dayWeatherViewSetting(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
-//            print("dayWeatherViewSetting: \(response)")
             print("세팅 날짜: \(DateValue.baseDate), 세팅 시간: \(DateValue.baseTime)")
             var index = 12
             let timeLeg = Int(DateValue.currentTime)! - Int(DateValue.baseTime)!
             print("timeLeg = \(Int(DateValue.currentTime)!) - \(Int(DateValue.baseTime)!)")
             
+            // 시간 차이를 기준으로 인덱스 설정
             if timeLeg == 100 {
                 print("timeLeg == 100")
                 index = 0
@@ -67,6 +67,7 @@ class CustomDayStackView: UIStackView {
                 var pty = ""
                 var weatherImage: UIImage?
                 
+                // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {
                     print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
@@ -79,6 +80,7 @@ class CustomDayStackView: UIStackView {
                     print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
                     print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
                     
+                    // 날씨 설정
                     if sky == "1" { // 맑음
                         weatherImage = UIImage(systemName: "sun.max.fill")!
                     } else if sky == "3" { // 구름 많음
@@ -97,7 +99,6 @@ class CustomDayStackView: UIStackView {
                             weatherImage = UIImage(systemName: "cloud.rain.fill")!
                         }
                     }
-                    
                     index += 12
                     
                 } else {
@@ -131,7 +132,6 @@ class CustomDayStackView: UIStackView {
                             weatherImage = UIImage(systemName: "cloud.rain.fill")!
                         }
                     }
-                    
                     index += 12
                 }
                
@@ -237,45 +237,8 @@ class CustomDayStackView: UIStackView {
                     break
                 }
             }
-//            self.dayInTimeLabel1.text = "오후 1시"
-//            self.dayInImageView1.image = UIImage(systemName: "cloud.heavyrain.fill")
-//            self.dayInTmpLabel1.text = "-0"
         }
         return stacks
-    }
-    
-    func dayStackViewSetting(time: String, image: String, tmp: String) -> UIStackView {
-         
-        let dayInTimeLabel: UILabel = {
-            let label = UILabel()
-            
-            return label
-        }()
-        
-        let dayInImageView: UIImageView = {
-            let imageView = UIImageView()
-            
-            return imageView
-        }()
-        
-        let dayInTmpLabel: UILabel = {
-            let label = UILabel()
-            
-            return label
-        }()
-        
-        let stackView = UIStackView(arrangedSubviews: [dayInTimeLabel, dayInImageView, dayInTmpLabel])
-        
-        stackView.axis = .vertical
-        stackView.spacing = 25
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        
-        dayInTimeLabel.text = time
-        dayInImageView.image = UIImage(systemName: image)
-        dayInTmpLabel.text = tmp + "˚"
-        
-        return stackView
     }
     
     // 라벨, 이미지를 위에 하나하나 할당한 다음 이 함수를 이용하여 스택뷰를 만든다.

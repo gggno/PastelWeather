@@ -13,18 +13,10 @@ extension MainViewController {
     
     func DayWeatherViewSetting() -> UIView {
         
-        // MARK: - DayWeatherView UI 로직
-        // dayInstackView 제거하고 dayInStackViews로 대체 예정
-//        let dayInstackView1 = CustomDayStackView().dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
-//        let dayInstackView2 = CustomDayStackView().dayStackViewSetting(time: "오후 10시", image: "sun.max.fill", tmp: "-12")
-//        let dayInstackView3 = CustomDayStackView().dayStackViewSetting(time: "오후 11시", image: "sun.max.fill", tmp: "-13")
-//        let dayInstackView4 = CustomDayStackView().dayStackViewSetting(time: "오전 01시", image: "sun.max.fill", tmp: "-14")
-//        let dayInstackView5 = CustomDayStackView().dayStackViewSetting(time: "오전 02시", image: "sun.max.fill", tmp: "-14")
-//        let dayInstackView6 = CustomDayStackView().dayStackViewSetting(time: "오전 03시", image: "sun.max.fill", tmp: "-15")
-//        let dayInstackView7 = CustomDayStackView().dayStackViewSetting(time: "오전 04시", image: "sun.max.fill", tmp: "-15")
-        
+        // MARK: - DayWeatherView 데이터 로직
         let dayInStackViews = CustomDayStackView().dayWeatherMakeStack(lat: self.lat, lon: self.lon)
         
+        // MARK: - DayWeatherView UI 로직
         let hstackView: UIStackView = {
             let stackView = dayInStackViews
             
@@ -69,11 +61,6 @@ extension MainViewController {
         dayInScrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        // MARK: - DayWeatherView 데이터 로직
-        
-        
-        
         
         return dayWeatherView
     }
