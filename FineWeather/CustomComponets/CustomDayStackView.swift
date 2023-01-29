@@ -22,27 +22,224 @@ class CustomDayStackView: UIStackView {
         let stack4 = stackElement(timeLabel: dayInTimeLabel4, ImageView: dayInImageView4, tmpLabel: dayInTmpLabel4)
         let stack5 = stackElement(timeLabel: dayInTimeLabel5, ImageView: dayInImageView5, tmpLabel: dayInTmpLabel5)
         let stack6 = stackElement(timeLabel: dayInTimeLabel6, ImageView: dayInImageView6, tmpLabel: dayInTmpLabel6)
-        let stack7 = dayStackViewSetting(time: "오후 9시", image: "cloud.heavyrain.fill", tmp: "-11")
+        let stack7 = stackElement(timeLabel: dayInTimeLabel7, ImageView: dayInImageView7, tmpLabel: dayInTmpLabel7)
+        let stack8 = stackElement(timeLabel: dayInTimeLabel8, ImageView: dayInImageView8, tmpLabel: dayInTmpLabel8)
+        let stack9 = stackElement(timeLabel: dayInTimeLabel9, ImageView: dayInImageView9, tmpLabel: dayInTmpLabel9)
+        let stack10 = stackElement(timeLabel: dayInTimeLabel10, ImageView: dayInImageView10, tmpLabel: dayInTmpLabel10)
+        let stack11 = stackElement(timeLabel: dayInTimeLabel11, ImageView: dayInImageView11, tmpLabel: dayInTmpLabel11)
+        let stack12 = stackElement(timeLabel: dayInTimeLabel12, ImageView: dayInImageView12, tmpLabel: dayInTmpLabel12)
+        let stack13 = stackElement(timeLabel: dayInTimeLabel13, ImageView: dayInImageView13, tmpLabel: dayInTmpLabel13)
+        let stack14 = stackElement(timeLabel: dayInTimeLabel14, ImageView: dayInImageView14, tmpLabel: dayInTmpLabel14)
+        let stack15 = stackElement(timeLabel: dayInTimeLabel15, ImageView: dayInImageView15, tmpLabel: dayInTmpLabel15)
+        let stack16 = stackElement(timeLabel: dayInTimeLabel16, ImageView: dayInImageView16, tmpLabel: dayInTmpLabel16)
+        let stack17 = stackElement(timeLabel: dayInTimeLabel17, ImageView: dayInImageView17, tmpLabel: dayInTmpLabel17)
+        let stack18 = stackElement(timeLabel: dayInTimeLabel18, ImageView: dayInImageView18, tmpLabel: dayInTmpLabel18)
+        let stack19 = stackElement(timeLabel: dayInTimeLabel19, ImageView: dayInImageView19, tmpLabel: dayInTmpLabel19)
+        let stack20 = stackElement(timeLabel: dayInTimeLabel20, ImageView: dayInImageView20, tmpLabel: dayInTmpLabel20)
+        let stack21 = stackElement(timeLabel: dayInTimeLabel21, ImageView: dayInImageView21, tmpLabel: dayInTmpLabel21)
+        let stack22 = stackElement(timeLabel: dayInTimeLabel22, ImageView: dayInImageView22, tmpLabel: dayInTmpLabel22)
+        let stack23 = stackElement(timeLabel: dayInTimeLabel23, ImageView: dayInImageView23, tmpLabel: dayInTmpLabel23)
+        let stack24 = stackElement(timeLabel: dayInTimeLabel24, ImageView: dayInImageView24, tmpLabel: dayInTmpLabel24)
         
-        var stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7])
+        var stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9, stack10, stack11, stack12, stack13, stack14, stack15, stack16, stack17, stack18, stack19, stack20, stack21, stack22, stack23, stack24])
         
         weatherAPI.dayWeatherViewSetting(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
 //            print("dayWeatherViewSetting: \(response)")
             print("세팅 날짜: \(DateValue.baseDate), 세팅 시간: \(DateValue.baseTime)")
-            var index = 0
+            var index = 12
+            let timeLeg = Int(DateValue.currentTime)! - Int(DateValue.baseTime)!
+            print("timeLeg = \(Int(DateValue.currentTime)!) - \(Int(DateValue.baseTime)!)")
+            
+            if timeLeg == 100 {
+                print("timeLeg == 100")
+                index = 0
+            } else if timeLeg == 200 {
+                print("timeLeg == 200")
+                index = 12
+            } else if timeLeg == 300 {
+                print("timeLeg == 300")
+                index = 24
+            }
+            
             for i in 0..<24 {
+                var tmp = ""
+                var sky = ""
+                var pty = ""
+                var weatherImage: UIImage?
+                
                 if response.response?.body?.items.item[index].category == "TMP" {
-                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
+                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
+                    guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
+                    tmp = tempTmp
+                    guard let tempSky = response.response?.body?.items.item[index+5].fcstValue else {return}
+                    sky = tempSky
+                    guard let tempPty = response.response?.body?.items.item[index+6].fcstValue else {return}
+                    pty = tempPty
+                    
+                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
+                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
+                    
+                    if sky == "1" { // 맑음
+                        weatherImage = UIImage(systemName: "sun.max.fill")!
+                    } else if sky == "3" { // 구름 많음
+                        weatherImage = UIImage(systemName: "smoke.fill")!
+                    } else if sky == "4" && pty == "0" { // 흐림
+                        weatherImage = UIImage(systemName: "cloud.fill")!
+                        
+                    } else {
+                        if pty == "1" { // 비
+                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                        } else if pty == "2" { // 비/눈
+                            weatherImage = UIImage(systemName: "cloud.hail.fill")!
+                        } else if pty == "3" { // 눈
+                            weatherImage = UIImage(systemName: "snowflake")!
+                        } else if pty == "4" { // 소나기
+                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                        }
+                    }
+                    
                     index += 12
+                    
                 } else {
                     index += 1
-                    print("i = response.response?.body?.items.item[\(index)]\nvalue = \(response.response?.body?.items.item[index])\n")
+                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
+                    guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
+                    tmp = tempTmp
+                    guard let tempSky = response.response?.body?.items.item[index+5].fcstValue else {return}
+                    sky = tempSky
+                    guard let tempPty = response.response?.body?.items.item[index+6].fcstValue else {return}
+                    pty = tempPty
+                    
+                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
+                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
+                    
+                    if sky == "1" { // 맑음
+                        weatherImage = UIImage(systemName: "sun.max.fill")!
+                    } else if sky == "3" { // 구름 많음
+                        weatherImage = UIImage(systemName: "smoke.fill")!
+                    } else if sky == "4" && pty == "0" { // 흐림
+                        weatherImage = UIImage(systemName: "cloud.fill")!
+                        
+                    } else {
+                        if pty == "1" { // 비
+                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                        } else if pty == "2" { // 비/눈
+                            weatherImage = UIImage(systemName: "cloud.hail.fill")!
+                        } else if pty == "3" { // 눈
+                            weatherImage = UIImage(systemName: "snowflake")!
+                        } else if pty == "4" { // 소나기
+                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                        }
+                    }
+                    
                     index += 12
                 }
+               
+                // 시간 별 날씨 데이터 업데이트
+                switch i+1 {
+                case 1:
+                    self.dayInTimeLabel1.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView1.image = weatherImage
+                    self.dayInTmpLabel1.text = tmp + "˚"
+                case 2:
+                    self.dayInTimeLabel2.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView2.image = weatherImage
+                    self.dayInTmpLabel2.text = tmp + "˚"
+                case 3:
+                    self.dayInTimeLabel3.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView3.image = weatherImage
+                    self.dayInTmpLabel3.text = tmp + "˚"
+                case 4:
+                    self.dayInTimeLabel4.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView4.image = weatherImage
+                    self.dayInTmpLabel4.text = tmp + "˚"
+                case 5:
+                    self.dayInTimeLabel5.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView5.image = weatherImage
+                    self.dayInTmpLabel5.text = tmp + "˚"
+                case 6:
+                    self.dayInTimeLabel6.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView6.image = weatherImage
+                    self.dayInTmpLabel6.text = tmp + "˚"
+                case 7:
+                    self.dayInTimeLabel7.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView7.image = weatherImage
+                    self.dayInTmpLabel7.text = tmp + "˚"
+                case 8:
+                    self.dayInTimeLabel8.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView8.image = weatherImage
+                    self.dayInTmpLabel8.text = tmp + "˚"
+                case 9:
+                    self.dayInTimeLabel9.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView9.image = weatherImage
+                    self.dayInTmpLabel9.text = tmp + "˚"
+                case 10:
+                    self.dayInTimeLabel10.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView10.image = weatherImage
+                    self.dayInTmpLabel10.text = tmp + "˚"
+                case 11:
+                    self.dayInTimeLabel11.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView11.image = weatherImage
+                    self.dayInTmpLabel11.text = tmp + "˚"
+                case 12:
+                    self.dayInTimeLabel12.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView12.image = weatherImage
+                    self.dayInTmpLabel12.text = tmp + "˚"
+                case 13:
+                    self.dayInTimeLabel13.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView13.image = weatherImage
+                    self.dayInTmpLabel13.text = tmp + "˚"
+                case 14:
+                    self.dayInTimeLabel14.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView14.image = weatherImage
+                    self.dayInTmpLabel14.text = tmp + "˚"
+                case 15:
+                    self.dayInTimeLabel15.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView15.image = weatherImage
+                    self.dayInTmpLabel15.text = tmp + "˚"
+                case 16:
+                    self.dayInTimeLabel16.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView16.image = weatherImage
+                    self.dayInTmpLabel16.text = tmp + "˚"
+                case 17:
+                    self.dayInTimeLabel17.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView17.image = weatherImage
+                    self.dayInTmpLabel17.text = tmp + "˚"
+                case 18:
+                    self.dayInTimeLabel18.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView18.image = weatherImage
+                    self.dayInTmpLabel18.text = tmp + "˚"
+                case 19:
+                    self.dayInTimeLabel19.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView19.image = weatherImage
+                    self.dayInTmpLabel19.text = tmp + "˚"
+                case 20:
+                    self.dayInTimeLabel20.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView20.image = weatherImage
+                    self.dayInTmpLabel20.text = tmp + "˚"
+                case 21:
+                    self.dayInTimeLabel21.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView21.image = weatherImage
+                    self.dayInTmpLabel21.text = tmp + "˚"
+                case 22:
+                    self.dayInTimeLabel22.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView22.image = weatherImage
+                    self.dayInTmpLabel22.text = tmp + "˚"
+                case 23:
+                    self.dayInTimeLabel23.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView23.image = weatherImage
+                    self.dayInTmpLabel23.text = tmp + "˚"
+                case 24:
+                    self.dayInTimeLabel24.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
+                    self.dayInImageView24.image = weatherImage
+                    self.dayInTmpLabel24.text = tmp + "˚"
+                default:
+                    break
+                }
             }
-            self.dayInTimeLabel1.text = "오후 1시"
-            self.dayInImageView1.image = UIImage(systemName: "cloud.heavyrain.fill")
-            self.dayInTmpLabel1.text = "-0"
+//            self.dayInTimeLabel1.text = "오후 1시"
+//            self.dayInImageView1.image = UIImage(systemName: "cloud.heavyrain.fill")
+//            self.dayInTmpLabel1.text = "-0"
         }
         return stacks
     }
@@ -91,7 +288,7 @@ class CustomDayStackView: UIStackView {
         stackView.distribution = .equalSpacing
         
         timeLabel.text = "정보 없음"
-        ImageView.image = UIImage(systemName: "cloud.heavyrain.fill")
+        ImageView.image = UIImage(systemName: "sun.max.fill")
         tmpLabel.text = "정보 없음"
         
         return stackView
@@ -206,4 +403,327 @@ class CustomDayStackView: UIStackView {
         return label
     }()
     
+    let dayInTimeLabel7: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView7: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel7: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel8: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView8: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel8: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel9: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView9: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel9: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel10: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView10: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel10: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel11: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView11: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel11: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel12: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView12: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel12: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel13: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView13: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel13: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel14: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView14: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel14: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel15: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView15: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel15: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel16: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView16: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel16: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel17: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView17: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel17: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel18: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView18: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel18: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel19: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView19: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel19: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel20: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView20: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel20: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel21: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView21: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel21: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel22: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView22: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel22: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel23: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView23: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel23: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInTimeLabel24: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    let dayInImageView24: UIImageView = {
+        let imageView = UIImageView()
+        
+        return imageView
+    }()
+    
+    let dayInTmpLabel24: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
 }

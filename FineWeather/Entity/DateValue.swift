@@ -108,4 +108,15 @@ class DateValue {
         
         return formatter.string(from: time)
     }()
+    
+    // 오전, 오후를 구분하는 한시간 뒤 시간
+    static func currentTimeOfAmPm(count: Double) -> String {
+        let time = Date(timeIntervalSinceNow: 3600*count)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a h시"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        return formatter.string(from: time)
+    }
+    
 }
