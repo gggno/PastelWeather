@@ -197,7 +197,7 @@ class WeatherAPI: NSObject {
         let params: Parameters = [
             "serviceKey" : self.serviceKey,
             "dataType" : "JSON",
-            "numOfRows" : 36,
+            "numOfRows" : 324,
             "pageNo" : 1,
             "base_date" : baseDate,
             "base_time" : baseTime,
