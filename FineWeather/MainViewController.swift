@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayWeatherView = DayWeatherViewSetting()
         
-        let emptyView3: UIView = {
+        let googleAdsView1: UIView = {
             let view = UIView()
             
             view.backgroundColor = .gray
@@ -79,7 +79,7 @@ class MainViewController: UIViewController {
             view.backgroundColor = .clear
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
-            view.addSubview(emptyView3)
+            view.addSubview(googleAdsView1)
             view.addSubview(emptyView4)
             
             return view
@@ -102,7 +102,7 @@ class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
-        emptyView3.snp.makeConstraints { make in
+        googleAdsView1.snp.makeConstraints { make in
             make.height.equalTo(340)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
@@ -111,7 +111,7 @@ class MainViewController: UIViewController {
         
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(emptyView3.snp.bottom).offset(40)
+            make.top.equalTo(googleAdsView1.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)

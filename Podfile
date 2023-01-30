@@ -9,6 +9,7 @@ target 'FineWeather' do
   pod 'RealmSwift', '~>10'  
   pod 'SideMenu'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'Google-Mobile-Ads-SDK'
 
   # Pods for FineWeather
 
