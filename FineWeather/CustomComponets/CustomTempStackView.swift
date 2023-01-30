@@ -38,18 +38,22 @@ class CustomTempStackView: UIStackView {
                     if let maxTmp = response.response?.body?.items.item[0].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
+                        self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
+                        self.tempLabel.textColor = .red
                     }
                 } else {
                     print("날짜 다름max: \(String(describing: response.response?.body?.items.item[1]))")
                     if let maxTmp = response.response?.body?.items.item[1].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
+                        self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
+                        self.tempLabel.textColor = .red
                     }
                 }
             }
@@ -60,9 +64,11 @@ class CustomTempStackView: UIStackView {
                 if let minTmp = response.response?.body?.items.item[0].fcstValue {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = minTmp + "˚"
+                    self.tempLabel.textColor = .blue
                 } else {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = "_ _"
+                    self.tempLabel.textColor = .blue
                 }
             }
             
@@ -96,10 +102,12 @@ class CustomTempStackView: UIStackView {
                 if let feelTmp = feelTmpSTr {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = feelTmp + "˚"
+                    self.tempLabel.textColor = .black
                     
                 } else {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = "_ _"
+                    self.tempLabel.textColor = .black
                 }
             }
         }

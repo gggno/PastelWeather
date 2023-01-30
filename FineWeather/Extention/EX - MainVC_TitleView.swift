@@ -43,8 +43,8 @@ extension MainViewController {
             return label
         }()
         
-        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .red, lat: self.lat, lon: self.lon)
-        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .blue, lat: self.lat, lon: self.lon)
+        let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .black, lat: self.lat, lon: self.lon)
+        let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .black, lat: self.lat, lon: self.lon)
         
         let titleInTempStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [titleInmaxTempStackView, titleInminTempStackView])
@@ -68,10 +68,12 @@ extension MainViewController {
             return stackView
         }()
         
-        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .white, lat: self.lat, lon: self.lon)
+        let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .black, lat: self.lat, lon: self.lon)
         
         let titleView: UIView = {
             let view = UIView()
+            
+            view.layer.cornerRadius = 10
             
             view.backgroundColor = .systemCyan
             view.addSubview(titleInImageView)

@@ -43,6 +43,7 @@ extension MainViewController {
             let view = UIView()
             
             view.backgroundColor = .systemGreen
+            view.layer.cornerRadius = 10
             
             view.addSubview(dayInScrollView)
             

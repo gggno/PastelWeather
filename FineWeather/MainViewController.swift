@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import GoogleMobileAds
 
 class MainViewController: UIViewController {
     
@@ -15,8 +16,16 @@ class MainViewController: UIViewController {
     var lat = 0
     var lon = 0
     
+    var bottomBarBannerView: GADBannerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bottomBarBannerView.rootViewController = self
+        //        bottomBarBannerView.load(GADRequest())
+        
         
         self.view.backgroundColor = .systemYellow
         
@@ -27,7 +36,7 @@ class MainViewController: UIViewController {
         // 타이틀에 현재위치 출력
         guard let currentLocation = locationManager.location else {return}
         convertAddress(from: currentLocation)
-         
+        
         let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
         lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
         lon = Int(xy["ny"] ?? 126) // 용산구
@@ -76,7 +85,7 @@ class MainViewController: UIViewController {
         let containerView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .clear
+            view.backgroundColor = .brown
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
             view.addSubview(googleAdsView1)
@@ -137,7 +146,71 @@ class MainViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        // 하단바 광고 추가
+        bannerViewDidReceiveAd(bottomBarBannerView)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Note loadBannerAd is called in viewDidAppear as this is the first time that
+        // the safe area is known. If safe area is not a concern (e.g., your app is
+        // locked in portrait mode), the banner can be loaded in viewWillAppear.
+        loadBannerAd()
+    }
+    
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to:size, with:coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.loadBannerAd()
+        })
+    }
+    
+    func loadBannerAd() {
+        // Step 2 - Determine the view width to use for the ad width.
+        let frame = { () -> CGRect in
+            // Here safe area is taken into account, hence the view frame is used
+            // after the view has been laid out.
+            if #available(iOS 11.0, *) {
+                return view.frame.inset(by: view.safeAreaInsets)
+            } else {
+                return view.frame
+            }
+        }()
+        let viewWidth = frame.size.width
+        
+        // Step 3 - Get Adaptive GADAdSize and set the ad view.
+        // Here the current interface orientation is used. If the ad is being preloaded
+        // for a future orientation change or different orientation, the function for the
+        // relevant orientation should be used.
+        bottomBarBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        
+        // Step 4 - Create an ad request and load the adaptive banner ad.
+        bottomBarBannerView.load(GADRequest())
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints( 
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    
     
     // 버튼 클릭 메서드
     @objc func sideMenuBtnClicked(_ sender: UIButton) {
