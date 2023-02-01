@@ -69,7 +69,7 @@ class CustomDayStackView: UIStackView {
                 
                 // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {
-                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
+//                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
                     tmp = tempTmp
                     guard let tempSky = response.response?.body?.items.item[index+5].fcstValue else {return}
@@ -77,8 +77,8 @@ class CustomDayStackView: UIStackView {
                     guard let tempPty = response.response?.body?.items.item[index+6].fcstValue else {return}
                     pty = tempPty
                     
-                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
-                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
+//                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
+//                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
                     
                     // 날씨 설정
                     if sky == "1" { // 맑음
@@ -103,7 +103,7 @@ class CustomDayStackView: UIStackView {
                     
                 } else {
                     index += 1
-                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
+//                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
                     tmp = tempTmp
                     guard let tempSky = response.response?.body?.items.item[index+5].fcstValue else {return}
@@ -111,8 +111,8 @@ class CustomDayStackView: UIStackView {
                     guard let tempPty = response.response?.body?.items.item[index+6].fcstValue else {return}
                     pty = tempPty
                     
-                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
-                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
+//                    print("tempSky = response.response?.body?.items.item[\(index+5)]\n value = \(response.response?.body?.items.item[index+5])")
+//                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
                     
                     if sky == "1" { // 맑음
                         weatherImage = UIImage(systemName: "sun.max.fill")!

@@ -16,16 +16,15 @@ class MainViewController: UIViewController {
     var lat = 0
     var lon = 0
     
+    // 하단바 광고
     var bottomBarBannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
         bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBarBannerView.rootViewController = self
-        //        bottomBarBannerView.load(GADRequest())
-        
         
         self.view.backgroundColor = .systemYellow
         
@@ -66,7 +65,7 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayWeatherView = DayWeatherViewSetting()
         
-        let googleAdsView1: UIView = {
+        let emptyView3: UIView = {
             let view = UIView()
             
             view.backgroundColor = .gray
@@ -88,7 +87,7 @@ class MainViewController: UIViewController {
             view.backgroundColor = .brown
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
-            view.addSubview(googleAdsView1)
+            view.addSubview(emptyView3)
             view.addSubview(emptyView4)
             
             return view
@@ -111,7 +110,7 @@ class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
-        googleAdsView1.snp.makeConstraints { make in
+        emptyView3.snp.makeConstraints { make in
             make.height.equalTo(340)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
@@ -120,7 +119,7 @@ class MainViewController: UIViewController {
         
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(googleAdsView1.snp.bottom).offset(40)
+            make.top.equalTo(emptyView3.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
@@ -151,11 +150,9 @@ class MainViewController: UIViewController {
         bannerViewDidReceiveAd(bottomBarBannerView)
     }
     
+    // MARK: - 하단바 구글ads 맞춤 크기 설정
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Note loadBannerAd is called in viewDidAppear as this is the first time that
-        // the safe area is known. If safe area is not a concern (e.g., your app is
-        // locked in portrait mode), the banner can be loaded in viewWillAppear.
         loadBannerAd()
     }
     
@@ -168,10 +165,7 @@ class MainViewController: UIViewController {
     }
     
     func loadBannerAd() {
-        // Step 2 - Determine the view width to use for the ad width.
         let frame = { () -> CGRect in
-            // Here safe area is taken into account, hence the view frame is used
-            // after the view has been laid out.
             if #available(iOS 11.0, *) {
                 return view.frame.inset(by: view.safeAreaInsets)
             } else {
@@ -180,20 +174,15 @@ class MainViewController: UIViewController {
         }()
         let viewWidth = frame.size.width
         
-        // Step 3 - Get Adaptive GADAdSize and set the ad view.
-        // Here the current interface orientation is used. If the ad is being preloaded
-        // for a future orientation change or different orientation, the function for the
-        // relevant orientation should be used.
         bottomBarBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
         
-        // Step 4 - Create an ad request and load the adaptive banner ad.
         bottomBarBannerView.load(GADRequest())
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
-        view.addConstraints( 
+        view.addConstraints(
             [NSLayoutConstraint(item: bannerView,
                                 attribute: .bottom,
                                 relatedBy: .equal,
@@ -211,7 +200,6 @@ class MainViewController: UIViewController {
             ])
     }
     
-    
     // 버튼 클릭 메서드
     @objc func sideMenuBtnClicked(_ sender: UIButton) {
         print("MainVC - sideMenuBtnClicked() called")
@@ -225,7 +213,6 @@ class MainViewController: UIViewController {
         
         self.navigationController?.pushViewController(PlusViewController(), animated: true)
     }
-    
 }
 
 #if DEBUG
@@ -234,7 +221,6 @@ import CoreLocation
 
 struct MainViewControllerPresentable: UIViewControllerRepresentable {
     func  updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
     }
     
     func makeUIViewController(context: Context) -> some UIViewController {

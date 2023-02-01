@@ -117,23 +117,18 @@ extension MainViewController: CLLocationManagerDelegate {
                 return
             }
             guard let placemark = placemarks?.first else { return }
-            if let state = placemark.administrativeArea,
-               let city = placemark.locality,
-               let subLocality = placemark.subLocality {
-                //                    self.locationInfo = "\(state) " + "\(city) " + subLocality
-                //                    self.state = state
+            if let state = placemark.administrativeArea, // 시/도
+               let city = placemark.locality, // 장소 표시와 연결된 도시 ex) 부천시
+               let subLocality = placemark.subLocality { // 추가 도시 수준 정보 ex) 동작구
+                
                 if state != city { // 위치 지역이 동일하게 나와서 조건문을 추가 함
                     self.title = "\(state) \(city)"
                 } else {
                     self.title = "\(state) \(subLocality)"
                 }
+                print("all city: \(placemark)")
                 print("state: \(state) city: \(city)")
                 print("state: \(state) subLocality: \(subLocality)")
-            }
-            
-            if let country = placemark.country {
-                print("country: \(country)")
-                //                    self.country = country
             }
         }
     }
