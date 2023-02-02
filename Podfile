@@ -10,6 +10,7 @@ target 'FineWeather' do
   pod 'SideMenu'
   pod 'SnapKit', '~> 5.6.0'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'SwiftyJSON', '~> 4.0'
 
   # Pods for FineWeather
 

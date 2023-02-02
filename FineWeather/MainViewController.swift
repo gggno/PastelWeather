@@ -15,10 +15,13 @@ class MainViewController: UIViewController {
     let locationManager = CLLocationManager()
     var lat = 0
     var lon = 0
-    var naverLat = 0.0
-    var naverLon = 0.0
+    var doubleLat = 0.0
+    var doubleLon = 0.0
     
     let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
+    let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
+    let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
+    let findDustInfoUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
     
     // 하단바 광고
     var bottomBarBannerView: GADBannerView!
@@ -41,8 +44,8 @@ class MainViewController: UIViewController {
         convertAddress(from: currentLocation)
         
         let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
-        naverLat = xy["lat"] ?? 60
-        naverLon = xy["lon"] ?? 126
+        doubleLat = xy["lat"] ?? 60
+        doubleLon = xy["lon"] ?? 126
         lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
         lon = Int(xy["ny"] ?? 126) // 용산구
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
@@ -71,8 +74,18 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayWeatherView = DayWeatherViewSetting()
         
-        getLocationInNaver(url: naverUrl, lat: naverLat, lon: naverLon) { response in
-            print("")
+        getLocationInNaver(url: naverUrl, lat: doubleLat, lon: doubleLon) { response in
+            
+        }
+        
+        getTMInKakao(url: kakaoUrl, lat: self.doubleLat, lon: self.doubleLon) { response in
+            print("getTMInKakao: \(response)")
+            self.getNearCenter(url: self.nearCenterUrl, tmX: response.longitude, tmY: response.latitude) { response in
+                print(response)
+                self.getFindDust(url: self.findDustInfoUrl, stationName: response) { data1, data2, data3 in
+                    print(data1, data2, data3)
+                }
+            }
         }
         
         let findDustView: UIView = {
