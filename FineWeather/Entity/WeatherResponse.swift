@@ -7,7 +7,7 @@ class WeatherAPI: NSObject {
     
     private let serviceKey = "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ=="
     
-    // MARK: - Welcome
+    // MARK: - WeatherResponse
     struct WeatherResponse: Decodable {
         var response: Response?
     }

@@ -15,6 +15,10 @@ class MainViewController: UIViewController {
     let locationManager = CLLocationManager()
     var lat = 0
     var lon = 0
+    var naverLat = 0.0
+    var naverLon = 0.0
+    
+    let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     
     // 하단바 광고
     var bottomBarBannerView: GADBannerView!
@@ -37,6 +41,8 @@ class MainViewController: UIViewController {
         convertAddress(from: currentLocation)
         
         let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
+        naverLat = xy["lat"] ?? 60
+        naverLon = xy["lon"] ?? 126
         lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
         lon = Int(xy["ny"] ?? 126) // 용산구
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
@@ -65,7 +71,11 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayWeatherView = DayWeatherViewSetting()
         
-        let emptyView3: UIView = {
+        getLocationInNaver(url: naverUrl, lat: naverLat, lon: naverLon) { response in
+            print("")
+        }
+        
+        let findDustView: UIView = {
             let view = UIView()
             
             view.backgroundColor = .gray
@@ -87,7 +97,7 @@ class MainViewController: UIViewController {
             view.backgroundColor = .brown
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
-            view.addSubview(emptyView3)
+            view.addSubview(findDustView)
             view.addSubview(emptyView4)
             
             return view
@@ -110,7 +120,7 @@ class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
-        emptyView3.snp.makeConstraints { make in
+        findDustView.snp.makeConstraints { make in
             make.height.equalTo(340)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
@@ -119,7 +129,7 @@ class MainViewController: UIViewController {
         
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(emptyView3.snp.bottom).offset(40)
+            make.top.equalTo(findDustView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
