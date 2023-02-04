@@ -111,7 +111,7 @@ class MainViewController: UIViewController {
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
             make.height.equalTo(170)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(20)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
         }

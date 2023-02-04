@@ -84,7 +84,7 @@ class FineDustAPI: NSObject {
             case .success(let value):
                 print("측정소 정보 얻기 통신 성공")
                 let json = JSON(value)
-                print(json)
+                
                 let pm10Value = json["response"]["body"]["items"][0]["pm10Value"].string! // 미세먼지 농도
                 let pm10Grade = json["response"]["body"]["items"][0]["pm10Grade"].string! // 미세먼지 단계
                 let pm25Value = json["response"]["body"]["items"][0]["pm25Value"].string! // 초미세먼지 농도
