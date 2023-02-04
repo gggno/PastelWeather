@@ -74,24 +74,14 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 설정
         let dayWeatherView = DayWeatherViewSetting()
         
-        getLocationInNaver(url: naverUrl, lat: doubleLat, lon: doubleLon) { response in
-            
-        }
-        
-        getTMInKakao(url: kakaoUrl, lat: self.doubleLat, lon: self.doubleLon) { response in
-            print("getTMInKakao: \(response)")
-            self.getNearCenter(url: self.nearCenterUrl, tmX: response.longitude, tmY: response.latitude) { response in
-                print(response)
-                self.getFindDust(url: self.fineDustInfoUrl, stationName: response) { pm10Value, pm10Grade, o3Value, o3Grade in
-                    print("MainVC: \(pm10Value), \(pm10Grade), \(o3Value), \(o3Grade)")
-                }
-            }
-        }
+        // MARK: - fineDustView 요소 설정
+        // let fineDustView = fineDustViewSetting()
+        fineDustViewSetting()
         
         let findDustView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .gray
+            view.backgroundColor = .link
             
             return view
         }()

@@ -12,8 +12,8 @@ class FineDustDatas {
     
     var pm10Value: String?
     var pm10Grade: String?
-    var o3Value: String?
-    var o3Grade: String?
+    var pm25Value: String?
+    var pm25Grade: String?
     
     private init() { }
 }
