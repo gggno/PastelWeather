@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
     let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
     let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
-    let findDustInfoUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
+    let fineDustInfoUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
     
     // 하단바 광고
     var bottomBarBannerView: GADBannerView!
@@ -82,8 +82,8 @@ class MainViewController: UIViewController {
             print("getTMInKakao: \(response)")
             self.getNearCenter(url: self.nearCenterUrl, tmX: response.longitude, tmY: response.latitude) { response in
                 print(response)
-                self.getFindDust(url: self.findDustInfoUrl, stationName: response) { data1, data2, data3 in
-                    print(data1, data2, data3)
+                self.getFindDust(url: self.fineDustInfoUrl, stationName: response) { pm10Value, pm10Grade, o3Value, o3Grade in
+                    print("MainVC: \(pm10Value), \(pm10Grade), \(o3Value), \(o3Grade)")
                 }
             }
         }

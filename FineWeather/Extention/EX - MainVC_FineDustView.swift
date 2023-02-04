@@ -87,6 +87,7 @@ extension MainViewController {
                 let json = JSON(value)
                 let stationName = json["response"]["body"]["items"][0]["stationName"].string!
                 print("stationName: \(stationName)")
+                
                 completion(stationName)
                 
             case .failure(let error):
@@ -95,7 +96,8 @@ extension MainViewController {
         }
     }
     
-    func getFindDust(url: String, stationName: String, completion: @escaping (String, String, String) -> Void) {
+    // 측정소에서 얻은 정보 활용
+    func getFindDust(url: String, stationName: String, completion: @escaping (String, String, String, String) -> Void) {
         let params: Parameters = [
                     "serviceKey" : "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ==",
                     "stationName" : stationName,
@@ -106,14 +108,25 @@ extension MainViewController {
         AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print("측정소 정보 통신 성공")
+                print("측정소 정보 얻기 통신 성공")
+                let json = JSON(value)
+                let pm10Value = json["response"]["body"]["items"][0]["pm10Value"].string! // 미세먼지 농도
+                let pm10Grade = json["response"]["body"]["items"][0]["pm10Grade"].string! // 미세먼지 단계
+                let o3Value = json["response"]["body"]["items"][0]["o3Value"].string! // 오존 농도
+                let o3Grade = json["response"]["body"]["items"][0]["o3Grade"].string! // 오존 단계
                 
+                FineDustDatas.shared.pm10Value = pm10Value
+                FineDustDatas.shared.pm10Grade = pm10Grade
+                FineDustDatas.shared.o3Value = o3Value
+                FineDustDatas.shared.o3Grade = o3Grade
+                
+                completion(pm10Value, pm10Grade, o3Value, o3Grade)
             case .failure(let error):
-                print("측정소 정보 통신 실패 에러 메시지: \(error)")
+                print("측정소 정보 얻기 통신 실패 에러 메시지: \(error)")
             }
         }
         
-        
+    // 해야할것 측정소에서 얻은 정보가 어떤게 있는지 파악(미먼, 초미먼) -> ui꾸미기 -> 얻은 정보를 이용하여 ui에 뿌리기
     }
     
 }
