@@ -14,51 +14,96 @@ class CustomView: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "타이틀"
+        label.font = label.font.withSize(25)
         label.textColor = .black
         label.textAlignment = .center
-        label.backgroundColor = .cyan
+        
+        return label
+    }()
+    
+    lazy var currentStateLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = label.font.withSize(25)
+        label.textColor = .black
+        label.textAlignment = .center
         
         return label
     }()
     
     lazy var progressView: UIProgressView = {
         let progress = UIProgressView()
-        progress.progressTintColor = .green
-        progress.trackTintColor = .lightGray
-        progress.setProgress(0.7, animated: true)
+        
         return progress
+    }()
+    
+    lazy var minValueLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = label.font.withSize(10)
+        
+        return label
+    }()
+    
+    lazy var standardLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = label.font.withSize(10)
+        
+        return label
     }()
     
     lazy var fromInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "환경부 한국환경공단"
-        label.backgroundColor = .cyan
+        
+        label.text = "기준: 환경부 한국환경공단"
+        label.font = label.font.withSize(10)
+        label.textColor = .lightGray
+        
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.backgroundColor = .orange
         self.addSubview(titleLabel)
+        self.addSubview(currentStateLabel)
         self.addSubview(progressView)
+        self.addSubview(minValueLabel)
+        self.addSubview(standardLabel)
         self.addSubview(fromInfoLabel)
-        
+ 
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.top.equalToSuperview().offset(15)
             make.leading.equalToSuperview().offset(10)
         }
         
+        currentStateLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.top.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-10)
+        }
+        
         progressView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(25)
-            make.centerX.equalToSuperview()
+            make.center.equalToSuperview()
             make.leading.equalTo(titleLabel.snp.leading)
         }
         
+        minValueLabel.snp.makeConstraints { make in
+            make.top.equalTo(progressView.snp.bottom).offset(5)
+            make.leading.equalTo(progressView.snp.leading)
+        }
+        
+        standardLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-5)
+            make.leading.equalTo(progressView)
+        }
+        
         fromInfoLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-15)
-            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-5)
+            make.trailing.equalToSuperview().offset(-5)
         }
     }
     
@@ -66,8 +111,10 @@ class CustomView: UIView {
         super.init(coder: coder)
     }
     
-    func setupLayout(title: String, value: String, grade: String) {
+    func setupLayout(title: String, value: String, grade: String, minValue: String, currentState: String) {
         titleLabel.text = title
+        minValueLabel.text = minValue
+        currentStateLabel.text = currentState
     }
 }
 

@@ -101,8 +101,8 @@ class MainViewController: UIViewController {
         
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
-            make.height.equalTo(170)
-            make.top.equalToSuperview().offset(20)
+            make.height.equalTo(200)
+            make.top.equalToSuperview().offset(30)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
         }
@@ -110,20 +110,20 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 레이아웃
         dayWeatherView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleView.snp.bottom).offset(40)
+            make.top.equalTo(titleView.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
         }
         
         fineDustView.snp.makeConstraints { make in
-            make.height.equalTo(350)
-            make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
+            make.height.equalTo(330)
+            make.top.equalTo(dayWeatherView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(fineDustView.snp.bottom).offset(40)
+            make.top.equalTo(fineDustView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
@@ -179,7 +179,6 @@ class MainViewController: UIViewController {
         let viewWidth = frame.size.width
         
         bottomBarBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
-        
         bottomBarBannerView.load(GADRequest())
     }
     
