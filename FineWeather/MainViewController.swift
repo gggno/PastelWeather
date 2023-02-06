@@ -75,16 +75,7 @@ class MainViewController: UIViewController {
         let dayWeatherView = DayWeatherViewSetting()
         
         // MARK: - fineDustView 요소 설정
-        // let fineDustView = fineDustViewSetting()
-        fineDustViewSetting()
-        
-        let findDustView: UIView = {
-            let view = UIView()
-            
-            view.backgroundColor = .link
-            
-            return view
-        }()
+        let fineDustView = fineDustViewSetting()
         
         let emptyView4: UIView = {
             let view = UIView()
@@ -100,7 +91,7 @@ class MainViewController: UIViewController {
             view.backgroundColor = .brown
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
-            view.addSubview(findDustView)
+            view.addSubview(fineDustView)
             view.addSubview(emptyView4)
             
             return view
@@ -123,8 +114,8 @@ class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
-        findDustView.snp.makeConstraints { make in
-            make.height.equalTo(340)
+        fineDustView.snp.makeConstraints { make in
+            make.height.equalTo(350)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
@@ -132,7 +123,7 @@ class MainViewController: UIViewController {
         
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(findDustView.snp.bottom).offset(40)
+            make.top.equalTo(fineDustView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
