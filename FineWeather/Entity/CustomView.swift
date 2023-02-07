@@ -24,7 +24,7 @@ class CustomView: UIView {
     lazy var currentStateLabel: UILabel = {
         let label = UILabel()
         
-        label.font = label.font.withSize(25)
+        label.font = label.font.withSize(20)
         label.textColor = .black
         label.textAlignment = .center
         
@@ -40,7 +40,7 @@ class CustomView: UIView {
     lazy var minValueLabel: UILabel = {
         let label = UILabel()
         
-        label.font = label.font.withSize(10)
+        label.font = label.font.withSize(15)
         
         return label
     }()
@@ -56,7 +56,7 @@ class CustomView: UIView {
     lazy var fromInfoLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "기준: 환경부 한국환경공단"
+        label.text = "기준: 한국환경공단"
         label.font = label.font.withSize(10)
         label.textColor = .lightGray
         

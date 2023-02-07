@@ -70,7 +70,7 @@ class FineDustAPI: NSObject {
     }
     
     // 측정소에서 얻은 정보 활용
-    func getFindDust(stationName: String, completion: @escaping (String, String, String, String) -> Void) {
+    func getFindDust(stationName: String, completion: @escaping (String, String, String, String, String, String) -> Void) {
         let params: Parameters = [
                     "serviceKey" : "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ==",
                     "stationName" : stationName,
@@ -85,17 +85,21 @@ class FineDustAPI: NSObject {
                 print("측정소 정보 얻기 통신 성공")
                 let json = JSON(value)
                 
-                let pm10Value = json["response"]["body"]["items"][0]["pm10Value"].string! // 미세먼지 농도
-                let pm10Grade = json["response"]["body"]["items"][0]["pm10Grade"].string! // 미세먼지 단계
-                let pm25Value = json["response"]["body"]["items"][0]["pm25Value"].string! // 초미세먼지 농도
-                let pm25Grade = json["response"]["body"]["items"][0]["pm25Grade"].string! // 초미세먼지 단계
+                let pm10Value = json["response"]["body"]["items"][0]["pm10Value"].string ?? "0" // 미세먼지 농도
+                let pm10Grade = json["response"]["body"]["items"][0]["pm10Grade"].string ?? "0" // 미세먼지 단계
+                let pm25Value = json["response"]["body"]["items"][0]["pm25Value"].string ?? "0" // 초미세먼지 농도
+                let pm25Grade = json["response"]["body"]["items"][0]["pm25Grade"].string ?? "0" // 초미세먼지 단계
+                let o3Value = json["response"]["body"]["items"][0]["o3Value"].string ?? "0" // 오존 농도
+                let o3Grade = json["response"]["body"]["items"][0]["o3Grade"].string ?? "0" // 오존 농도
                 
                 FineDustDatas.shared.pm10Value = pm10Value
                 FineDustDatas.shared.pm10Grade = pm10Grade
                 FineDustDatas.shared.pm25Value = pm25Value
                 FineDustDatas.shared.pm25Grade = pm25Grade
+                FineDustDatas.shared.o3Value = o3Value
+                FineDustDatas.shared.o3Grade = o3Grade
                 
-                completion(pm10Value, pm10Grade, pm25Value, pm25Grade)
+                completion(pm10Value, pm10Grade, pm25Value, pm25Grade, o3Value, o3Grade)
             case .failure(let error):
                 print("측정소 정보 얻기 통신 실패 에러 메시지: \(error)")
             }

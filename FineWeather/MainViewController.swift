@@ -115,7 +115,7 @@ class MainViewController: UIViewController {
         }
         
         fineDustView.snp.makeConstraints { make in
-            make.height.equalTo(330)
+            make.height.equalTo(510)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
