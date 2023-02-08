@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 import SnapKit
 
-class SearchTVC: UITableViewCell {
-    static let identifier = "SearchTVC"
+class SearchTableViewCell: UITableViewCell {
+    static let identifier = "SearchTableViewCell"
     // MARK: - Properties
     
     lazy var countryLabel: UILabel = {
