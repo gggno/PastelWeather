@@ -28,12 +28,14 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .systemYellow
+        
+        
+        
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
         bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bottomBarBannerView.rootViewController = self
-        
-        self.view.backgroundColor = .systemYellow
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -48,6 +50,7 @@ class MainViewController: UIViewController {
         doubleLon = xy["lon"] ?? 126
         lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
         lon = Int(xy["ny"] ?? 126) // 용산구
+        
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
         print("int lat: \(lat), int lon: \(lon)")
         

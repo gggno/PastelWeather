@@ -17,6 +17,8 @@
 		6677E51C294A10E70045D348 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6677E51A294A10E70045D348 /* LaunchScreen.storyboard */; };
 		667C9E9829927B0E0035A085 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E9729927B0E0035A085 /* SearchTableViewCell.swift */; };
 		667C9E9A2993E9150035A085 /* EX - PlusVC_All.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E992993E9150035A085 /* EX - PlusVC_All.swift */; };
+		667C9E9C2994FD7C0035A085 /* EX - MainVC_PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E9B2994FD7C0035A085 /* EX - MainVC_PageViewController.swift */; };
+		667C9E9E29953F970035A085 /* EX - UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E9D29953F970035A085 /* EX - UILabel.swift */; };
 		667D502F2950A185002453AA /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D502E2950A185002453AA /* PlusViewController.swift */; };
 		667D50312950A3C3002453AA /* SideMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D50302950A3C3002453AA /* SideMenuNavigation.swift */; };
 		667D50332950A42D002453AA /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D50322950A42D002453AA /* SideMenuViewController.swift */; };
@@ -48,6 +50,8 @@
 		6677E51D294A10E70045D348 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		667C9E9729927B0E0035A085 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		667C9E992993E9150035A085 /* EX - PlusVC_All.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - PlusVC_All.swift"; sourceTree = "<group>"; };
+		667C9E9B2994FD7C0035A085 /* EX - MainVC_PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_PageViewController.swift"; sourceTree = "<group>"; };
+		667C9E9D29953F970035A085 /* EX - UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - UILabel.swift"; sourceTree = "<group>"; };
 		667D502E2950A185002453AA /* PlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewController.swift; sourceTree = "<group>"; };
 		667D50302950A3C3002453AA /* SideMenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNavigation.swift; sourceTree = "<group>"; };
 		667D50322950A42D002453AA /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -96,8 +100,10 @@
 				66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */,
 				66CADB2A2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift */,
 				66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */,
-				668296D8298F978600054499 /* UIView+PreView.swift */,
+				667C9E9B2994FD7C0035A085 /* EX - MainVC_PageViewController.swift */,
 				667C9E992993E9150035A085 /* EX - PlusVC_All.swift */,
+				668296D8298F978600054499 /* UIView+PreView.swift */,
+				667C9E9D29953F970035A085 /* EX - UILabel.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				6677E510294A10E60045D348 /* AppDelegate.swift in Sources */,
 				66524D7D295485B700263F00 /* CustomTempStackView.swift in Sources */,
 				667C9E9829927B0E0035A085 /* SearchTableViewCell.swift in Sources */,
+				667C9E9E29953F970035A085 /* EX - UILabel.swift in Sources */,
 				667D50312950A3C3002453AA /* SideMenuNavigation.swift in Sources */,
 				6677E512294A10E60045D348 /* SceneDelegate.swift in Sources */,
 				66BDF1DD29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift in Sources */,
@@ -305,6 +312,7 @@
 				66CADB3F298BDB5C000A29A5 /* UserLocation.swift in Sources */,
 				6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */,
 				66BDF1D7296803AE00E1CD21 /* DateValue.swift in Sources */,
+				667C9E9C2994FD7C0035A085 /* EX - MainVC_PageViewController.swift in Sources */,
 				668296D9298F978600054499 /* UIView+PreView.swift in Sources */,
 				66CC510E295ABDBE00C47EEC /* WeatherResponse.swift in Sources */,
 				66CADB39298A89EF000A29A5 /* FineDustResponse.swift in Sources */,

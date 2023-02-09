@@ -24,7 +24,9 @@ extension PlusViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         
-        
+        if let highlightText = searchBar.text {
+            cell.countryLabel.setHighlighted(searchResults[indexPath.row].title, with: highlightText)
+        }
         
        return cell
     }
@@ -51,6 +53,13 @@ extension PlusViewController: UITableViewDelegate {
             let searchLat = placeMark.coordinate.latitude
             let searchLon = placeMark.coordinate.longitude
             
+            let mainVC = MainViewController()
+            
+            let xy = mainVC.convertGrid(code: "toXY", v1: searchLat, v2: searchLon)
+    
+            mainVC.lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
+            mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
+            print("plus lat, lon: \(mainVC.lat) \(mainVC.lon)")
         }
         
     }
