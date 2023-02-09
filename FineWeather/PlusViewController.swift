@@ -63,9 +63,12 @@ class PlusViewController: UIViewController {
         
         searchBar.delegate = self
         
+        searchCompleter.delegate = self
+        searchCompleter.resultTypes = .address
+        
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         searchTableView.separatorStyle = .none
         
         self.view.backgroundColor = .orange
@@ -101,7 +104,6 @@ class PlusViewController: UIViewController {
         }
         
     }
-    
     
     @objc func touchupCancelBtn(_ sender: UIButton) {
         print("PlusViewController - touchupCancelBtn() called")

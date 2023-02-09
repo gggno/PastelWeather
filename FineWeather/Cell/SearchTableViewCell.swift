@@ -11,7 +11,6 @@ import SnapKit
 
 class SearchTableViewCell: UITableViewCell {
     static let identifier = "SearchTableViewCell"
-    // MARK: - Properties
     
     lazy var countryLabel: UILabel = {
         let label = UILabel()

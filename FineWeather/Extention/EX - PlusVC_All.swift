@@ -9,9 +9,31 @@ import Foundation
 import UIKit
 import MapKit
 
+extension PlusViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("tableView numberOfRowsInSection() called")
+        print("numberOfRowsInSection: \(searchResults)")
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("tableView cellForRowAt() called")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else {return UITableViewCell()}
+        print("cell: \(cell)")
+        cell.countryLabel.text = searchResults[indexPath.row].title
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        
+        
+        
+       return cell
+    }
+}
+
 extension PlusViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("tableView didSelectRowAt() called")
         let selectedResult = searchResults[indexPath.row]
         let searchReqeust = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchReqeust)
@@ -26,25 +48,11 @@ extension PlusViewController: UITableViewDelegate {
                 return
             }
             
-            
+            let searchLat = placeMark.coordinate.latitude
+            let searchLon = placeMark.coordinate.longitude
             
         }
         
-    }
-}
-
-extension PlusViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else {return UITableViewCell()}
-        
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        
-       return cell
     }
 }
 
@@ -60,6 +68,7 @@ extension PlusViewController: MKLocalSearchCompleterDelegate {
     
     // 자동완성 완료 시에 결과를 받는 함수
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        print("searchResults: \(searchResults)")
         searchResults = completer.results
         searchTableView.reloadData()
     }
