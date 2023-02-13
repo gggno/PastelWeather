@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             naviVC.navigationBar.standardAppearance = naviBarAppearance
             naviVC.navigationBar.scrollEdgeAppearance = naviBarAppearance
         }
-        window?.rootViewController = naviVC // 위에서 만든 viewController를 첫 화면으로 띄우기
+        window?.rootViewController = mainVC // 위에서 만든 viewController를 첫 화면으로 띄우기
         
         window?.makeKeyAndVisible() // 화면에 보이게끔
         window?.windowScene = windowScene

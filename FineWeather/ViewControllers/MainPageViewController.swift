@@ -10,21 +10,26 @@ import SnapKit
 
 class MainPageViewController: UIViewController {
     
-    lazy var vc1: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
+    lazy var firstVC: UIViewController = {
+        let vc = UINavigationController(rootViewController: MainViewController())
         
         return vc
     }()
     
     lazy var vc2: UIViewController = {
+        let vc = UINavigationController(rootViewController: MainViewController())
+        
+        return vc
+    }()
+    
+    lazy var vc3: UIViewController = {
         let vc = UIViewController()
         vc.view.backgroundColor = .green
         
         return vc
     }()
     
-    lazy var vc3: UIViewController = {
+    lazy var vc4: UIViewController = {
         let vc = UIViewController()
         vc.view.backgroundColor = .blue
         
@@ -32,13 +37,21 @@ class MainPageViewController: UIViewController {
     }()
     
     lazy var dataViewControllers: [UIViewController] = {
-        return [MainViewController(), vc1, vc2, vc3]
+        return [firstVC, vc2, vc3, vc4]
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initPageViewController()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(deliverdVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
         
-        initPageViewController()
+        // 아마 화면 추가 때문에 viewWillApear에 해야할거같음
+//        initPageViewController()
     }
     
     // 페이지뷰 설정
@@ -46,7 +59,7 @@ class MainPageViewController: UIViewController {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         pageViewController.delegate = self
         pageViewController.dataSource = self
-        
+          
         pageViewController.view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         
         if let firstVC = dataViewControllers.first {
@@ -58,9 +71,17 @@ class MainPageViewController: UIViewController {
         // 1. 페이징 화면 추가 방법 구상
     }
     
+    @objc func deliverdVC(_ notification: NSNotification) {
+        guard let mainVC = notification.object as? MainViewController else {return}
+        let naviVC = UINavigationController(rootViewController: mainVC)
+        dataViewControllers.append(naviVC)
+       
+    }
+    
 }
 
 extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    // 왼쪽에서 오른쪽으로 스와이프 직전에 실행되는 함수
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print("before")
         guard let index = dataViewControllers.firstIndex(of: viewController) else {return nil}
@@ -73,6 +94,7 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
         }
     }
     
+    // 오른쪽에서 왼쪽으로 스와이프 직전에 실행되는 함수
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         print("after")
         guard let index = dataViewControllers.firstIndex(of: viewController) else {return nil}
@@ -83,20 +105,5 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
         } else {
             return dataViewControllers[nextIndex]
         }
-        
-    }
-    
-    // 버튼 클릭 메서드
-    @objc func sideMenuBtnClicked(_ sender: UIButton) {
-        print("MainVC - sideMenuBtnClicked() called")
-        let sideMenu = SideMenuNavigation(rootViewController: SideMenuViewController())
-        
-        present(sideMenu, animated: true)
-    }
-    
-    @objc func plusBtnClicked(_ sender: UIButton) {
-        print("MainVC - plusBtnClicked() called")
-        
-        self.navigationController?.pushViewController(PlusViewController(), animated: true)
     }
 }

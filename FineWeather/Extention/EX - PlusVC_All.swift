@@ -60,6 +60,7 @@ extension PlusViewController: UITableViewDelegate {
             mainVC.lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
             mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
             print("plus lat, lon: \(mainVC.lat) \(mainVC.lon)")
+            NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
         }
         
     }

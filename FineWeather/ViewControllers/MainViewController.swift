@@ -148,8 +148,7 @@ class MainViewController: UIViewController {
         }
         
         scrollView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.leading.trailing.bottom.equalToSuperview()
         }
         
         // 하단바 광고 추가
