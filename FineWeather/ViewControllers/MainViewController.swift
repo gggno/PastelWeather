@@ -30,8 +30,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .systemYellow
         
-        
-        
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
         bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
@@ -58,14 +56,14 @@ class MainViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(sideMenuBtnClicked(_:)))
             button.tintColor = .white
-            
+
             return button
         }()
-        
+
         self.navigationItem.rightBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
             button.tintColor = .white
-            
+
             return button
         }()
         
@@ -105,7 +103,7 @@ class MainViewController: UIViewController {
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
             make.height.equalTo(200)
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
         }
@@ -150,7 +148,8 @@ class MainViewController: UIViewController {
         }
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
         // 하단바 광고 추가
@@ -210,13 +209,11 @@ class MainViewController: UIViewController {
     @objc func sideMenuBtnClicked(_ sender: UIButton) {
         print("MainVC - sideMenuBtnClicked() called")
         let sideMenu = SideMenuNavigation(rootViewController: SideMenuViewController())
-        
         present(sideMenu, animated: true)
     }
     
     @objc func plusBtnClicked(_ sender: UIButton) {
         print("MainVC - plusBtnClicked() called")
-        
         self.navigationController?.pushViewController(PlusViewController(), animated: true)
     }
 }
