@@ -61,6 +61,7 @@ extension PlusViewController: UITableViewDelegate {
             mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
             print("plus lat, lon: \(mainVC.lat) \(mainVC.lon)")
             NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
+            // lat lon을 이용해서 메인뷰컨 로직 재구현하기
         }
         
     }

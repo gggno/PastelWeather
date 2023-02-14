@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     var lon = 0
     var doubleLat = 0.0
     var doubleLon = 0.0
-    
+    var firstViewConfirm: Bool = false
     let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
     let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
@@ -39,18 +39,10 @@ class MainViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        // 타이틀에 현재위치 출력
-        guard let currentLocation = locationManager.location else {return}
-        convertAddress(from: currentLocation)
-        
-        let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
-        doubleLat = xy["lat"] ?? 60
-        doubleLon = xy["lon"] ?? 126
-        lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
-        lon = Int(xy["ny"] ?? 126) // 용산구
-        
-        print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
-        print("int lat: \(lat), int lon: \(lon)")
+        // 첫번째 뷰 현재위치를 기반으로 세팅
+        if firstViewConfirm == true {
+            firstVCLocationSetting()
+        }
         
         // MARK: - 메인화면 내비게이션 요소 설정
         self.navigationItem.leftBarButtonItem = {
@@ -63,7 +55,7 @@ class MainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
             button.tintColor = .white
-
+ 
             return button
         }()
         
@@ -167,6 +159,21 @@ class MainViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ in
             self.loadBannerAd()
         })
+    }
+    
+    func firstVCLocationSetting() {
+        // 타이틀에 현재위치 출력
+        guard let currentLocation = locationManager.location else {return}
+        convertAddress(from: currentLocation)
+        
+        let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
+        doubleLat = xy["lat"] ?? 60
+        doubleLon = xy["lon"] ?? 126
+        lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
+        lon = Int(xy["ny"] ?? 126) // 용산구
+        
+        print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
+        print("int lat: \(lat), int lon: \(lon)")
     }
     
     func loadBannerAd() {
