@@ -164,7 +164,7 @@ class MainViewController: UIViewController {
     func firstVCLocationSetting() {
         // 타이틀에 현재위치 출력
         guard let currentLocation = locationManager.location else {return}
-        convertAddress(from: currentLocation)
+        convertCurrentAddress(from: currentLocation)
         
         let xy = convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0)
         doubleLat = xy["lat"] ?? 60

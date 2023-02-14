@@ -40,6 +40,8 @@ extension PlusViewController: UITableViewDelegate {
         let searchReqeust = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchReqeust)
         
+        let mainVC = MainViewController()
+        
         search.start { response, error in
             guard error == nil else {
                 print(error.debugDescription)
@@ -53,13 +55,16 @@ extension PlusViewController: UITableViewDelegate {
             let searchLat = placeMark.coordinate.latitude
             let searchLon = placeMark.coordinate.longitude
             
-            let mainVC = MainViewController()
+            let searchLocation = CLLocation(latitude: searchLat, longitude: searchLon)
+            self.convertCurrentAddress(from: searchLocation, vc: mainVC)
             
             let xy = mainVC.convertGrid(code: "toXY", v1: searchLat, v2: searchLon)
     
             mainVC.lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
             mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
-            print("plus lat, lon: \(mainVC.lat) \(mainVC.lon)")
+            mainVC.doubleLat = xy["lat"] ?? 60
+            mainVC.doubleLon = xy["lon"] ?? 126
+            print("plus lat, lon: \(mainVC.lat) \(mainVC.lon) double: \(mainVC.doubleLat) \(mainVC.doubleLon)")
             NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
             // lat lon을 이용해서 메인뷰컨 로직 재구현하기
         }

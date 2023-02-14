@@ -109,11 +109,11 @@ extension MainPageViewController: CLLocationManagerDelegate {
     }
     
     // 타이틀에 현재 위치 나타내기
-    func convertAddress(from coordinate:CLLocation) {
+    func convertSearchAddress(from coordinate:CLLocation) {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) in
             if let someError = error {
-                print("convertAddress Error:", someError)
+                print("convertSearchAddress Error:", someError)
                 return
             }
             guard let placemark = placemarks?.first else { return }
