@@ -63,7 +63,7 @@ extension MainViewController {
                     let ozoneProgress: Float = (Float(o3Value) ?? 0) / 0.18
                     
                     // 미세먼지
-                    switch Int(pm10Value)! {
+                    switch Int(pm10Value) ?? -1 {
                     case 0...30:
                         pm10View.setupLayout(title: "미세먼지", value: pm10Value, grade: pm10Grade, minValue: "0", currentState: "😁 좋음 \(pm10Value)(㎍/m³)")
                         pm10View.progressView.progressTintColor = .blue
@@ -89,7 +89,7 @@ extension MainViewController {
                     }
                     
                     // 초미세먼지
-                    switch Int(pm25Value)! {
+                    switch Int(pm25Value) ?? -1 {
                     case 0...15:
                         pm25View.setupLayout(title: "초미세먼지", value: pm25Value, grade: pm25Grade, minValue: "0", currentState: "😁 좋음 \(pm25Value)(㎍/m³)")
                         pm25View.progressView.progressTintColor = .blue
@@ -115,7 +115,7 @@ extension MainViewController {
                     }
                     
                     // 오존
-                    switch Double(o3Value)! {
+                    switch Double(o3Value) ?? -1 {
                     case 0...0.030:
                         o3View.setupLayout(title: "오존", value: o3Value, grade: o3Grade, minValue: "0", currentState: "😁 좋음 \(o3Value)(ppm)")
                         o3View.progressView.progressTintColor = .blue
