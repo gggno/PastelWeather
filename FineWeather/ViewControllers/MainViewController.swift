@@ -45,22 +45,46 @@ class MainViewController: UIViewController {
         }
         
         // MARK: - 메인화면 내비게이션 요소 설정
+        navigationItemSetting()
+        
+        // MARK: - 메인 스크롤뷰에 넣을 요소 설정
+        vcLayoutSetting()
+        
+        // 하단바 광고 추가
+        bannerViewDidReceiveAd(bottomBarBannerView)
+    }
+    
+    // MARK: - 하단바 구글ads 맞춤 크기 설정
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadBannerAd()
+    }
+    
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to:size, with:coordinator)
+        coordinator.animate(alongsideTransition: { _ in
+            self.loadBannerAd()
+        })
+    }
+    
+    func navigationItemSetting() {
         self.navigationItem.leftBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(sideMenuBtnClicked(_:)))
             button.tintColor = .white
-
+            
             return button
         }()
-
+        
         self.navigationItem.rightBarButtonItem = {
             let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBtnClicked(_:)))
             button.tintColor = .white
- 
+            
             return button
         }()
-        
-        // MARK: - 메인 스크롤뷰에 넣을 요소 설정
-        
+    }
+    
+    func vcLayoutSetting() {
         // MARK: - titleView 요소 설정
         let titleView = titleViewSetting()
         
@@ -142,23 +166,6 @@ class MainViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
-        
-        // 하단바 광고 추가
-        bannerViewDidReceiveAd(bottomBarBannerView)
-    }
-    
-    // MARK: - 하단바 구글ads 맞춤 크기 설정
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loadBannerAd()
-    }
-    
-    override func viewWillTransition(to size: CGSize,
-                                     with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to:size, with:coordinator)
-        coordinator.animate(alongsideTransition: { _ in
-            self.loadBannerAd()
-        })
     }
     
     func firstVCLocationSetting() {
