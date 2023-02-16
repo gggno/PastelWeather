@@ -114,19 +114,10 @@ class PlusViewController: UIViewController {
                 return
             }
             guard let placemark = placemarks?.first else { return }
-            print("search placemark: \(placemark)")
-            print("placemark.country: \(placemark.country)")
-            print("placemark.administrativeArea: \(placemark.administrativeArea)")
-            print("placemark.subAdministrativeArea: \(placemark.subAdministrativeArea)")
-            print("placemark.locality: \(placemark.locality)")
-            print("placemark.subLocality: \(placemark.subLocality)")
-            print("")
             
             let state = placemark.administrativeArea ?? ""
             let subState = placemark.subAdministrativeArea ?? ""
             let city = placemark.locality ?? ""
-            
-            print("placemark state substate city: \(state) \(subState) \(city)")
             
             if subState == "" {
                 if state == city {
