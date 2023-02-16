@@ -108,29 +108,4 @@ extension MainPageViewController: CLLocationManagerDelegate {
         return rs
     }
     
-    // 타이틀에 현재 위치 나타내기
-    func convertSearchAddress(from coordinate:CLLocation) {
-        let geoCoder = CLGeocoder()
-        geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) in
-            if let someError = error {
-                print("convertSearchAddress Error:", someError)
-                return
-            }
-            guard let placemark = placemarks?.first else { return }
-            if let state = placemark.administrativeArea, // 시/도
-               let city = placemark.locality, // 장소 표시와 연결된 도시 ex) 부천시
-               let subLocality = placemark.subLocality { // 추가 도시 수준 정보 ex) 동작구
-                
-                if state != city { // 위치 지역이 동일하게 나와서 조건문을 추가 함
-                    self.firstVC.title = "\(state) \(city)"
-                } else {
-                    self.firstVC.title = "\(state) \(subLocality)"
-                }
-//                print("all city: \(placemark)")
-                print("state: \(state) city: \(city)")
-                print("state: \(state) subLocality: \(subLocality)")
-            }
-        }
-    }
-    
 }

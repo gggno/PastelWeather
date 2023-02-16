@@ -85,7 +85,7 @@ extension MainViewController {
                         pm10View.progressView.trackTintColor = .lightGray
                         pm10View.progressView.setProgress(fineDustProgress, animated: true)
                     default:
-                        pm10View.setupLayout(title: "미세먼지", value: "0", grade: "0", minValue: "0", currentState: "정보없음")
+                        pm10View.setupLayout(title: "미세먼지", value: "0", grade: "0", minValue: "0", currentState: "정보조회실패")
                     }
                     
                     // 초미세먼지
@@ -111,7 +111,7 @@ extension MainViewController {
                         pm25View.progressView.trackTintColor = .lightGray
                         pm25View.progressView.setProgress(ultrafineDustProgress, animated: true)
                     default:
-                        pm25View.setupLayout(title: "초미세먼지", value: "0", grade: "0", minValue: "0", currentState: "정보없음")
+                        pm25View.setupLayout(title: "초미세먼지", value: "0", grade: "0", minValue: "0", currentState: "정보조회실패")
                     }
                     
                     // 오존
@@ -137,7 +137,7 @@ extension MainViewController {
                         o3View.progressView.trackTintColor = .lightGray
                         o3View.progressView.setProgress(ozoneProgress, animated: true)
                     default:
-                        o3View.setupLayout(title: "오존", value: "0", grade: "0", minValue: "0", currentState: "정보없음")
+                        o3View.setupLayout(title: "오존", value: "0", grade: "0", minValue: "0", currentState: "정보조회실패")
                     }
                 }
             }

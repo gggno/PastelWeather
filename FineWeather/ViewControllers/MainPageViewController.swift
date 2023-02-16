@@ -43,8 +43,6 @@ class MainPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
-        
-        
     }
     
     // 페이지뷰 설정
@@ -69,13 +67,9 @@ class MainPageViewController: UIViewController {
         guard let mainVC = notification.object as? MainViewController else {return}
         print("mainVC lat lon: \(mainVC.lat) \(mainVC.lon)")
         print("mainVC Double lat lon: \(mainVC.doubleLat) \(mainVC.doubleLon)")
-//        let searchLocation = CLLocation(latitude: CLLocationDegrees, longitude: <#T##CLLocationDegrees#>)
-//        convertSearchAddress(from: searchLocation)
-        
         
         let naviVC = UINavigationController(rootViewController: mainVC)
-        dataViewControllers.append(naviVC)
-        
+        dataViewControllers.append(naviVC)   
     }
     
     deinit {

@@ -126,7 +126,7 @@ extension MainViewController: CLLocationManagerDelegate {
                 } else {
                     self.title = "\(state) \(subLocality)"
                 }
-//                print("all city: \(placemark)")
+                print("Currnet all city: \(placemark)")
                 print("state: \(state) city: \(city)")
                 print("state: \(state) subLocality: \(subLocality)")
             }

@@ -56,7 +56,7 @@ extension PlusViewController: UITableViewDelegate {
             let searchLon = placeMark.coordinate.longitude
             
             let searchLocation = CLLocation(latitude: searchLat, longitude: searchLon)
-            self.convertCurrentAddress(from: searchLocation, vc: mainVC)
+            self.convertSearchAddress(from: searchLocation, vc: mainVC)
             
             let xy = mainVC.convertGrid(code: "toXY", v1: searchLat, v2: searchLon)
     

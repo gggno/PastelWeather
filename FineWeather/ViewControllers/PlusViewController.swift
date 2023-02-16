@@ -71,7 +71,7 @@ class PlusViewController: UIViewController {
         searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         searchTableView.separatorStyle = .none
         
-        self.view.backgroundColor = .orange
+        self.view.backgroundColor = .blue
         self.title = "관심지역"
         
         topView.addSubview(searchBar)
@@ -105,26 +105,37 @@ class PlusViewController: UIViewController {
         
     }
     
-    func convertCurrentAddress(from coordinate:CLLocation, vc: UIViewController) {
+    func convertSearchAddress(from coordinate:CLLocation, vc: UIViewController) {
         let geoCoder = CLGeocoder()
-        geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) in
+        let locale = Locale(identifier: "ko-kr")
+        geoCoder.reverseGeocodeLocation(coordinate, preferredLocale: locale) { (placemarks, error) in
             if let someError = error {
-                print("convertCurrentAddress Error:", someError)
+                print("convertSearchAddress Error:", someError)
                 return
             }
             guard let placemark = placemarks?.first else { return }
-            if let state = placemark.administrativeArea, // 시/도
-               let city = placemark.locality, // 장소 표시와 연결된 도시 ex) 부천시
-               let subLocality = placemark.subLocality { // 추가 도시 수준 정보 ex) 동작구
-                
-                if state != city { // 위치 지역이 동일하게 나와서 조건문을 추가 함
-                    vc.title = "\(state) \(city)"
+            print("search placemark: \(placemark)")
+            print("placemark.country: \(placemark.country)")
+            print("placemark.administrativeArea: \(placemark.administrativeArea)")
+            print("placemark.subAdministrativeArea: \(placemark.subAdministrativeArea)")
+            print("placemark.locality: \(placemark.locality)")
+            print("placemark.subLocality: \(placemark.subLocality)")
+            print("")
+            
+            let state = placemark.administrativeArea ?? ""
+            let subState = placemark.subAdministrativeArea ?? ""
+            let city = placemark.locality ?? ""
+            
+            print("placemark state substate city: \(state) \(subState) \(city)")
+            
+            if subState == "" {
+                if state == city {
+                    vc.title = state
                 } else {
-                    vc.title = "\(state) \(subLocality)"
+                    vc.title = "\(state) \(city)"
                 }
-//                print("all city: \(placemark)")
-                print("state: \(state) city: \(city)")
-                print("state: \(state) subLocality: \(subLocality)")
+            } else {
+                vc.title = "\(state) \(subState)"
             }
         }
     }
