@@ -69,7 +69,7 @@ class MainPageViewController: UIViewController {
         print("mainVC Double lat lon: \(mainVC.doubleLat) \(mainVC.doubleLon)")
         
         let naviVC = UINavigationController(rootViewController: mainVC)
-        dataViewControllers.append(naviVC)   
+        dataViewControllers.append(naviVC)
     }
     
     deinit {

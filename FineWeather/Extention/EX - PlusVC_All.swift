@@ -28,7 +28,7 @@ extension PlusViewController: UITableViewDataSource {
             cell.countryLabel.setHighlighted(searchResults[indexPath.row].title, with: highlightText)
         }
         
-       return cell
+        return cell
     }
 }
 
@@ -59,17 +59,22 @@ extension PlusViewController: UITableViewDelegate {
             self.convertSearchAddress(from: searchLocation, vc: mainVC)
             
             let xy = mainVC.convertGrid(code: "toXY", v1: searchLat, v2: searchLon)
-    
+            
             mainVC.lat = Int(xy["nx"] ?? 60) // 기본값은 서울특별시
             mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
             mainVC.doubleLat = xy["lat"] ?? 60
             mainVC.doubleLon = xy["lon"] ?? 126
             print("plus lat, lon: \(mainVC.lat) \(mainVC.lon) double: \(mainVC.doubleLat) \(mainVC.doubleLon)")
             NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
-            // lat lon을 이용해서 메인뷰컨 로직 재구현하기
+            
+//            let alertMessage = UIAlertController(title: "지역 추가", message: "추가되었습니다", preferredStyle: .alert)
+//            alertMessage.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+//                self.navigationController?.popViewController(animated: true)
+//            }))
+//            present(self.alertMessage, animated: true)
         }
-        
     }
+    
 }
 
 extension PlusViewController: UISearchBarDelegate {
@@ -83,14 +88,11 @@ extension PlusViewController: MKLocalSearchCompleterDelegate {
     // 자동완성 완료 시에 결과를 받는 함수
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
-        
         // 한국 지역만 나타나게 필터 적용
-        for i in 0..<searchResults.count {
-            if !searchResults[i].title.contains("대한민국") {
-                searchResults.remove(at: i)
-            }
-        }
-        
+        print("searchResults: \(searchResults)")
+        searchResults.removeAll {!$0.title.contains("대한민국")}
+        print("searchResults2: \(searchResults)")
+
         searchTableView.reloadData()
     }
     
