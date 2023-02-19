@@ -12,6 +12,7 @@ import MapKit
 class PlusViewController: UIViewController {
     
     var searchCompleter = MKLocalSearchCompleter() // 검색을 도와주는 변수
+    var searchRequest = MKLocalSearch.Request()
     var searchResults = [MKLocalSearchCompletion]() // 검색 결과를 담는 변수
     
     let searchBar: UISearchBar = {
@@ -60,7 +61,6 @@ class PlusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("PlusViewController - viewDidLoad() called")
-        
         searchBar.delegate = self
         
         searchCompleter.delegate = self

@@ -73,7 +73,6 @@ extension PlusViewController: UITableViewDelegate {
 }
 
 extension PlusViewController: UISearchBarDelegate {
-    
     // 검색창의 text가 변하는 경우 searchBar가 델리게이트로 알려주는 함수
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchCompleter.queryFragment = searchText
@@ -81,11 +80,17 @@ extension PlusViewController: UISearchBarDelegate {
 }
 
 extension PlusViewController: MKLocalSearchCompleterDelegate {
-    
     // 자동완성 완료 시에 결과를 받는 함수
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        print("searchResults: \(searchResults)")
         searchResults = completer.results
+        
+        // 한국 지역만 나타나게 필터 적용
+        for i in 0..<searchResults.count {
+            if !searchResults[i].title.contains("대한민국") {
+                searchResults.remove(at: i)
+            }
+        }
+        
         searchTableView.reloadData()
     }
     
