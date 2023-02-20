@@ -131,9 +131,19 @@ class PlusViewController: UIViewController {
         }
     }
     
+    func presentAlert() {
+        let alert = UIAlertController(title: "관심지역 추가", message: "관심지역이 추가되었습니다", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+//        self.searchBar.text = nil
+        present(alert, animated: true)
+    }
+    
     @objc func touchupCancelBtn(_ sender: UIButton) {
         print("PlusViewController - touchupCancelBtn() called")
-        self.dismiss(animated: true, completion: nil)
+        view.endEditing(true)
     }
 
 }

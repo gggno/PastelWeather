@@ -67,11 +67,7 @@ extension PlusViewController: UITableViewDelegate {
             print("plus lat, lon: \(mainVC.lat) \(mainVC.lon) double: \(mainVC.doubleLat) \(mainVC.doubleLon)")
             NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
             
-//            let alertMessage = UIAlertController(title: "지역 추가", message: "추가되었습니다", preferredStyle: .alert)
-//            alertMessage.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-//                self.navigationController?.popViewController(animated: true)
-//            }))
-//            present(self.alertMessage, animated: true)
+            self.presentAlert()
         }
     }
     
@@ -89,10 +85,7 @@ extension PlusViewController: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
         // 한국 지역만 나타나게 필터 적용
-        print("searchResults: \(searchResults)")
         searchResults.removeAll {!$0.title.contains("대한민국")}
-        print("searchResults2: \(searchResults)")
-
         searchTableView.reloadData()
     }
     
