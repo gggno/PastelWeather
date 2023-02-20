@@ -69,7 +69,6 @@ class PlusViewController: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
-        searchTableView.register(AddedCitiesTableViewCell.self, forCellReuseIdentifier: AddedCitiesTableViewCell.identifier)
         searchTableView.separatorStyle = .none
         
         self.view.backgroundColor = .black

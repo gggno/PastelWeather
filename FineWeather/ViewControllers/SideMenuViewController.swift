@@ -34,7 +34,7 @@ class SideMenuViewController: UIViewController {
             
             button.backgroundColor = UIColor.white
             button.setTitleColor(.darkGray, for: .normal)
-            button.setTitle("관심지역", for: .normal)
+            button.setTitle("관심지역 목록/삭제", for: .normal)
             
             button.addTarget(self, action: #selector(citiesListBtnClicked), for: .touchUpInside)
             
@@ -95,6 +95,7 @@ class SideMenuViewController: UIViewController {
     
     @objc func citiesListBtnClicked(_ sender: UIButton) {
         print("citiesListBtnClicked clicked")
+        present(CityListViewController(), animated: true)
     }
 
     @objc func standardWHOBtnClicked(_ sender: UIButton) {
