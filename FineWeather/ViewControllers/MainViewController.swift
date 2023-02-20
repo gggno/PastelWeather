@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         navigationItemSetting()
         
         // MARK: - 메인 스크롤뷰에 넣을 요소 설정
-        vcLayoutSetting()
+        mainVCLayoutSetting()
         
         // 하단바 광고 추가
         bannerViewDidReceiveAd(bottomBarBannerView)
@@ -84,7 +84,7 @@ class MainViewController: UIViewController {
         }()
     }
     
-    func vcLayoutSetting() {
+    func mainVCLayoutSetting() {
         // MARK: - titleView 요소 설정
         let titleView = titleViewSetting()
         

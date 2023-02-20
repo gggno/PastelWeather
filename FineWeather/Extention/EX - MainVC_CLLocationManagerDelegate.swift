@@ -125,11 +125,14 @@ extension MainViewController: CLLocationManagerDelegate {
             if subState == "" {
                 if state == city {
                     self.title = state
+                    AddedCityDatas.shared.cityDatas.append(state)
                 } else {
                     self.title = "\(state) \(city)"
+                    AddedCityDatas.shared.cityDatas.append("\(state) \(city)")
                 }
             } else {
                 self.title = "\(state) \(subState)"
+                AddedCityDatas.shared.cityDatas.append("\(state) \(subState)")
             }
         }
     }

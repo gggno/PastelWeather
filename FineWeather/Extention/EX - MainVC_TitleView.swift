@@ -123,7 +123,6 @@ extension MainViewController {
                 index = 24
             }
             
-            print(response.response?.body?.items.item[index])
             if let currentTmp = response.response?.body?.items.item[index].fcstValue {
                 // 현재온도
                 titleInTempNum.text = currentTmp + "˚"

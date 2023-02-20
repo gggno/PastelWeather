@@ -69,9 +69,10 @@ class PlusViewController: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
+        searchTableView.register(AddedCitiesTableViewCell.self, forCellReuseIdentifier: AddedCitiesTableViewCell.identifier)
         searchTableView.separatorStyle = .none
         
-        self.view.backgroundColor = .blue
+        self.view.backgroundColor = .black
         self.title = "관심지역"
         
         topView.addSubview(searchBar)
@@ -122,11 +123,14 @@ class PlusViewController: UIViewController {
             if subState == "" {
                 if state == city {
                     vc.title = state
+                    AddedCityDatas.shared.cityDatas.append(state)
                 } else {
                     vc.title = "\(state) \(city)"
+                    AddedCityDatas.shared.cityDatas.append("\(state) \(city)")
                 }
             } else {
                 vc.title = "\(state) \(subState)"
+                AddedCityDatas.shared.cityDatas.append("\(state) \(subState)")
             }
         }
     }

@@ -24,7 +24,6 @@ class SearchTableViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configUI()
         setupAutoLayout()
     }
     
@@ -41,9 +40,6 @@ class SearchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Custom Method
-    func configUI() {
-    }
     
     func setupAutoLayout() {
         addSubview(countryLabel)
