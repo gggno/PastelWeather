@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class AddedCityDatas {
     static let shared = AddedCityDatas()
     
+    var vcDatas: [UIViewController] = []
     var cityDatas: [String] = []
     
     private init() { }

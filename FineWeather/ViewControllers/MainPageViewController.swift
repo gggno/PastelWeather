@@ -12,7 +12,8 @@ import CoreLocation
 class MainPageViewController: UIViewController {
     
     let locationManager = CLLocationManager()
-    
+    let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+   
     lazy var firstVC: UIViewController = {
         let mainVC = MainViewController()
         // 첫번째 뷰인 것을 확인하는 용도
@@ -22,58 +23,66 @@ class MainPageViewController: UIViewController {
         
         return vc
     }()
-    
-    lazy var vc2: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .blue
-        
-        return vc
-    }()
-    
-    lazy var dataViewControllers: [UIViewController] = {
-        return [firstVC, vc2]
-    }()
-    
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initPageViewController()
-        
+        updatePageView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        AddedCityDatas.shared.vcDatas.append(firstVC)
+        initPageViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deletePageVC(_:)), name: NSNotification.Name("deleteVC"), object: nil)
     }
     
     // 페이지뷰 설정
     func initPageViewController() {
-        let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
         pageViewController.view.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         
-        if let firstVC = dataViewControllers.first {
+        if let firstVC = AddedCityDatas.shared.vcDatas.first {
             pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
         }
         
         view.addSubview(pageViewController.view)
         self.addChild(pageViewController)
-        // 1. 페이징 화면 추가 방법 구상
+    }
+    
+    func updatePageView() {
+        pageViewController.delegate = self
+        pageViewController.dataSource = self
+
+        if let firstVC = AddedCityDatas.shared.vcDatas.first {
+            pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
+        }
     }
     
     // 페이지 화면 추가 함수
     @objc func deliveredVC(_ notification: NSNotification) {
+        print("deliveredVC() called")
         guard let mainVC = notification.object as? MainViewController else {return}
         print("mainVC lat lon: \(mainVC.lat) \(mainVC.lon)")
         print("mainVC Double lat lon: \(mainVC.doubleLat) \(mainVC.doubleLon)")
         
         let naviVC = UINavigationController(rootViewController: mainVC)
-        dataViewControllers.append(naviVC)
+        AddedCityDatas.shared.vcDatas.append(naviVC)
+    }
+    
+    // 페이지 화면 삭제 함수
+    @objc func deletePageVC(_ notification: NSNotification) {
+        print("deletePageVC() called")
+        let indexpathRow = notification.object
+        print(indexpathRow)
+        
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sendVC"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("deleteVC"), object: nil)
     }
     
 }
@@ -82,26 +91,26 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
     // 왼쪽에서 오른쪽으로 스와이프 직전에 실행되는 함수
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print("before")
-        guard let index = dataViewControllers.firstIndex(of: viewController) else {return nil}
+        guard let index = AddedCityDatas.shared.vcDatas.firstIndex(of: viewController) else {return nil}
         let previousIndex = index - 1
         
         if previousIndex < 0 {
             return nil
         } else {
-            return dataViewControllers[previousIndex]
+            return AddedCityDatas.shared.vcDatas[previousIndex]
         }
     }
     
     // 오른쪽에서 왼쪽으로 스와이프 직전에 실행되는 함수
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         print("after")
-        guard let index = dataViewControllers.firstIndex(of: viewController) else {return nil}
+        guard let index = AddedCityDatas.shared.vcDatas.firstIndex(of: viewController) else {return nil}
         let nextIndex = index + 1
         
-        if nextIndex == dataViewControllers.count {
+        if nextIndex == AddedCityDatas.shared.vcDatas.count {
             return nil
         } else {
-            return dataViewControllers[nextIndex]
+            return AddedCityDatas.shared.vcDatas[nextIndex]
         }
     }
 }

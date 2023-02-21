@@ -12,7 +12,7 @@ class CityListViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-    
+        
         label.text = "관심지역 목록"
         label.textColor = .black
         label.textAlignment = .center
@@ -50,6 +50,9 @@ class CityListViewController: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("deleteVC"), object: nil)
+    }
     
     
 }
@@ -67,6 +70,25 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    // 옆으로 슬라이드하여 도시 삭제 함수
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            if indexPath.row != 0 {
+                AddedCityDatas.shared.cityDatas.remove(at: indexPath.row)
+                cityListTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                NotificationCenter.default.post(name: NSNotification.Name("deleteVC"), object: indexPath.row)
+            } else {
+                let alert = UIAlertController(title: "현재 위치", message: "현재 위치는 삭제할 수 없습니다", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(okAction)
+                present(alert, animated: true)
+            }
+        }
+    }
+    
+   
     
     
 }

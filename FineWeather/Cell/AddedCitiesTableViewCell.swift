@@ -13,7 +13,7 @@ class AddedCitiesTableViewCell: UITableViewCell {
     lazy var cityLabel: UILabel = {
         let label = UILabel()
         
-        label.textColor = .white
+        label.textColor = .systemBlue
         
         return label
     }()
