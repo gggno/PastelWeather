@@ -12,7 +12,7 @@ class AddedCityDatas {
     static let shared = AddedCityDatas()
     
     var vcDatas: [UIViewController] = []
-    var cityDatas: [String] = []
+    var cityNameDatas: [String] = []
     
     private init() { }
 }

@@ -122,14 +122,14 @@ class PlusViewController: UIViewController {
             if subState == "" {
                 if state == city {
                     vc.title = state
-                    AddedCityDatas.shared.cityDatas.append(state)
+                    AddedCityDatas.shared.cityNameDatas.append(state)
                 } else {
                     vc.title = "\(state) \(city)"
-                    AddedCityDatas.shared.cityDatas.append("\(state) \(city)")
+                    AddedCityDatas.shared.cityNameDatas.append("\(state) \(city)")
                 }
             } else {
                 vc.title = "\(state) \(subState)"
-                AddedCityDatas.shared.cityDatas.append("\(state) \(subState)")
+                AddedCityDatas.shared.cityNameDatas.append("\(state) \(subState)")
             }
         }
     }

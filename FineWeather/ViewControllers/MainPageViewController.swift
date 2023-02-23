@@ -25,12 +25,19 @@ class MainPageViewController: UIViewController {
     }()
   
     override func viewWillAppear(_ animated: Bool) {
+        print("MainPageViewController viewWillAppear() called")
         super.viewWillAppear(animated)
         updatePageView()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("MainPageViewController viewWillDisAppear() called")
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("MainPageViewController viewDidLoad() called")
         AddedCityDatas.shared.vcDatas.append(firstVC)
         initPageViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
@@ -75,9 +82,16 @@ class MainPageViewController: UIViewController {
     // 페이지 화면 삭제 함수
     @objc func deletePageVC(_ notification: NSNotification) {
         print("deletePageVC() called")
-        let indexpathRow = notification.object
-        print(indexpathRow)
-        
+        if let indexpathRow = notification.object {
+            pageViewController.delegate = self
+            pageViewController.dataSource = self
+            print(AddedCityDatas.shared.cityNameDatas)
+
+            AddedCityDatas.shared.vcDatas.remove(at: indexpathRow as! Int)
+            if let firstVC = AddedCityDatas.shared.vcDatas.first {
+                pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
+            }
+        }
     }
     
     deinit {

@@ -59,13 +59,13 @@ class CityListViewController: UIViewController {
 
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AddedCityDatas.shared.cityDatas.count
+        return AddedCityDatas.shared.cityNameDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = cityListTableView.dequeueReusableCell(withIdentifier: "AddedCitiesTableViewCell", for: indexPath) as? AddedCitiesTableViewCell else {return UITableViewCell()}
         
-        cell.cityLabel.text = AddedCityDatas.shared.cityDatas[indexPath.row]
+        cell.cityLabel.text = AddedCityDatas.shared.cityNameDatas[indexPath.row]
         
         return cell
     }
@@ -74,8 +74,9 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            // 첫번째 뷰(현재위치는 삭제 안되게)
             if indexPath.row != 0 {
-                AddedCityDatas.shared.cityDatas.remove(at: indexPath.row)
+                AddedCityDatas.shared.cityNameDatas.remove(at: indexPath.row)
                 cityListTableView.deleteRows(at: [indexPath], with: .fade)
                 
                 NotificationCenter.default.post(name: NSNotification.Name("deleteVC"), object: indexPath.row)
