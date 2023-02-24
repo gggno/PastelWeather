@@ -13,11 +13,12 @@ import GoogleMobileAds
 class MainViewController: UIViewController {
     
     let locationManager = CLLocationManager()
-    var lat = 0
-    var lon = 0
-    var doubleLat = 0.0
-    var doubleLon = 0.0
-    var firstViewConfirm: Bool = false
+    var lat = 0 // 주소 조회 때 사용
+    var lon = 0 // 주소 조회 때 사용
+    var doubleLat = 0.0 // 미세먼지 조회 때 사용
+    var doubleLon = 0.0 // 미세먼지 조회 때 사용
+    var firstViewConfirm: Bool = false // 첫번째뷰(현재 위치)확인 때 사용
+    var dbViewConfirm: Bool = false
     let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
     let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
@@ -42,6 +43,11 @@ class MainViewController: UIViewController {
         // 첫번째 뷰 현재위치를 기반으로 세팅
         if firstViewConfirm == true {
             firstVCLocationSetting()
+        }
+        
+        // DB에 저장된 위도, 경도를 기반으로 세팅
+        if dbViewConfirm == true {
+            dbVCLocationSetting()
         }
         
         // MARK: - 메인화면 내비게이션 요소 설정
@@ -169,6 +175,7 @@ class MainViewController: UIViewController {
     }
     
     func firstVCLocationSetting() {
+        print("MainViewController - firstVCLocationSetting() called")
         // 타이틀에 현재위치 출력
         guard let currentLocation = locationManager.location else {return}
         convertCurrentAddress(from: currentLocation)
@@ -181,6 +188,12 @@ class MainViewController: UIViewController {
         
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
         print("int lat: \(lat), int lon: \(lon)")
+    }
+    
+    func dbVCLocationSetting() {
+        print("MainViewController - dbVCLocationSetting() called")
+        
+        
     }
     
     func loadBannerAd() {

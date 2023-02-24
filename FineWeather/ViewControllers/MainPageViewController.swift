@@ -16,7 +16,7 @@ class MainPageViewController: UIViewController {
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     let realm = try! Realm()
-    let locationDB = LocalDB()
+    let localDB = LocalDB()
     
     lazy var firstVC: UIViewController = {
         let mainVC = MainViewController()
@@ -33,6 +33,7 @@ class MainPageViewController: UIViewController {
         print("MainPageViewController viewDidLoad() called")
 //        dbRemove()
         AddedCityDatas.shared.vcDatas.append(firstVC)
+        dbVCAppend(viewcontrollers: dbVCSetting())
         
         initPageViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)

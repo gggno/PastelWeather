@@ -9,6 +9,11 @@ import Foundation
 import RealmSwift
 
 class LocalDB: Object {
-    @objc dynamic var vcData: String = ""
+    @objc dynamic var lat: Int = 0
+    @objc dynamic var lon: Int = 0
+
+    @objc dynamic var doubleLat: Double = 0.0
+    @objc dynamic var doubleLon: Double = 0.0
+
     @objc dynamic var cityName: String = ""
 }

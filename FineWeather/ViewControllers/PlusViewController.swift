@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 import MapKit
+import RealmSwift
 
 class PlusViewController: UIViewController {
+    
+    let realm = try! Realm()
+    let localDB = LocalDB()
     
     var searchCompleter = MKLocalSearchCompleter() // 검색을 도와주는 변수
     var searchRequest = MKLocalSearch.Request()
@@ -123,13 +127,28 @@ class PlusViewController: UIViewController {
                 if state == city {
                     vc.title = state
                     AddedCityDatas.shared.cityNameDatas.append(state)
+                    
+                    try! self.realm.write{
+                        self.realm.add(self.localDB)
+                        self.localDB.cityName = state
+                    }
                 } else {
                     vc.title = "\(state) \(city)"
                     AddedCityDatas.shared.cityNameDatas.append("\(state) \(city)")
+                    
+                    try! self.realm.write{
+                        self.realm.add(self.localDB)
+                        self.localDB.cityName = "\(state) \(city)"
+                    }
                 }
             } else {
                 vc.title = "\(state) \(subState)"
                 AddedCityDatas.shared.cityNameDatas.append("\(state) \(subState)")
+                
+                try! self.realm.write{
+                    self.realm.add(self.localDB)
+                    self.localDB.cityName = "\(state) \(subState)"
+                }
             }
         }
     }

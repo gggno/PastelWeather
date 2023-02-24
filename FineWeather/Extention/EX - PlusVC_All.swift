@@ -48,9 +48,7 @@ extension PlusViewController: UITableViewDelegate {
                 return
             }
             
-            guard let placeMark = response?.mapItems[0].placemark else {
-                return
-            }
+            guard let placeMark = response?.mapItems[0].placemark else {return}
             
             let searchLat = placeMark.coordinate.latitude
             let searchLon = placeMark.coordinate.longitude
@@ -64,7 +62,21 @@ extension PlusViewController: UITableViewDelegate {
             mainVC.lon = Int(xy["ny"] ?? 126) // 용산구
             mainVC.doubleLat = xy["lat"] ?? 60
             mainVC.doubleLon = xy["lon"] ?? 126
+            
+            // 로컬 DB에 도시 위도, 경도 값 저장
+            self.localDB.lat = Int(xy["nx"] ?? 60)
+            self.localDB.lon = Int(xy["ny"] ?? 126)
+            self.localDB.doubleLat = xy["lat"] ?? 60
+            self.localDB.doubleLon = xy["lon"] ?? 126
+            
+            
+            try! self.realm.write {
+                self.realm.add(self.localDB)
+            }
+            
             print("plus lat, lon: \(mainVC.lat) \(mainVC.lon) double: \(mainVC.doubleLat) \(mainVC.doubleLon)")
+            
+            // 검색된 도시의 도시, 날씨정보를 페이지뷰에 전달
             NotificationCenter.default.post(name: NSNotification.Name("sendVC"), object: mainVC)
             
             self.presentAlert()
