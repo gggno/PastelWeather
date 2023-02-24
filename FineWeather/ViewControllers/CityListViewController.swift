@@ -47,13 +47,11 @@ class CityListViewController: UIViewController {
             make.top.equalTo(titleLabel.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("deleteVC"), object: nil)
     }
-    
     
 }
 

@@ -22,7 +22,7 @@ extension MainViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("locationManagerError: \(error)")
+        print("MainViewController - locationManagerError: \(error)")
     }
     
     func convertGrid(code: String, v1: Double, v2: Double) -> [String: Double] {
@@ -113,7 +113,7 @@ extension MainViewController: CLLocationManagerDelegate {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) in
             if let someError = error {
-                print("convertCurrentAddress Error:", someError)
+                print("MainViewController - convertCurrentAddress Error:", someError)
                 return
             }
             guard let placemark = placemarks?.first else { return }

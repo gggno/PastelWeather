@@ -110,7 +110,7 @@ class PlusViewController: UIViewController {
         let locale = Locale(identifier: "ko-kr")
         geoCoder.reverseGeocodeLocation(coordinate, preferredLocale: locale) { (placemarks, error) in
             if let someError = error {
-                print("convertSearchAddress Error:", someError)
+                print("PlusViewController - convertSearchAddress Error:", someError)
                 return
             }
             guard let placemark = placemarks?.first else { return }

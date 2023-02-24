@@ -8,12 +8,16 @@
 import UIKit
 import SnapKit
 import CoreLocation
+import RealmSwift
 
 class MainPageViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-   
+    
+    let realm = try! Realm()
+    let locationDB = LocalDB()
+    
     lazy var firstVC: UIViewController = {
         let mainVC = MainViewController()
         // 첫번째 뷰인 것을 확인하는 용도
@@ -23,25 +27,39 @@ class MainPageViewController: UIViewController {
         
         return vc
     }()
-  
-    override func viewWillAppear(_ animated: Bool) {
-        print("MainPageViewController viewWillAppear() called")
-        super.viewWillAppear(animated)
-        updatePageView()
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("MainPageViewController viewWillDisAppear() called")
-
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("MainPageViewController viewDidLoad() called")
+//        dbRemove()
         AddedCityDatas.shared.vcDatas.append(firstVC)
+        
         initPageViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePageVC(_:)), name: NSNotification.Name("deleteVC"), object: nil)
+    }
+    
+    func dbRemove() {
+        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+        let realmURLs = [
+            realmURL,
+            realmURL.appendingPathExtension("year"),
+            realmURL.appendingPathExtension("month")
+        ]
+        
+        for URL in realmURLs{
+            do{
+                try FileManager.default.removeItem(at: URL)
+            } catch{
+                
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("MainPageViewController viewWillAppear() called")
+        super.viewWillAppear(animated)
+        updatePageView()
     }
     
     // 페이지뷰 설정
@@ -70,22 +88,19 @@ class MainPageViewController: UIViewController {
     
     // 페이지 화면 추가 함수
     @objc func deliveredVC(_ notification: NSNotification) {
-        print("deliveredVC() called")
+        print("MainPageViewController - deliveredVC() called")
         guard let mainVC = notification.object as? MainViewController else {return}
-        print("mainVC lat lon: \(mainVC.lat) \(mainVC.lon)")
-        print("mainVC Double lat lon: \(mainVC.doubleLat) \(mainVC.doubleLon)")
-        
         let naviVC = UINavigationController(rootViewController: mainVC)
+        
         AddedCityDatas.shared.vcDatas.append(naviVC)
     }
     
     // 페이지 화면 삭제 함수
     @objc func deletePageVC(_ notification: NSNotification) {
-        print("deletePageVC() called")
+        print("MainPageViewController - deletePageVC() called")
         if let indexpathRow = notification.object {
             pageViewController.delegate = self
             pageViewController.dataSource = self
-            print(AddedCityDatas.shared.cityNameDatas)
 
             AddedCityDatas.shared.vcDatas.remove(at: indexpathRow as! Int)
             if let firstVC = AddedCityDatas.shared.vcDatas.first {
@@ -103,6 +118,7 @@ class MainPageViewController: UIViewController {
 
 extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     // 왼쪽에서 오른쪽으로 스와이프 직전에 실행되는 함수
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print("before")
         guard let index = AddedCityDatas.shared.vcDatas.firstIndex(of: viewController) else {return nil}

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class AddedCityDatas {
     static let shared = AddedCityDatas()
