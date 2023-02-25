@@ -122,17 +122,28 @@ extension MainViewController: CLLocationManagerDelegate {
             let subState = placemark.subAdministrativeArea ?? ""
             let city = placemark.locality ?? ""
             
+            let dbDatas = self.realm.objects(LocalDB.self)
+            
             if subState == "" {
                 if state == city {
                     self.title = state
                     AddedCityDatas.shared.cityNameDatas.append(state)
+                    try! self.realm.write{
+                        dbDatas[0].cityName = state
+                    }
                 } else {
                     self.title = "\(state) \(city)"
                     AddedCityDatas.shared.cityNameDatas.append("\(state) \(city)")
+                    try! self.realm.write{
+                        dbDatas[0].cityName = "\(state) \(city)"
+                    }
                 }
             } else {
                 self.title = "\(state) \(subState)"
                 AddedCityDatas.shared.cityNameDatas.append("\(state) \(subState)")
+                try! self.realm.write{
+                    dbDatas[0].cityName = "\(state) \(subState)"
+                }
             }
         }
     }

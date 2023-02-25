@@ -5,6 +5,7 @@
 //  Created by 정근호 on 2023/02/14.
 //
 
+import UIKit
 import Foundation
 import CoreLocation
 import RealmSwift
@@ -15,7 +16,7 @@ extension MainPageViewController {
         print("MainPageViewController - dbVCLocationSetting() called")
         
         var vcArray: [UIViewController] = []
-        var dbResult = realm.objects(LocalDB.self)
+        let dbResult = realm.objects(LocalDB.self).dropFirst()
         
         for dbData in dbResult {
             let mainVC = MainViewController()

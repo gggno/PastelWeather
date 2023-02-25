@@ -9,8 +9,11 @@ import UIKit
 import SnapKit
 import Alamofire
 import GoogleMobileAds
+import RealmSwift
 
 class MainViewController: UIViewController {
+    
+    let realm = try! Realm()
     
     let locationManager = CLLocationManager()
     var lat = 0 // 주소 조회 때 사용
@@ -188,6 +191,27 @@ class MainViewController: UIViewController {
         
         print("convertGrid: \(convertGrid(code: "toXY", v1: locationManager.location?.coordinate.latitude ?? 0.0, v2: locationManager.location?.coordinate.longitude ?? 0.0))")
         print("int lat: \(lat), int lon: \(lon)")
+        
+        let dbDatas = realm.objects(LocalDB.self)
+        let localDB = LocalDB()
+        localDB.lat = lat
+        localDB.lon = lon
+        localDB.doubleLat = doubleLat
+        localDB.doubleLon = doubleLon
+        
+        if dbDatas.isEmpty { // 최초 앱을 켰을 때
+            try! realm.write{
+                realm.add(localDB)
+            }
+        } else {
+            try! realm.write{ // 그 이후 현재 위치의 저장값 변경
+                dbDatas[0].lat = lat
+                dbDatas[0].lon = lon
+                dbDatas[0].doubleLat = doubleLat
+                dbDatas[0].doubleLon = doubleLon
+            }
+        }
+        
     }
     
     func dbVCLocationSetting() {

@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class CityListViewController: UIViewController {
+    
+    let realm = try! Realm()
+    let localDB = LocalDB()
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -57,13 +61,17 @@ class CityListViewController: UIViewController {
 
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AddedCityDatas.shared.cityNameDatas.count
+        let dbDatas = realm.objects(LocalDB.self)
+        
+        return dbDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = cityListTableView.dequeueReusableCell(withIdentifier: "AddedCitiesTableViewCell", for: indexPath) as? AddedCitiesTableViewCell else {return UITableViewCell()}
         
-        cell.cityLabel.text = AddedCityDatas.shared.cityNameDatas[indexPath.row]
+        let dbDatas = realm.objects(LocalDB.self)
+        
+        cell.cityLabel.text = dbDatas[indexPath.row].cityName
         
         return cell
     }
@@ -74,9 +82,14 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
             
             // 첫번째 뷰(현재위치는 삭제 안되게)
             if indexPath.row != 0 {
-                AddedCityDatas.shared.cityNameDatas.remove(at: indexPath.row)
-                cityListTableView.deleteRows(at: [indexPath], with: .fade)
                 
+                let dbDatas = realm.objects(LocalDB.self)
+                try! realm.write{
+                    realm.delete(dbDatas[indexPath.row])
+                }
+                
+                cityListTableView.deleteRows(at: [indexPath], with: .fade)
+
                 NotificationCenter.default.post(name: NSNotification.Name("deleteVC"), object: indexPath.row)
             } else {
                 let alert = UIAlertController(title: "현재 위치", message: "현재 위치는 삭제할 수 없습니다", preferredStyle: .alert)

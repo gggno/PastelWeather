@@ -16,7 +16,6 @@ class MainPageViewController: UIViewController {
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     let realm = try! Realm()
-    let localDB = LocalDB()
     
     lazy var firstVC: UIViewController = {
         let mainVC = MainViewController()
@@ -36,6 +35,7 @@ class MainPageViewController: UIViewController {
         dbVCAppend(viewcontrollers: dbVCSetting())
         
         initPageViewController()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePageVC(_:)), name: NSNotification.Name("deleteVC"), object: nil)
     }
@@ -104,6 +104,8 @@ class MainPageViewController: UIViewController {
             pageViewController.dataSource = self
 
             AddedCityDatas.shared.vcDatas.remove(at: indexpathRow as! Int)
+            var dbResult = realm.objects(LocalDB.self)
+            
             if let firstVC = AddedCityDatas.shared.vcDatas.first {
                 pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
             }

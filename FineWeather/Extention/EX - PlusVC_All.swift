@@ -69,7 +69,6 @@ extension PlusViewController: UITableViewDelegate {
             self.localDB.doubleLat = xy["lat"] ?? 60
             self.localDB.doubleLon = xy["lon"] ?? 126
             
-            
             try! self.realm.write {
                 self.realm.add(self.localDB)
             }
