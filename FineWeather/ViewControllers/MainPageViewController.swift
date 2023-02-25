@@ -30,37 +30,16 @@ class MainPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("MainPageViewController viewDidLoad() called")
-//        dbRemove()
+        
+        // 첫번째뷰(현재위치) 페이지뷰에 추가
         AddedCityDatas.shared.vcDatas.append(firstVC)
+        // 로컬 DB에 저장된 도시들 페이지뷰에 추가
         dbVCAppend(viewcontrollers: dbVCSetting())
         
         initPageViewController()
         
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletePageVC(_:)), name: NSNotification.Name("deleteVC"), object: nil)
-    }
-    
-    func dbRemove() {
-        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
-        let realmURLs = [
-            realmURL,
-            realmURL.appendingPathExtension("year"),
-            realmURL.appendingPathExtension("month")
-        ]
-        
-        for URL in realmURLs{
-            do{
-                try FileManager.default.removeItem(at: URL)
-            } catch{
-                
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("MainPageViewController viewWillAppear() called")
-        super.viewWillAppear(animated)
-        updatePageView()
     }
     
     // 페이지뷰 설정
@@ -76,15 +55,6 @@ class MainPageViewController: UIViewController {
         
         view.addSubview(pageViewController.view)
         self.addChild(pageViewController)
-    }
-    
-    func updatePageView() {
-        pageViewController.delegate = self
-        pageViewController.dataSource = self
-
-        if let firstVC = AddedCityDatas.shared.vcDatas.first {
-            pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
-        }
     }
     
     // 페이지 화면 추가 함수
@@ -104,7 +74,6 @@ class MainPageViewController: UIViewController {
             pageViewController.dataSource = self
 
             AddedCityDatas.shared.vcDatas.remove(at: indexpathRow as! Int)
-            var dbResult = realm.objects(LocalDB.self)
             
             if let firstVC = AddedCityDatas.shared.vcDatas.first {
                 pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)

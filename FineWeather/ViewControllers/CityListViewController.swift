@@ -53,10 +53,6 @@ class CityListViewController: UIViewController {
         }
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("deleteVC"), object: nil)
-    }
-    
 }
 
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -83,6 +79,7 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
             // 첫번째 뷰(현재위치는 삭제 안되게)
             if indexPath.row != 0 {
                 
+                // 로컬 DB에서 삭제
                 let dbDatas = realm.objects(LocalDB.self)
                 try! realm.write{
                     realm.delete(dbDatas[indexPath.row])

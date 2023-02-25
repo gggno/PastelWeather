@@ -126,21 +126,27 @@ extension MainViewController: CLLocationManagerDelegate {
             
             if subState == "" {
                 if state == city {
+                    // 현재위치 도시이름 출력
                     self.title = state
-                    AddedCityDatas.shared.cityNameDatas.append(state)
+                    
+                    // 로컬 DB에 현재위치 도시이름 저장
                     try! self.realm.write{
                         dbDatas[0].cityName = state
                     }
                 } else {
+                    // 현재위치 도시이름 출력
                     self.title = "\(state) \(city)"
-                    AddedCityDatas.shared.cityNameDatas.append("\(state) \(city)")
+                    
+                    // 로컬 DB에 현재위치 도시이름 저장
                     try! self.realm.write{
                         dbDatas[0].cityName = "\(state) \(city)"
                     }
                 }
             } else {
+                // 현재위치 도시이름 출력
                 self.title = "\(state) \(subState)"
-                AddedCityDatas.shared.cityNameDatas.append("\(state) \(subState)")
+                
+                // 로컬 DB에 현재위치 도시이름 저장
                 try! self.realm.write{
                     dbDatas[0].cityName = "\(state) \(subState)"
                 }

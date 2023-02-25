@@ -11,13 +11,11 @@ import MapKit
 
 extension PlusViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("tableView numberOfRowsInSection() called")
-        print("numberOfRowsInSection: \(searchResults)")
+        
         return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView cellForRowAt() called")
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else {return UITableViewCell()}
         print("cell: \(cell)")
         cell.countryLabel.text = searchResults[indexPath.row].title
@@ -35,7 +33,6 @@ extension PlusViewController: UITableViewDataSource {
 extension PlusViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tableView didSelectRowAt() called")
         let selectedResult = searchResults[indexPath.row]
         let searchReqeust = MKLocalSearch.Request(completion: selectedResult)
         let search = MKLocalSearch(request: searchReqeust)

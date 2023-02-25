@@ -22,7 +22,6 @@ class PlusViewController: UIViewController {
     let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         
-//        searchBar.becomeFirstResponder()
         searchBar.keyboardAppearance = .dark
         searchBar.showsCancelButton = false
         searchBar.searchBarStyle = .minimal
@@ -125,26 +124,29 @@ class PlusViewController: UIViewController {
             
             if subState == "" {
                 if state == city {
+                    // 처음 도시 추가했을때 도시이름 표시
                     vc.title = state
-                    AddedCityDatas.shared.cityNameDatas.append(state)
                     
+                    // 로컬 DB에 도시이름 저장
                     try! self.realm.write{
                         self.realm.add(self.localDB)
                         self.localDB.cityName = state
                     }
                 } else {
+                    // 처음 도시 추가했을때 도시이름 표시
                     vc.title = "\(state) \(city)"
-                    AddedCityDatas.shared.cityNameDatas.append("\(state) \(city)")
                     
+                    // 로컬 DB에 도시이름 저장
                     try! self.realm.write{
                         self.realm.add(self.localDB)
                         self.localDB.cityName = "\(state) \(city)"
                     }
                 }
             } else {
+                // 처음 도시 추가했을때 도시이름 표시
                 vc.title = "\(state) \(subState)"
-                AddedCityDatas.shared.cityNameDatas.append("\(state) \(subState)")
                 
+                // 로컬 DB에 도시이름 저장
                 try! self.realm.write{
                     self.realm.add(self.localDB)
                     self.localDB.cityName = "\(state) \(subState)"

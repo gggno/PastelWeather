@@ -102,7 +102,7 @@
 			path = CustomComponets;
 			sourceTree = "<group>";
 		};
-		6657B50929559145007D9E71 /* Extention */ = {
+		665791E229A9E8E200A4E2B0 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
 				66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */,
@@ -110,10 +110,34 @@
 				66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */,
 				66CADB2A2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift */,
 				66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		665791E329A9E8FD00A4E2B0 /* MainPageVC */ = {
+			isa = PBXGroup;
+			children = (
+				667C9EA6299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift */,
+			);
+			path = MainPageVC;
+			sourceTree = "<group>";
+		};
+		665791E429A9E90F00A4E2B0 /* PlusVC */ = {
+			isa = PBXGroup;
+			children = (
 				667C9E992993E9150035A085 /* EX - PlusVC_All.swift */,
+			);
+			path = PlusVC;
+			sourceTree = "<group>";
+		};
+		6657B50929559145007D9E71 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				665791E329A9E8FD00A4E2B0 /* MainPageVC */,
+				665791E229A9E8E200A4E2B0 /* MainVC */,
+				665791E429A9E90F00A4E2B0 /* PlusVC */,
 				668296D8298F978600054499 /* UIView+PreView.swift */,
 				667C9E9D29953F970035A085 /* EX - UILabel.swift */,
-				667C9EA6299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -165,11 +189,11 @@
 		667C9E9F299542300035A085 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				668256DF294B544A007D5F27 /* MainViewController.swift */,
 				667C9EA42997E1CB0035A085 /* MainPageViewController.swift */,
+				668256DF294B544A007D5F27 /* MainViewController.swift */,
+				667D502E2950A185002453AA /* PlusViewController.swift */,
 				667D50322950A42D002453AA /* SideMenuViewController.swift */,
 				667D50302950A3C3002453AA /* SideMenuNavigation.swift */,
-				667D502E2950A185002453AA /* PlusViewController.swift */,
 				660B9ED229A3C601008A7640 /* CityListViewController.swift */,
 			);
 			path = ViewControllers;

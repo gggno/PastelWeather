@@ -16,6 +16,7 @@ extension MainPageViewController {
         print("MainPageViewController - dbVCLocationSetting() called")
         
         var vcArray: [UIViewController] = []
+        // 첫번째(현재 위치)는 firstView로 만드니까 건너뛰고 그 이후부터 데이터 조회
         let dbResult = realm.objects(LocalDB.self).dropFirst()
         
         for dbData in dbResult {
@@ -36,6 +37,7 @@ extension MainPageViewController {
     }
     
     func dbVCAppend(viewcontrollers: [UIViewController]) {
+        print("MainPageViewController - dbVCAppend() called")
         for vc in viewcontrollers {
             AddedCityDatas.shared.vcDatas.append(vc)
         }
