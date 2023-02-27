@@ -105,7 +105,8 @@ class MainViewController: UIViewController {
             let label = UILabel()
             label.numberOfLines = 0
             label.textColor = .white
-            label.text = "자료: 기상청, 한국환경공단\n이 자료는 인증 받지 않은 실시간 자료이므로 자료 오류 및 표출방식에 따른 값이 다를 수 있거나 정보 제공이 불가할 수 있습니다."
+            label.text = "자료: 기상청, 한국환경공단\n\n이 자료는 인증 받지 않은 실시간 자료이므로 자료 오류 및 표출방식에 따른 값이 다를 수 있거나 정보 제공이 불가할 수 있습니다."
+            label.font = UIFont(name: "GmarketSansTTFMedium", size: 10)
             label.textAlignment = .center
             
             return label
@@ -123,11 +124,11 @@ class MainViewController: UIViewController {
             let view = UIView()
             
             view.backgroundColor = .clear
+            
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
             view.addSubview(fineDustView)
             view.addSubview(copyrightUsedInfoLabel)
-            view.addSubview(emptyView4)
             
             return view
         }()
@@ -137,7 +138,7 @@ class MainViewController: UIViewController {
         // MARK: - titleView 요소 레이아웃
         titleView.snp.makeConstraints { make in
             make.height.equalTo(200)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(25)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(30)
         }
@@ -145,30 +146,24 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 레이아웃
         dayWeatherView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleView.snp.bottom).offset(50)
+            make.top.equalTo(titleView.snp.bottom).offset(25)
             make.leading.equalToSuperview().offset(20)
         }
         
         // MARK: - fineDustView 요소 레이아웃
         fineDustView.snp.makeConstraints { make in
-            make.height.equalTo(510)
+            
             make.top.equalTo(dayWeatherView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
-        
+           
         // MARK: - copyrightUsedInfoLabel 요소 레이아웃
         copyrightUsedInfoLabel.snp.makeConstraints { make in
-            make.top.equalTo(fineDustView.snp.bottom).offset(-30)
+            
+            make.top.equalTo(fineDustView.snp.bottom).offset(40)
             make.leading.trailing.equalTo(fineDustView)
-        }
-        
-        emptyView4.snp.makeConstraints { make in
-            make.height.equalTo(440)
-            make.top.equalTo(copyrightUsedInfoLabel.snp.bottom).offset(50)
-            make.centerX.equalToSuperview()
-            make.leading.equalTo(containerView.snp.leading).offset(20)
-            make.bottom.equalTo(containerView.snp.bottom).offset(-30)
+            make.bottom.equalToSuperview().offset(-100)
         }
         
         let scrollView: UIScrollView = {

@@ -38,10 +38,14 @@ class CustomTempStackView: UIStackView {
                     if let maxTmp = response.response?.body?.items.item[0].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
+                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
+                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     }
                 } else {
@@ -49,10 +53,14 @@ class CustomTempStackView: UIStackView {
                     if let maxTmp = response.response?.body?.items.item[1].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
+                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
+                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     }
                 }
@@ -64,10 +72,14 @@ class CustomTempStackView: UIStackView {
                 if let minTmp = response.response?.body?.items.item[0].fcstValue {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = minTmp + "˚"
+                    self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                    self.tempLabel.font = self.tempLabel.font.withSize(15)
                     self.tempLabel.textColor = .blue
-                } else {
+                } else { // 조회 실패
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = "_ _"
+                    self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                    self.tempLabel.font = self.tempLabel.font.withSize(15)
                     self.tempLabel.textColor = .blue
                 }
             }
@@ -117,7 +129,7 @@ class CustomTempStackView: UIStackView {
         stackView.axis = .horizontal
         stackView.spacing = 5
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
         
         return stackView
     }

@@ -74,7 +74,7 @@ class PlusViewController: UIViewController {
         searchTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         searchTableView.separatorStyle = .none
         
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = UIColor(named: "PlusVCColor")
         self.title = "관심지역"
         
         topView.addSubview(searchBar)

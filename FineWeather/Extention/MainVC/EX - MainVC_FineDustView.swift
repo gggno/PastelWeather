@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 // 카카오 -> 측정소 -> 미세먼지
 extension MainViewController {
@@ -46,6 +47,10 @@ extension MainViewController {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview()
+        }
+        
+        fineDustView.snp.makeConstraints { make in
+            make.height.equalTo(vStackView.snp.height)
         }
         
         //MARK: - FineDustView 데이터 로직

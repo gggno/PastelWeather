@@ -41,7 +41,7 @@ class CustomDayStackView: UIStackView {
         let stack23 = stackElement(timeLabel: dayInTimeLabel23, ImageView: dayInImageView23, tmpLabel: dayInTmpLabel23)
         let stack24 = stackElement(timeLabel: dayInTimeLabel24, ImageView: dayInImageView24, tmpLabel: dayInTmpLabel24)
         
-        var stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9, stack10, stack11, stack12, stack13, stack14, stack15, stack16, stack17, stack18, stack19, stack20, stack21, stack22, stack23, stack24])
+        let stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9, stack10, stack11, stack12, stack13, stack14, stack15, stack16, stack17, stack18, stack19, stack20, stack21, stack22, stack23, stack24])
         
         weatherAPI.dayWeatherViewSetting(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
             print("세팅 날짜: \(DateValue.baseDate), 세팅 시간: \(DateValue.baseTime)")
@@ -252,7 +252,7 @@ class CustomDayStackView: UIStackView {
         
         timeLabel.text = "정보 없음"
         ImageView.image = UIImage(systemName: "sun.max.fill")
-        tmpLabel.text = "정보 없음"
+        tmpLabel.text = "_ _"
         
         return stackView
     }
@@ -260,7 +260,8 @@ class CustomDayStackView: UIStackView {
     // MARK: - 스택뷰 요소 할당(24개)
     let dayInTimeLabel1: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -272,13 +273,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel1: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel2: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -290,13 +293,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel2: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel3: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -308,13 +313,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel3: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel4: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -326,13 +333,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel4: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel5: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -344,13 +353,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel5: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel6: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -362,13 +373,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel6: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel7: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -380,13 +393,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel7: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel8: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -398,13 +413,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel8: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel9: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -416,13 +433,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel9: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel10: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -434,13 +453,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel10: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel11: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -452,13 +473,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel11: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel12: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -470,13 +493,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel12: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel13: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -488,13 +513,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel13: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel14: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -506,13 +533,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel14: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel15: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -524,13 +553,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel15: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel16: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -542,13 +573,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel16: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel17: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -560,13 +593,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel17: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel18: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -578,13 +613,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel18: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel19: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -596,13 +633,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel19: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel20: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -614,13 +653,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel20: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel21: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -632,13 +673,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel21: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel22: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -650,13 +693,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel22: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel23: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -668,13 +713,15 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel23: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
     let dayInTimeLabel24: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
     
@@ -686,7 +733,8 @@ class CustomDayStackView: UIStackView {
     
     let dayInTmpLabel24: UILabel = {
         let label = UILabel()
-        
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.textColor = .black
         return label
     }()
 }

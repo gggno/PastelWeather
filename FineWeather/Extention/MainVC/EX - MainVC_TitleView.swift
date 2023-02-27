@@ -12,20 +12,21 @@ import UIKit
 extension MainViewController {
     
     func titleViewSetting() -> UIView {
+        let greetingArr: [String] = ["좋은 하루 보내세요~!", "행복하고 건강하세요~!", "오늘도 파이팅~!!", "즐거운 하루 보내세요~!", "항상 응원합니다!!", "피할수 없으면 즐겨보세요!", "당신은 웃는 모습이 아릅답습니다.", "당신은 날마다 모든 면에서 점점 더 좋아지고 있습니다.", "더 멋진 하루를 보내는 당신! 아름다워요."]
         
         //MARK: - TitleView UI 로직
         let titleInImageView: UIImageView = {
             let imageView = UIImageView()
-            
-//            imageView.image = UIImage(systemName: presentImage)
-            imageView.backgroundColor = .white
             
             return imageView
         }()
         
         let titleInWeatherTextLabel: UILabel = {
             let label = UILabel()
+            
             label.textAlignment = .center
+            label.textColor = .black
+            label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
             label.backgroundColor = .clear
             label.text = "_ _"
             
@@ -34,11 +35,11 @@ extension MainViewController {
         
         let titleInTempNum: UILabel = {
             let label = UILabel()
-            label.backgroundColor = .magenta
+            
             label.textAlignment = .center
-            label.font = label.font.withSize(40)
+            label.textColor = .black
+            label.font = label.font.withSize(55)
             label.text = "_ _"
-            // label.text는 통신 후에 결정
             
             return label
         }()
@@ -61,7 +62,7 @@ extension MainViewController {
             let stackView = UIStackView(arrangedSubviews: [titleInTempNum, titleInTempStackView])
             
             stackView.axis = .horizontal
-            stackView.spacing = 20
+            stackView.spacing = 10
             stackView.alignment = .center
             stackView.distribution = .equalSpacing
             
@@ -70,31 +71,45 @@ extension MainViewController {
         
         let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .black, lat: self.lat, lon: self.lon)
         
+        let greetingLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = greetingArr.shuffled().first
+            label.textColor = .black
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+            label.font = UIFont(name: "GmarketSansTTFLight", size: 12)
+            
+            return label
+        }()
+        
         let titleView: UIView = {
             let view = UIView()
             
             view.layer.cornerRadius = 10
             
-            view.backgroundColor = .systemCyan
+            view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
             view.addSubview(titleInImageView)
             view.addSubview(titleInWeatherTextLabel)
             view.addSubview(titleInTopTempStackView)
             view.addSubview(titleInBottomStackView)
+            view.addSubview(greetingLabel)
             
             return view
         }()
         
         titleInImageView.snp.makeConstraints { make in
-            make.size.equalTo(90)
-            make.top.equalToSuperview().offset(20)
+            make.size.equalTo(100)
+            make.top.equalToSuperview().offset(30)
             make.leading.equalToSuperview().offset(20)
         }
         
         titleInWeatherTextLabel.snp.makeConstraints { make in
-            make.width.equalTo(90)
-            make.height.equalTo(30)
+            make.width.equalTo(100)
+            
             make.leading.equalTo(titleInImageView.snp.leading)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-30)
         }
         
         titleInTopTempStackView.snp.makeConstraints { make in
@@ -103,8 +118,15 @@ extension MainViewController {
         }
         
         titleInBottomStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleInTopTempStackView.snp.bottom).offset(30)
+            make.top.equalTo(titleInTopTempStackView.snp.bottom).offset(10)
             make.centerX.equalTo(titleInTopTempStackView.snp.centerX)
+        }
+        
+        greetingLabel.snp.makeConstraints { make in
+            make.width.equalTo(150)
+            make.top.equalTo(titleInBottomStackView.snp.bottom).offset(20)
+            make.trailing.equalTo(titleInTopTempStackView)
+
         }
         
         //MARK: - TitleView 데이터 로직
@@ -150,26 +172,33 @@ extension MainViewController {
             if sky == "1" { // 맑음
                 titleInImageView.image = UIImage(systemName: "sun.max.fill")
                 titleInWeatherTextLabel.text = "맑아요"
+                self.view.backgroundColor = UIColor(named: "SunnyColor")
             } else if sky == "3" { // 구름 많음
                 titleInImageView.image = UIImage(systemName: "smoke.fill")
                 titleInWeatherTextLabel.text = "구름 많아요"
+                self.view.backgroundColor = UIColor(named: "manyCloudColor")
             } else if sky == "4" && pty == "0" { // 흐림
                 titleInImageView.image = UIImage(systemName: "cloud.fill")
                 titleInWeatherTextLabel.text = "흐려요"
+                self.view.backgroundColor = UIColor(named: "CloudyColor")
                 
             } else {
                 if pty == "1" { // 비
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
                     titleInWeatherTextLabel.text = "비와요"
+                    self.view.backgroundColor = UIColor(named: "RainyColor")
                 } else if pty == "2" { // 비/눈
                     titleInImageView.image = UIImage(systemName: "cloud.hail.fill")
                     titleInWeatherTextLabel.text = "비랑 눈이와요"
+                    self.view.backgroundColor = UIColor(named: "RainAndSnowColor")
                 } else if pty == "3" { // 눈
                     titleInImageView.image = UIImage(systemName: "snowflake")
                     titleInWeatherTextLabel.text = "눈와요"
+                    self.view.backgroundColor = UIColor(named: "SnowColor")
                 } else if pty == "4" { // 소나기
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
                     titleInWeatherTextLabel.text = "소나기와요"
+                    self.view.backgroundColor = UIColor(named: "SuddenRainColor")
                 }
             }
             

@@ -4,6 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>GmarketSansTTFMedium.ttf</string>
+		<string>GmarketSansTTFLight.ttf</string>
+		<string>GmarketSansTTFBold.ttf</string>
 		<string>Jalnan.ttf</string>
 	</array>
 	<key>GADApplicationIdentifier</key>

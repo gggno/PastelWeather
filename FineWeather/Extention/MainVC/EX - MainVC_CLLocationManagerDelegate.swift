@@ -127,6 +127,7 @@ extension MainViewController: CLLocationManagerDelegate {
             if subState == "" {
                 if state == city {
                     // 현재위치 도시이름 출력
+                    
                     self.title = state
                     
                     // 로컬 DB에 현재위치 도시이름 저장

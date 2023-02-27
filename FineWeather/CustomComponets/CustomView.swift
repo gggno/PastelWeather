@@ -14,7 +14,7 @@ class CustomView: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         
-        label.font = label.font.withSize(25)
+        label.font = UIFont(name: "GmarketSansTTFMedium", size: 18)
         label.textColor = .black
         label.textAlignment = .center
         
@@ -24,7 +24,7 @@ class CustomView: UIView {
     lazy var currentStateLabel: UILabel = {
         let label = UILabel()
         
-        label.font = label.font.withSize(20)
+        label.font = UIFont(name: "GmarketSansTTFLight", size: 17)
         label.textColor = .black
         label.textAlignment = .center
         
@@ -57,7 +57,7 @@ class CustomView: UIView {
         let label = UILabel()
         
         label.text = "기준: 한국환경공단"
-        label.font = label.font.withSize(10)
+        label.font = UIFont(name: "GmarketSansTTFLight", size: 8)
         label.textColor = .lightGray
         
         return label
@@ -66,7 +66,8 @@ class CustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .orange
+        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        
         self.addSubview(titleLabel)
         self.addSubview(currentStateLabel)
         self.addSubview(progressView)

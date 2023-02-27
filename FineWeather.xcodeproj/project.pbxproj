@@ -32,6 +32,9 @@
 		66AB08F3298E47D1007AE290 /* FineDustDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB08F2298E47D1007AE290 /* FineDustDatas.swift */; };
 		66AB08F5298E90DD007AE290 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB08F4298E90DD007AE290 /* CustomView.swift */; };
 		66AE8F8629AC8439006397A4 /* Jalnan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AE8F8529AC8439006397A4 /* Jalnan.ttf */; };
+		66AE8F8B29AC8C8D006397A4 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AE8F8829AC8C8D006397A4 /* GmarketSansTTFLight.ttf */; };
+		66AE8F8C29AC8C8D006397A4 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AE8F8929AC8C8D006397A4 /* GmarketSansTTFMedium.ttf */; };
+		66AE8F8D29AC8C8D006397A4 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AE8F8A29AC8C8D006397A4 /* GmarketSansTTFBold.ttf */; };
 		66BDF1D7296803AE00E1CD21 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1D6296803AE00E1CD21 /* DateValue.swift */; };
 		66BDF1D9296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */; };
 		66BDF1DD29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */; };
@@ -71,6 +74,9 @@
 		66AB08F2298E47D1007AE290 /* FineDustDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustDatas.swift; sourceTree = "<group>"; };
 		66AB08F4298E90DD007AE290 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		66AE8F8529AC8439006397A4 /* Jalnan.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan.ttf; sourceTree = "<group>"; };
+		66AE8F8829AC8C8D006397A4 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
+		66AE8F8929AC8C8D006397A4 /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
+		66AE8F8A29AC8C8D006397A4 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		66BDF1D6296803AE00E1CD21 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_DayWeatherView.swift"; sourceTree = "<group>"; };
@@ -173,7 +179,7 @@
 				6677E50F294A10E60045D348 /* AppDelegate.swift */,
 				6677E511294A10E60045D348 /* SceneDelegate.swift */,
 				6677E518294A10E70045D348 /* Assets.xcassets */,
-				66AE8F8529AC8439006397A4 /* Jalnan.ttf */,
+				66AE8F8729AC8C75006397A4 /* Font */,
 				6677E51A294A10E70045D348 /* LaunchScreen.storyboard */,
 				6677E51D294A10E70045D348 /* Info.plist */,
 			);
@@ -200,6 +206,17 @@
 				660B9ED229A3C601008A7640 /* CityListViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		66AE8F8729AC8C75006397A4 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				66AE8F8529AC8439006397A4 /* Jalnan.ttf */,
+				66AE8F8829AC8C8D006397A4 /* GmarketSansTTFLight.ttf */,
+				66AE8F8929AC8C8D006397A4 /* GmarketSansTTFMedium.ttf */,
+				66AE8F8A29AC8C8D006397A4 /* GmarketSansTTFBold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		66CC510A295ABC6700C47EEC /* Entity */ = {
@@ -294,8 +311,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				66AE8F8629AC8439006397A4 /* Jalnan.ttf in Resources */,
+				66AE8F8B29AC8C8D006397A4 /* GmarketSansTTFLight.ttf in Resources */,
 				6677E51C294A10E70045D348 /* LaunchScreen.storyboard in Resources */,
 				6677E519294A10E70045D348 /* Assets.xcassets in Resources */,
+				66AE8F8C29AC8C8D006397A4 /* GmarketSansTTFMedium.ttf in Resources */,
+				66AE8F8D29AC8C8D006397A4 /* GmarketSansTTFBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
