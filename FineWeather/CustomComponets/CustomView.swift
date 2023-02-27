@@ -73,7 +73,9 @@ class CustomView: UIView {
         self.addSubview(minValueLabel)
         self.addSubview(standardLabel)
         self.addSubview(fromInfoLabel)
- 
+        
+        self.layer.cornerRadius = 10
+        
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.top.equalToSuperview().offset(15)

@@ -7,12 +7,10 @@
 
 import UIKit
 import SnapKit
-import CoreLocation
 import RealmSwift
 
 class MainPageViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     let realm = try! Realm()
@@ -115,4 +113,5 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
             return AddedCityDatas.shared.vcDatas[nextIndex]
         }
     }
+    
 }

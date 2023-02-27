@@ -23,7 +23,7 @@
 		667C9E9A2993E9150035A085 /* EX - PlusVC_All.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E992993E9150035A085 /* EX - PlusVC_All.swift */; };
 		667C9E9E29953F970035A085 /* EX - UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9E9D29953F970035A085 /* EX - UILabel.swift */; };
 		667C9EA52997E1CB0035A085 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9EA42997E1CB0035A085 /* MainPageViewController.swift */; };
-		667C9EA7299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9EA6299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift */; };
+		667C9EA7299B6C2B0035A085 /* EX - MainPageVC_dbVCSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667C9EA6299B6C2B0035A085 /* EX - MainPageVC_dbVCSetting.swift */; };
 		667D502F2950A185002453AA /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D502E2950A185002453AA /* PlusViewController.swift */; };
 		667D50312950A3C3002453AA /* SideMenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D50302950A3C3002453AA /* SideMenuNavigation.swift */; };
 		667D50332950A42D002453AA /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667D50322950A42D002453AA /* SideMenuViewController.swift */; };
@@ -31,6 +31,7 @@
 		668296D9298F978600054499 /* UIView+PreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668296D8298F978600054499 /* UIView+PreView.swift */; };
 		66AB08F3298E47D1007AE290 /* FineDustDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB08F2298E47D1007AE290 /* FineDustDatas.swift */; };
 		66AB08F5298E90DD007AE290 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AB08F4298E90DD007AE290 /* CustomView.swift */; };
+		66AE8F8629AC8439006397A4 /* Jalnan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AE8F8529AC8439006397A4 /* Jalnan.ttf */; };
 		66BDF1D7296803AE00E1CD21 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1D6296803AE00E1CD21 /* DateValue.swift */; };
 		66BDF1D9296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */; };
 		66BDF1DD29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */; };
@@ -61,7 +62,7 @@
 		667C9E992993E9150035A085 /* EX - PlusVC_All.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - PlusVC_All.swift"; sourceTree = "<group>"; };
 		667C9E9D29953F970035A085 /* EX - UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - UILabel.swift"; sourceTree = "<group>"; };
 		667C9EA42997E1CB0035A085 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		667C9EA6299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainPageVC_CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
+		667C9EA6299B6C2B0035A085 /* EX - MainPageVC_dbVCSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainPageVC_dbVCSetting.swift"; sourceTree = "<group>"; };
 		667D502E2950A185002453AA /* PlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewController.swift; sourceTree = "<group>"; };
 		667D50302950A3C3002453AA /* SideMenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNavigation.swift; sourceTree = "<group>"; };
 		667D50322950A42D002453AA /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		668296D8298F978600054499 /* UIView+PreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PreView.swift"; sourceTree = "<group>"; };
 		66AB08F2298E47D1007AE290 /* FineDustDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustDatas.swift; sourceTree = "<group>"; };
 		66AB08F4298E90DD007AE290 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		66AE8F8529AC8439006397A4 /* Jalnan.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan.ttf; sourceTree = "<group>"; };
 		66BDF1D6296803AE00E1CD21 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 		66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_DayWeatherView.swift"; sourceTree = "<group>"; };
@@ -117,7 +119,7 @@
 		665791E329A9E8FD00A4E2B0 /* MainPageVC */ = {
 			isa = PBXGroup;
 			children = (
-				667C9EA6299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift */,
+				667C9EA6299B6C2B0035A085 /* EX - MainPageVC_dbVCSetting.swift */,
 			);
 			path = MainPageVC;
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 				6677E50F294A10E60045D348 /* AppDelegate.swift */,
 				6677E511294A10E60045D348 /* SceneDelegate.swift */,
 				6677E518294A10E70045D348 /* Assets.xcassets */,
+				66AE8F8529AC8439006397A4 /* Jalnan.ttf */,
 				6677E51A294A10E70045D348 /* LaunchScreen.storyboard */,
 				6677E51D294A10E70045D348 /* Info.plist */,
 			);
@@ -290,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66AE8F8629AC8439006397A4 /* Jalnan.ttf in Resources */,
 				6677E51C294A10E70045D348 /* LaunchScreen.storyboard in Resources */,
 				6677E519294A10E70045D348 /* Assets.xcassets in Resources */,
 			);
@@ -349,7 +353,7 @@
 				6677E510294A10E60045D348 /* AppDelegate.swift in Sources */,
 				66524D7D295485B700263F00 /* CustomTempStackView.swift in Sources */,
 				667C9E9829927B0E0035A085 /* SearchTableViewCell.swift in Sources */,
-				667C9EA7299B6C2B0035A085 /* EX - MainPageVC_CLLocationManagerDelegate.swift in Sources */,
+				667C9EA7299B6C2B0035A085 /* EX - MainPageVC_dbVCSetting.swift in Sources */,
 				667C9E9E29953F970035A085 /* EX - UILabel.swift in Sources */,
 				660B9ED329A3C601008A7640 /* CityListViewController.swift in Sources */,
 				665CF06629A7593B00292EF7 /* LocalDB.swift in Sources */,

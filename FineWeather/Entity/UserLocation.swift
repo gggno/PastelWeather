@@ -8,6 +8,6 @@
 import Foundation
 
 struct UserLocation {
-        var latitude: Double!
-        var longitude: Double!
-    }
+    var latitude: Double!
+    var longitude: Double!
+}

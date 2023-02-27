@@ -1,5 +1,5 @@
 //
-//  EX - MainPageVC_CLLocationManagerDelegate.swift
+//  MainPageVC_dbVCSetting.swift
 //  FineWeather
 //
 //  Created by 정근호 on 2023/02/14.
@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import CoreLocation
 import RealmSwift
 
 extension MainPageViewController {
@@ -27,8 +26,6 @@ extension MainPageViewController {
             mainVC.doubleLat = dbData.doubleLat
             mainVC.doubleLon = dbData.doubleLon
             mainVC.title = dbData.cityName
-            
-            mainVC.dbViewConfirm = true
             
             let vc = UINavigationController(rootViewController: mainVC)
             vcArray.append(vc)

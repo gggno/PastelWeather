@@ -96,8 +96,5 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-   
-    
-    
+
 }

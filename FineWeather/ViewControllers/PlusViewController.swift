@@ -105,7 +105,6 @@ class PlusViewController: UIViewController {
             make.top.equalTo(topView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
     
     func convertSearchAddress(from coordinate:CLLocation, vc: UIViewController) {

@@ -4,7 +4,6 @@ import Alamofire
 class WeatherAPI: NSObject {
     
     private let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
-    
     private let serviceKey = "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ=="
     
     // MARK: - WeatherResponse

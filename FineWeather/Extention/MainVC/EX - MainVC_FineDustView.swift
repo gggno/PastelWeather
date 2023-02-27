@@ -25,7 +25,6 @@ extension MainViewController {
             stackView.spacing = 30
             stackView.alignment = .fill
             stackView.distribution = .fillEqually
-            stackView.backgroundColor = .darkGray
             
             return stackView
         }()
@@ -34,12 +33,12 @@ extension MainViewController {
            let view = UIView()
             
             view.addSubview(vStackView)
-            view.backgroundColor = .purple
+            view.backgroundColor = .clear
             return view
         }()
         
         pm10View.snp.makeConstraints { make in
-            make.height.equalTo(150)
+            make.height.equalTo(100)
             make.width.equalToSuperview()
         }
         

@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import CoreLocation
 import GoogleMobileAds
 import RealmSwift
 
@@ -16,12 +17,14 @@ class MainViewController: UIViewController {
     let realm = try! Realm()
     
     let locationManager = CLLocationManager()
-    var lat = 0 // 주소 조회 때 사용
-    var lon = 0 // 주소 조회 때 사용
+    
+    var lat = 0 // 주소 조회, 온도 조회 때 사용
+    var lon = 0 // 주소 조회, 온도 조회 때 사용
     var doubleLat = 0.0 // 미세먼지 조회 때 사용
     var doubleLon = 0.0 // 미세먼지 조회 때 사용
+    
     var firstViewConfirm: Bool = false // 첫번째뷰(현재 위치)확인 때 사용
-    var dbViewConfirm: Bool = false
+
     let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
     let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
@@ -46,11 +49,6 @@ class MainViewController: UIViewController {
         // 첫번째 뷰 현재위치를 기반으로 세팅
         if firstViewConfirm == true {
             firstVCLocationSetting()
-        }
-        
-        // DB에 저장된 위도, 경도를 기반으로 세팅
-        if dbViewConfirm == true {
-            dbVCLocationSetting()
         }
         
         // MARK: - 메인화면 내비게이션 요소 설정
@@ -103,6 +101,16 @@ class MainViewController: UIViewController {
         // MARK: - fineDustView 요소 설정
         let fineDustView = fineDustViewSetting()
         
+        let copyrightUsedInfoLabel: UILabel = {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.textColor = .white
+            label.text = "자료: 기상청, 한국환경공단\n이 자료는 인증 받지 않은 실시간 자료이므로 자료 오류 및 표출방식에 따른 값이 다를 수 있거나 정보 제공이 불가할 수 있습니다."
+            label.textAlignment = .center
+            
+            return label
+        }()
+        
         let emptyView4: UIView = {
             let view = UIView()
             
@@ -114,10 +122,11 @@ class MainViewController: UIViewController {
         let containerView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .brown
+            view.backgroundColor = .clear
             view.addSubview(titleView)
             view.addSubview(dayWeatherView)
             view.addSubview(fineDustView)
+            view.addSubview(copyrightUsedInfoLabel)
             view.addSubview(emptyView4)
             
             return view
@@ -140,6 +149,7 @@ class MainViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
+        // MARK: - fineDustView 요소 레이아웃
         fineDustView.snp.makeConstraints { make in
             make.height.equalTo(510)
             make.top.equalTo(dayWeatherView.snp.bottom).offset(50)
@@ -147,9 +157,15 @@ class MainViewController: UIViewController {
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
         
+        // MARK: - copyrightUsedInfoLabel 요소 레이아웃
+        copyrightUsedInfoLabel.snp.makeConstraints { make in
+            make.top.equalTo(fineDustView.snp.bottom).offset(-30)
+            make.leading.trailing.equalTo(fineDustView)
+        }
+        
         emptyView4.snp.makeConstraints { make in
             make.height.equalTo(440)
-            make.top.equalTo(fineDustView.snp.bottom).offset(50)
+            make.top.equalTo(copyrightUsedInfoLabel.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
             make.bottom.equalTo(containerView.snp.bottom).offset(-30)
@@ -194,6 +210,7 @@ class MainViewController: UIViewController {
         
         let dbDatas = realm.objects(LocalDB.self)
         let localDB = LocalDB()
+        
         localDB.lat = lat
         localDB.lon = lon
         localDB.doubleLat = doubleLat
@@ -211,13 +228,6 @@ class MainViewController: UIViewController {
                 dbDatas[0].doubleLon = doubleLon
             }
         }
-        
-    }
-    
-    func dbVCLocationSetting() {
-        print("MainViewController - dbVCLocationSetting() called")
-        
-        
     }
     
     func loadBannerAd() {
@@ -266,11 +276,11 @@ class MainViewController: UIViewController {
         print("MainVC - plusBtnClicked() called")
         self.navigationController?.pushViewController(PlusViewController(), animated: true)
     }
+    
 }
 
 #if DEBUG
 import SwiftUI
-import CoreLocation
 
 struct MainViewControllerPresentable: UIViewControllerRepresentable {
     func  updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
