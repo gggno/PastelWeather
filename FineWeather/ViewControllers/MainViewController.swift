@@ -146,7 +146,7 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 레이아웃
         dayWeatherView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleView.snp.bottom).offset(25)
+            make.top.equalTo(titleView.snp.bottom).offset(50 )
             make.leading.equalToSuperview().offset(20)
         }
         

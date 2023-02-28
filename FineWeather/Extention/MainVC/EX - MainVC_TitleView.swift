@@ -171,33 +171,40 @@ extension MainViewController {
             
             if sky == "1" { // 맑음
                 titleInImageView.image = UIImage(systemName: "sun.max.fill")
-                titleInWeatherTextLabel.text = "맑아요"
+                titleInImageView.tintColor = UIColor(named: "SunnyColor")
+                titleInWeatherTextLabel.text = "맑음"
                 self.view.backgroundColor = UIColor(named: "SunnyColor")
             } else if sky == "3" { // 구름 많음
                 titleInImageView.image = UIImage(systemName: "smoke.fill")
-                titleInWeatherTextLabel.text = "구름 많아요"
+                titleInImageView.tintColor = UIColor(named: "manyCloudColor")
+                titleInWeatherTextLabel.text = "대체로 흐림"
                 self.view.backgroundColor = UIColor(named: "manyCloudColor")
             } else if sky == "4" && pty == "0" { // 흐림
                 titleInImageView.image = UIImage(systemName: "cloud.fill")
-                titleInWeatherTextLabel.text = "흐려요"
+                titleInImageView.tintColor = UIColor(named: "CloudyColor")
+                titleInWeatherTextLabel.text = "흐림"
                 self.view.backgroundColor = UIColor(named: "CloudyColor")
                 
             } else {
                 if pty == "1" { // 비
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
-                    titleInWeatherTextLabel.text = "비와요"
+                    titleInImageView.tintColor = UIColor(named: "RainyColor")
+                    titleInWeatherTextLabel.text = "비"
                     self.view.backgroundColor = UIColor(named: "RainyColor")
                 } else if pty == "2" { // 비/눈
                     titleInImageView.image = UIImage(systemName: "cloud.hail.fill")
-                    titleInWeatherTextLabel.text = "비랑 눈이와요"
+                    titleInImageView.tintColor = UIColor(named: "RainAndSnowColor")
+                    titleInWeatherTextLabel.text = "눈·비"
                     self.view.backgroundColor = UIColor(named: "RainAndSnowColor")
                 } else if pty == "3" { // 눈
                     titleInImageView.image = UIImage(systemName: "snowflake")
-                    titleInWeatherTextLabel.text = "눈와요"
+                    titleInImageView.tintColor = UIColor(named: "SnowColor")
+                    titleInWeatherTextLabel.text = "눈"
                     self.view.backgroundColor = UIColor(named: "SnowColor")
                 } else if pty == "4" { // 소나기
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
-                    titleInWeatherTextLabel.text = "소나기와요"
+                    titleInImageView.tintColor = UIColor(named: "SuddenRainColor")
+                    titleInWeatherTextLabel.text = "소나기"
                     self.view.backgroundColor = UIColor(named: "SuddenRainColor")
                 }
             }

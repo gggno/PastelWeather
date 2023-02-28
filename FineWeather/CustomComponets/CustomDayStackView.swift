@@ -65,7 +65,7 @@ class CustomDayStackView: UIStackView {
                 var tmp = ""
                 var sky = ""
                 var pty = ""
-                var weatherImage: UIImage?
+                var weatherImageView = UIImageView()
                 
                 // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {
@@ -82,21 +82,28 @@ class CustomDayStackView: UIStackView {
                     
                     // 날씨 설정
                     if sky == "1" { // 맑음
-                        weatherImage = UIImage(systemName: "sun.max.fill")!
+                        weatherImageView.image = UIImage(systemName: "sun.max.fill")
+                        weatherImageView.tintColor = UIColor(named: "SunnyColor")
                     } else if sky == "3" { // 구름 많음
-                        weatherImage = UIImage(systemName: "smoke.fill")!
+                        weatherImageView.image = UIImage(systemName: "smoke.fill")
+                        weatherImageView.tintColor = UIColor(named: "manyCloudColor")
                     } else if sky == "4" && pty == "0" { // 흐림
-                        weatherImage = UIImage(systemName: "cloud.fill")!
+                        weatherImageView.image = UIImage(systemName: "cloud.fill")
+                        weatherImageView.tintColor = UIColor(named: "CloudyColor")
                         
                     } else {
                         if pty == "1" { // 비
-                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.rain.fill")
+                            weatherImageView.tintColor = UIColor(named: "RainyColor")
                         } else if pty == "2" { // 비/눈
-                            weatherImage = UIImage(systemName: "cloud.hail.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.hail.fill")
+                            weatherImageView.tintColor = UIColor(named: "RainAndSnowColor")
                         } else if pty == "3" { // 눈
-                            weatherImage = UIImage(systemName: "snowflake")!
+                            weatherImageView.image = UIImage(systemName: "snowflake")
+                            weatherImageView.tintColor = UIColor(named: "SnowColor")
                         } else if pty == "4" { // 소나기
-                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.rain.fill")
+                            weatherImageView.tintColor = UIColor(named: "SuddenRainColor")
                         }
                     }
                     index += 12
@@ -115,21 +122,28 @@ class CustomDayStackView: UIStackView {
 //                    print("tempPty = response.response?.body?.items.item[\(index+6)]\n value = \(response.response?.body?.items.item[index+6])\n")
                     
                     if sky == "1" { // 맑음
-                        weatherImage = UIImage(systemName: "sun.max.fill")!
+                        weatherImageView.image = UIImage(systemName: "sun.max.fill")
+                        weatherImageView.tintColor = UIColor(named: "SunnyColor")
                     } else if sky == "3" { // 구름 많음
-                        weatherImage = UIImage(systemName: "smoke.fill")!
+                        weatherImageView.image = UIImage(systemName: "smoke.fill")
+                        weatherImageView.tintColor = UIColor(named: "manyCloudColor")
                     } else if sky == "4" && pty == "0" { // 흐림
-                        weatherImage = UIImage(systemName: "cloud.fill")!
+                        weatherImageView.image = UIImage(systemName: "cloud.fill")
+                        weatherImageView.tintColor = UIColor(named: "CloudyColor")
                         
                     } else {
                         if pty == "1" { // 비
-                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.rain.fill")
+                            weatherImageView.tintColor = UIColor(named: "RainyColor")
                         } else if pty == "2" { // 비/눈
-                            weatherImage = UIImage(systemName: "cloud.hail.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.hail.fill")
+                            weatherImageView.tintColor = UIColor(named: "RainAndSnowColor")
                         } else if pty == "3" { // 눈
-                            weatherImage = UIImage(systemName: "snowflake")!
+                            weatherImageView.image = UIImage(systemName: "snowflake")
+                            weatherImageView.tintColor = UIColor(named: "SnowColor")
                         } else if pty == "4" { // 소나기
-                            weatherImage = UIImage(systemName: "cloud.rain.fill")!
+                            weatherImageView.image = UIImage(systemName: "cloud.rain.fill")
+                            weatherImageView.tintColor = UIColor(named: "SuddenRainColor")
                         }
                     }
                     index += 12
@@ -139,99 +153,147 @@ class CustomDayStackView: UIStackView {
                 switch i+1 {
                 case 1:
                     self.dayInTimeLabel1.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView1.image = weatherImage
+                    self.dayInImageView1.image = weatherImageView.image
+                    self.dayInImageView1.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel1.text = tmp + "˚"
                 case 2:
                     self.dayInTimeLabel2.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView2.image = weatherImage
+                    self.dayInImageView2.image = weatherImageView.image
+                    self.dayInImageView2.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel2.text = tmp + "˚"
                 case 3:
                     self.dayInTimeLabel3.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView3.image = weatherImage
+                    self.dayInImageView3.image = weatherImageView.image
+                    self.dayInImageView3.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel3.text = tmp + "˚"
                 case 4:
                     self.dayInTimeLabel4.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView4.image = weatherImage
+                    self.dayInImageView4.image = weatherImageView.image
+                    self.dayInImageView4.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel4.text = tmp + "˚"
                 case 5:
                     self.dayInTimeLabel5.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView5.image = weatherImage
+                    self.dayInImageView5.image = weatherImageView.image
+                    self.dayInImageView5.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel5.text = tmp + "˚"
                 case 6:
                     self.dayInTimeLabel6.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView6.image = weatherImage
+                    self.dayInImageView6.image = weatherImageView.image
+                    self.dayInImageView6.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel6.text = tmp + "˚"
                 case 7:
                     self.dayInTimeLabel7.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView7.image = weatherImage
+                    self.dayInImageView7.image = weatherImageView.image
+                    self.dayInImageView7.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel7.text = tmp + "˚"
                 case 8:
                     self.dayInTimeLabel8.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView8.image = weatherImage
+                    self.dayInImageView8.image = weatherImageView.image
+                    self.dayInImageView8.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel8.text = tmp + "˚"
                 case 9:
                     self.dayInTimeLabel9.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView9.image = weatherImage
+                    self.dayInImageView9.image = weatherImageView.image
+                    self.dayInImageView9.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel9.text = tmp + "˚"
                 case 10:
                     self.dayInTimeLabel10.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView10.image = weatherImage
+                    self.dayInImageView10.image = weatherImageView.image
+                    self.dayInImageView10.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel10.text = tmp + "˚"
                 case 11:
                     self.dayInTimeLabel11.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView11.image = weatherImage
+                    self.dayInImageView11.image = weatherImageView.image
+                    self.dayInImageView11.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel11.text = tmp + "˚"
                 case 12:
                     self.dayInTimeLabel12.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView12.image = weatherImage
+                    self.dayInImageView12.image = weatherImageView.image
+                    self.dayInImageView12.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel12.text = tmp + "˚"
                 case 13:
                     self.dayInTimeLabel13.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView13.image = weatherImage
+                    self.dayInImageView13.image = weatherImageView.image
+                    self.dayInImageView13.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel13.text = tmp + "˚"
                 case 14:
                     self.dayInTimeLabel14.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView14.image = weatherImage
+                    self.dayInImageView14.image = weatherImageView.image
+                    self.dayInImageView14.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel14.text = tmp + "˚"
                 case 15:
                     self.dayInTimeLabel15.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView15.image = weatherImage
+                    self.dayInImageView15.image = weatherImageView.image
+                    self.dayInImageView15.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel15.text = tmp + "˚"
                 case 16:
                     self.dayInTimeLabel16.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView16.image = weatherImage
+                    self.dayInImageView16.image = weatherImageView.image
+                    self.dayInImageView16.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel16.text = tmp + "˚"
                 case 17:
                     self.dayInTimeLabel17.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView17.image = weatherImage
+                    self.dayInImageView17.image = weatherImageView.image
+                    self.dayInImageView17.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel17.text = tmp + "˚"
                 case 18:
                     self.dayInTimeLabel18.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView18.image = weatherImage
+                    self.dayInImageView18.image = weatherImageView.image
+                    self.dayInImageView18.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel18.text = tmp + "˚"
                 case 19:
                     self.dayInTimeLabel19.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView19.image = weatherImage
+                    self.dayInImageView19.image = weatherImageView.image
+                    self.dayInImageView19.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel19.text = tmp + "˚"
                 case 20:
                     self.dayInTimeLabel20.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView20.image = weatherImage
+                    self.dayInImageView20.image = weatherImageView.image
+                    self.dayInImageView20.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel20.text = tmp + "˚"
                 case 21:
                     self.dayInTimeLabel21.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView21.image = weatherImage
+                    self.dayInImageView21.image = weatherImageView.image
+                    self.dayInImageView21.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel21.text = tmp + "˚"
                 case 22:
                     self.dayInTimeLabel22.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView22.image = weatherImage
+                    self.dayInImageView22.image = weatherImageView.image
+                    self.dayInImageView22.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel22.text = tmp + "˚"
                 case 23:
                     self.dayInTimeLabel23.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView23.image = weatherImage
+                    self.dayInImageView23.image = weatherImageView.image
+                    self.dayInImageView23.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel23.text = tmp + "˚"
                 case 24:
                     self.dayInTimeLabel24.text = DateValue.currentTimeOfAmPm(count: Double(i+1))
-                    self.dayInImageView24.image = weatherImage
+                    self.dayInImageView24.image = weatherImageView.image
+                    self.dayInImageView24.tintColor = weatherImageView.tintColor
+                    
                     self.dayInTmpLabel24.text = tmp + "˚"
                 default:
                     break
