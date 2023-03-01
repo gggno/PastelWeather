@@ -26,7 +26,7 @@ extension MainViewController {
             
             label.textAlignment = .center
             label.textColor = .black
-            label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+            label.font = UIFont(name: "GmarketSansTTFMedium", size: 20)
             label.backgroundColor = .clear
             label.text = "_ _"
             
@@ -151,6 +151,7 @@ extension MainViewController {
             } else { titleInTempNum.text = "_ _" }
         }
         
+        // 날씨상태 구현 로직
         weatherAPI.lookWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
             var index = 0
             let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)

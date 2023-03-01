@@ -38,13 +38,13 @@ class CustomTempStackView: UIStackView {
                     if let maxTmp = response.response?.body?.items.item[0].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
-                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                         self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
-                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                         self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     }
@@ -53,13 +53,13 @@ class CustomTempStackView: UIStackView {
                     if let maxTmp = response.response?.body?.items.item[1].fcstValue {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = maxTmp + "˚"
-                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                         self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     } else {
                         self.tempNameLabel.text = tempName + ":"
                         self.tempLabel.text = "_ _"
-                        self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                        self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                         self.tempLabel.font = self.tempLabel.font.withSize(15)
                         self.tempLabel.textColor = .red
                     }
@@ -68,17 +68,17 @@ class CustomTempStackView: UIStackView {
             
         } else if tempName == "최저" {
             print("최저 온도")
-            weatherAPI.minWeather(baseDate: DateValue.baseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
+            weatherAPI.minWeather(baseDate: DateValue.minBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 if let minTmp = response.response?.body?.items.item[0].fcstValue {
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = minTmp + "˚"
-                    self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                    self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                     self.tempLabel.font = self.tempLabel.font.withSize(15)
                     self.tempLabel.textColor = .blue
                 } else { // 조회 실패
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = "_ _"
-                    self.tempNameLabel.font = self.tempNameLabel.font.withSize(15)
+                    self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
                     self.tempLabel.font = self.tempLabel.font.withSize(15)
                     self.tempLabel.textColor = .blue
                 }
@@ -109,15 +109,19 @@ class CustomTempStackView: UIStackView {
                 let v = pow(Double(wsd)!, 0.16) // 풍속
                 
                 let tmpCal: Double = round(13.12 + 0.6215 * t - 11.37 * v + 0.3965 * v * t)
-                let feelTmpSTr: String? = String(Int(tmpCal))
+                let feelTmpStr: String? = String(Int(tmpCal))
                 
-                if let feelTmp = feelTmpSTr {
+                if let feelTmp = feelTmpStr {
                     self.tempNameLabel.text = tempName + ":"
+                    self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 17)
                     self.tempLabel.text = feelTmp + "˚"
+                    
                     self.tempLabel.textColor = .black
                     
                 } else {
                     self.tempNameLabel.text = tempName + ":"
+                    self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 17)
+                    
                     self.tempLabel.text = "_ _"
                     self.tempLabel.textColor = .black
                 }

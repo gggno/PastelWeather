@@ -64,6 +64,9 @@ class PlusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("PlusViewController - viewDidLoad() called")
+        
+        self.navigationController?.navigationBar.tintColor = .white
+
         searchBar.delegate = self
         
         searchCompleter.delegate = self

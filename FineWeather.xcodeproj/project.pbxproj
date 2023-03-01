@@ -15,6 +15,7 @@
 		6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */; };
 		6657B50D2955D0B1007D9E71 /* CustomDayStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6657B50C2955D0B1007D9E71 /* CustomDayStackView.swift */; };
 		665CF06629A7593B00292EF7 /* LocalDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665CF06529A7593B00292EF7 /* LocalDB.swift */; };
+		6674AC7329AF7D160075F055 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6674AC7229AF7D160075F055 /* WeatherResponse.swift */; };
 		6677E510294A10E60045D348 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E50F294A10E60045D348 /* AppDelegate.swift */; };
 		6677E512294A10E60045D348 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6677E511294A10E60045D348 /* SceneDelegate.swift */; };
 		6677E519294A10E70045D348 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6677E518294A10E70045D348 /* Assets.xcassets */; };
@@ -39,10 +40,10 @@
 		66BDF1D9296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */; };
 		66BDF1DD29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */; };
 		66CADB2B2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB2A2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift */; };
-		66CADB39298A89EF000A29A5 /* FineDustResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB38298A89EF000A29A5 /* FineDustResponse.swift */; };
+		66CADB39298A89EF000A29A5 /* FineDustAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB38298A89EF000A29A5 /* FineDustAPI.swift */; };
 		66CADB3B298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */; };
 		66CADB3F298BDB5C000A29A5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB3E298BDB5C000A29A5 /* UserLocation.swift */; };
-		66CC510E295ABDBE00C47EEC /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */; };
+		66CC510E295ABDBE00C47EEC /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_TitleView.swift"; sourceTree = "<group>"; };
 		6657B50C2955D0B1007D9E71 /* CustomDayStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDayStackView.swift; sourceTree = "<group>"; };
 		665CF06529A7593B00292EF7 /* LocalDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDB.swift; sourceTree = "<group>"; };
+		6674AC7229AF7D160075F055 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		6677E50C294A10E60045D348 /* FineWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FineWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6677E50F294A10E60045D348 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6677E511294A10E60045D348 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,10 +83,10 @@
 		66BDF1D8296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		66BDF1DC29767F1000E1CD21 /* EX - MainVC_DayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_DayWeatherView.swift"; sourceTree = "<group>"; };
 		66CADB2A2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_GADBannerViewDelegate.swift"; sourceTree = "<group>"; };
-		66CADB38298A89EF000A29A5 /* FineDustResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustResponse.swift; sourceTree = "<group>"; };
+		66CADB38298A89EF000A29A5 /* FineDustAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineDustAPI.swift; sourceTree = "<group>"; };
 		66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_FineDustView.swift"; sourceTree = "<group>"; };
 		66CADB3E298BDB5C000A29A5 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
-		66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.debug.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,8 +224,9 @@
 		66CC510A295ABC6700C47EEC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				66CC510D295ABDBE00C47EEC /* WeatherResponse.swift */,
-				66CADB38298A89EF000A29A5 /* FineDustResponse.swift */,
+				6674AC7229AF7D160075F055 /* WeatherResponse.swift */,
+				66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */,
+				66CADB38298A89EF000A29A5 /* FineDustAPI.swift */,
 				66BDF1D6296803AE00E1CD21 /* DateValue.swift */,
 				66CADB3E298BDB5C000A29A5 /* UserLocation.swift */,
 				66AB08F2298E47D1007AE290 /* FineDustDatas.swift */,
@@ -369,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66BDF1D9296C012A00E1CD21 /* EX - MainVC_CLLocationManagerDelegate.swift in Sources */,
+				6674AC7329AF7D160075F055 /* WeatherResponse.swift in Sources */,
 				6657B50D2955D0B1007D9E71 /* CustomDayStackView.swift in Sources */,
 				6677E510294A10E60045D348 /* AppDelegate.swift in Sources */,
 				66524D7D295485B700263F00 /* CustomTempStackView.swift in Sources */,
@@ -390,8 +394,8 @@
 				66BDF1D7296803AE00E1CD21 /* DateValue.swift in Sources */,
 				668296D9298F978600054499 /* UIView+PreView.swift in Sources */,
 				667C9EA52997E1CB0035A085 /* MainPageViewController.swift in Sources */,
-				66CC510E295ABDBE00C47EEC /* WeatherResponse.swift in Sources */,
-				66CADB39298A89EF000A29A5 /* FineDustResponse.swift in Sources */,
+				66CC510E295ABDBE00C47EEC /* WeatherAPI.swift in Sources */,
+				66CADB39298A89EF000A29A5 /* FineDustAPI.swift in Sources */,
 				66CADB3B298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift in Sources */,
 				66CADB2B2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift in Sources */,
 				667C9E9A2993E9150035A085 /* EX - PlusVC_All.swift in Sources */,

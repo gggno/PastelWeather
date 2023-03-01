@@ -14,7 +14,7 @@ class DateValue {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH00"
         
-        // 현재시간이 0000~0200이면 전날 날짜의 2300시로 조회
+        // 현재시간이 0000~0200인 경우 전날 날짜
         if formatter.string(from: time) == "0000" || formatter.string(from: time) == "0100" || formatter.string(from: time) == "0200" {
             let date = Date(timeIntervalSinceNow: -86400)
             let formatter = DateFormatter()
@@ -22,7 +22,7 @@ class DateValue {
             
             return formatter.string(from: date)
         }
-        // 현재시간이 0300~2300이면 오늘 날짜의 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300시로 조회
+        // 오늘 날짜
         else {
             let date = Date()
             let formatter = DateFormatter()
@@ -48,11 +48,27 @@ class DateValue {
         }
     }()
     
+    static let minBaseDate: String = {
+        if Int(currentTime)! <= 0200 { // 02시 이전이면 어제 날짜로 변환
+            let date = Date(timeIntervalSinceNow: -86400)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        } else { // 02시 이후면 오늘 날짜
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYYMMdd"
+            
+            return formatter.string(from: date)
+        }
+    }()
+    
     static let baseTime: String = {
         let time = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "HH00"
-        
+        // 현재시간이 0~2시면 -> (어제의)2300, 현재시간이 3~11시면 -> 오늘 시간
         switch Int(formatter.string(from: time))! {
         case 0000...0259:
             print("0000...0259")

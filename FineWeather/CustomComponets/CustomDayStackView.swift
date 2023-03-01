@@ -49,7 +49,7 @@ class CustomDayStackView: UIStackView {
             let timeLeg = Int(DateValue.currentTime)! - Int(DateValue.baseTime)!
             print("timeLeg = \(Int(DateValue.currentTime)!) - \(Int(DateValue.baseTime)!)")
             
-            // 시간 차이를 기준으로 인덱스 설정
+            // 시간 차이를 기준으로 인덱스 설정(오늘)
             if timeLeg == 100 {
                 print("timeLeg == 100")
                 index = 0
@@ -59,6 +59,18 @@ class CustomDayStackView: UIStackView {
             } else if timeLeg == 300 {
                 print("timeLeg == 300")
                 index = 24
+                
+            } else { // 시간 차이를 기준으로 인덱스 설정(어제)
+                if timeLeg == -2300 { // 오전 00시
+                    print("timeLeg == -2300")
+                    index = 12
+                } else if timeLeg == -2200 { // 오전 01시
+                    print("timeLeg == -2200")
+                    index = 24
+                } else if timeLeg == -2100 { // 오전 02시
+                    print("timeLeg == -2100")
+                    index = 36
+                }
             }
             
             for i in 0..<24 {
@@ -69,7 +81,7 @@ class CustomDayStackView: UIStackView {
                 
                 // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {
-//                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
+                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
                     tmp = tempTmp
                     guard let tempSky = response.response?.body?.items.item[index+5].fcstValue else {return}
