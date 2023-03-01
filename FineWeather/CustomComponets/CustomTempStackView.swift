@@ -70,6 +70,7 @@ class CustomTempStackView: UIStackView {
             print("최저 온도")
             weatherAPI.minWeather(baseDate: DateValue.minBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 if let minTmp = response.response?.body?.items.item[0].fcstValue {
+                    print("최저온도값: \(minTmp)")
                     self.tempNameLabel.text = tempName + ":"
                     self.tempLabel.text = minTmp + "˚"
                     self.tempNameLabel.font = UIFont(name: "GmarketSansTTFMedium", size: 15)

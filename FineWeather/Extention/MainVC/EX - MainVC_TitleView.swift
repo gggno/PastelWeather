@@ -44,6 +44,7 @@ extension MainViewController {
             return label
         }()
         
+        // 최저, 최고 온도 구현로직
         let titleInmaxTempStackView = CustomTempStackView().tempSetting(tempName: "최고", tempNameColor: .black, lat: self.lat, lon: self.lon)
         let titleInminTempStackView = CustomTempStackView().tempSetting(tempName: "최저", tempNameColor: .black, lat: self.lat, lon: self.lon)
         
@@ -69,6 +70,7 @@ extension MainViewController {
             return stackView
         }()
         
+        // 체감온도 구현 로직
         let titleInBottomStackView = CustomTempStackView().tempSetting(tempName: "체감온도", tempNameColor: .black, lat: self.lat, lon: self.lon)
         
         let greetingLabel: UILabel = {
@@ -172,40 +174,61 @@ extension MainViewController {
             
             if sky == "1" { // 맑음
                 titleInImageView.image = UIImage(systemName: "sun.max.fill")
+                titleInImageView.contentMode = .scaleAspectFit
                 titleInImageView.tintColor = UIColor(named: "SunnyColor")
+                
                 titleInWeatherTextLabel.text = "맑음"
+                
                 self.view.backgroundColor = UIColor(named: "SunnyColor")
             } else if sky == "3" { // 구름 많음
                 titleInImageView.image = UIImage(systemName: "smoke.fill")
+                titleInImageView.contentMode = .scaleAspectFit
                 titleInImageView.tintColor = UIColor(named: "manyCloudColor")
+                
                 titleInWeatherTextLabel.text = "대체로 흐림"
+                
                 self.view.backgroundColor = UIColor(named: "manyCloudColor")
             } else if sky == "4" && pty == "0" { // 흐림
                 titleInImageView.image = UIImage(systemName: "cloud.fill")
+                titleInImageView.contentMode = .scaleAspectFit
                 titleInImageView.tintColor = UIColor(named: "CloudyColor")
+                
                 titleInWeatherTextLabel.text = "흐림"
+                
                 self.view.backgroundColor = UIColor(named: "CloudyColor")
                 
             } else {
                 if pty == "1" { // 비
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
+                    titleInImageView.contentMode = .scaleAspectFit
                     titleInImageView.tintColor = UIColor(named: "RainyColor")
+                    
                     titleInWeatherTextLabel.text = "비"
+                    
                     self.view.backgroundColor = UIColor(named: "RainyColor")
                 } else if pty == "2" { // 비/눈
                     titleInImageView.image = UIImage(systemName: "cloud.hail.fill")
+                    titleInImageView.contentMode = .scaleAspectFit
                     titleInImageView.tintColor = UIColor(named: "RainAndSnowColor")
+                    
                     titleInWeatherTextLabel.text = "눈·비"
+                    
                     self.view.backgroundColor = UIColor(named: "RainAndSnowColor")
                 } else if pty == "3" { // 눈
                     titleInImageView.image = UIImage(systemName: "snowflake")
+                    titleInImageView.contentMode = .scaleAspectFit
                     titleInImageView.tintColor = UIColor(named: "SnowColor")
+                    
                     titleInWeatherTextLabel.text = "눈"
+                    
                     self.view.backgroundColor = UIColor(named: "SnowColor")
                 } else if pty == "4" { // 소나기
                     titleInImageView.image = UIImage(systemName: "cloud.rain.fill")
+                    titleInImageView.contentMode = .scaleAspectFit
                     titleInImageView.tintColor = UIColor(named: "SuddenRainColor")
+                    
                     titleInWeatherTextLabel.text = "소나기"
+                    
                     self.view.backgroundColor = UIColor(named: "SuddenRainColor")
                 }
             }
