@@ -15,7 +15,7 @@ class SearchTableViewCell: UITableViewCell {
     lazy var countryLabel: UILabel = {
         let label = UILabel()
         
-        label.font = label.font.withSize(14)
+        label.font = UIFont(name: "GmarketSansTTFLight", size: 15)
         label.textColor = .lightGray
         
         return label

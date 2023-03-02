@@ -25,10 +25,10 @@ class MainViewController: UIViewController {
     
     var firstViewConfirm: Bool = false // 첫번째뷰(현재 위치)확인 때 사용
 
-    let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
-    let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
-    let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
-    let fineDustInfoUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
+    private let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
+    private let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
+    private let nearCenterUrl = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList"
+    private let fineDustInfoUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
     
     // 하단바 광고
     var bottomBarBannerView: GADBannerView!
@@ -110,14 +110,6 @@ class MainViewController: UIViewController {
             label.textAlignment = .center
             
             return label
-        }()
-        
-        let emptyView4: UIView = {
-            let view = UIView()
-            
-            view.backgroundColor = .gray
-            
-            return view
         }()
         
         let containerView: UIView = {

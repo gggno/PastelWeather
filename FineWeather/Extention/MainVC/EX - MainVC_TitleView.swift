@@ -26,7 +26,7 @@ extension MainViewController {
             
             label.textAlignment = .center
             label.textColor = .black
-            label.font = UIFont(name: "GmarketSansTTFMedium", size: 20)
+            label.font = UIFont(name: "GmarketSansTTFMedium", size: 18)
             label.backgroundColor = .clear
             label.text = "_ _"
             

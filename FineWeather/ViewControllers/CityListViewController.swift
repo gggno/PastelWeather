@@ -27,13 +27,15 @@ class CityListViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.backgroundColor = .clear
+//        tableView.separatorStyle = .none
+        tableView.rowHeight = 70
         
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor(named: "PlusVCColor")
         
         cityListTableView.delegate = self
         cityListTableView.dataSource = self
@@ -64,6 +66,7 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = cityListTableView.dequeueReusableCell(withIdentifier: "AddedCitiesTableViewCell", for: indexPath) as? AddedCitiesTableViewCell else {return UITableViewCell()}
+        cell.selectionStyle = .none
         
         let dbDatas = realm.objects(LocalDB.self)
         
@@ -71,6 +74,8 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    
     
     // 옆으로 슬라이드하여 도시 삭제 함수
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

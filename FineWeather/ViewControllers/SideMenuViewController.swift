@@ -53,7 +53,7 @@ class SideMenuViewController: UIViewController {
             
             return button
         }()
-        self.view.addSubview(standardWHOBtn)
+//        self.view.addSubview(standardWHOBtn)
         
         let settingBtn: UIButton = {
             let button = UIButton()
@@ -66,7 +66,7 @@ class SideMenuViewController: UIViewController {
             
             return button
         }()
-        self.view.addSubview(settingBtn)
+//        self.view.addSubview(settingBtn)
         
         topView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -79,17 +79,17 @@ class SideMenuViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
         }
         
-        standardWHOBtn.snp.makeConstraints { make in
-            make.height.equalTo(citiesListBtn.snp.height)
-            make.top.equalTo(citiesListBtn.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-        }
-        
-        settingBtn.snp.makeConstraints { make in
-            make.height.equalTo(standardWHOBtn.snp.height)
-            make.top.equalTo(standardWHOBtn.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-        }
+//        standardWHOBtn.snp.makeConstraints { make in
+//            make.height.equalTo(citiesListBtn.snp.height)
+//            make.top.equalTo(citiesListBtn.snp.bottom)
+//            make.leading.trailing.equalToSuperview()
+//        }
+//        
+//        settingBtn.snp.makeConstraints { make in
+//            make.height.equalTo(standardWHOBtn.snp.height)
+//            make.top.equalTo(standardWHOBtn.snp.bottom)
+//            make.leading.trailing.equalToSuperview()
+//        }
         
     }
     

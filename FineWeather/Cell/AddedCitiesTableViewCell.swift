@@ -10,10 +10,21 @@ import UIKit
 class AddedCitiesTableViewCell: UITableViewCell {
     static let identifier = "AddedCitiesTableViewCell"
     
+    lazy var cellBgView: UIView = {
+        let view = UIView()
+        
+//        view.layer.cornerRadius = 10
+        view.backgroundColor = .white
+        
+        view.addSubview(cityLabel)
+        
+        return view
+    }()
+    
     lazy var cityLabel: UILabel = {
         let label = UILabel()
         
-        label.textColor = .systemBlue
+        label.textColor = .black
         
         return label
     }()
@@ -37,14 +48,22 @@ class AddedCitiesTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupAutoLayout() {
-        addSubview(cityLabel)
+        addSubview(cellBgView)
         
         cityLabel.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            
+            make.centerY.equalToSuperview()
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(10)
         }
+        
+        cellBgView.snp.makeConstraints { make in
+            make.height.equalTo(80)
+            make.leading.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(0)
+            make.centerY.equalToSuperview()
+        }
+        
     }
 }

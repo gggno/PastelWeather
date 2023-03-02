@@ -62,6 +62,12 @@ class MainPageViewController: UIViewController {
         let naviVC = UINavigationController(rootViewController: mainVC)
         
         AddedCityDatas.shared.vcDatas.append(naviVC)
+        
+        // 추가한 도시의 뷰로 이동
+        if let lastVC = AddedCityDatas.shared.vcDatas.last {
+            pageViewController.setViewControllers([lastVC], direction: .forward, animated: true)
+            
+        }
     }
     
     // 페이지 화면 삭제 함수
@@ -113,5 +119,21 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
             return AddedCityDatas.shared.vcDatas[nextIndex]
         }
     }
+    
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        if completed {
+//            if let currentVC = pageViewController.viewControllers?.last {
+//                let currentIndex = AddedCityDatas.shared.vcDatas.firstIndex(of: currentVC)
+//                if currentIndex == 0 || currentIndex == (AddedCityDatas.shared.vcDatas.count - 1) {
+//                    // 현재 페이지가 첫 페이지이거나 마지막 페이지인 경우, bounce 효과를 비활성화합니다.
+//                    for view in pageViewController.view.subviews {
+//                        if let scrollView = view as? UIScrollView {
+//                            scrollView.bounces = false
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
 }
