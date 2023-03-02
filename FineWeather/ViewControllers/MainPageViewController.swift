@@ -8,27 +8,29 @@
 import UIKit
 import SnapKit
 import RealmSwift
+import CoreLocation
 
 class MainPageViewController: UIViewController {
     
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    var locationManager: CLLocationManager!
     
     let realm = try! Realm()
     
-    lazy var firstVC: UIViewController = {
-        let mainVC = MainViewController()
-        // 첫번째 뷰인 것을 확인하는 용도
-        mainVC.firstViewConfirm = true
-        
-        let vc = UINavigationController(rootViewController: mainVC)
-        
-        return vc
-    }()
+        lazy var firstVC: UIViewController = {
+            let mainVC = MainViewController()
+            // 첫번째 뷰인 것을 확인하는 용도
+            mainVC.firstViewConfirm = true
+            
+            let vc = UINavigationController(rootViewController: mainVC)
+    
+            return vc
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("MainPageViewController viewDidLoad() called")
-        
+        requestGPSPermission()
         // 첫번째뷰(현재위치) 페이지뷰에 추가
         AddedCityDatas.shared.vcDatas.append(firstVC)
         // 로컬 DB에 저장된 도시들 페이지뷰에 추가
@@ -66,7 +68,6 @@ class MainPageViewController: UIViewController {
         // 추가한 도시의 뷰로 이동
         if let lastVC = AddedCityDatas.shared.vcDatas.last {
             pageViewController.setViewControllers([lastVC], direction: .forward, animated: true)
-            
         }
     }
     
@@ -76,12 +77,29 @@ class MainPageViewController: UIViewController {
         if let indexpathRow = notification.object {
             pageViewController.delegate = self
             pageViewController.dataSource = self
-
+            
             AddedCityDatas.shared.vcDatas.remove(at: indexpathRow as! Int)
             
             if let firstVC = AddedCityDatas.shared.vcDatas.first {
                 pageViewController.setViewControllers([firstVC], direction: .forward, animated: true)
             }
+        }
+    }
+    
+    func requestGPSPermission() {
+        switch CLLocationManager.authorizationStatus() {
+        
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("GPS: 권한 있음")
+            
+        case .restricted, .notDetermined:
+            print("GPS: 아직 선택하지 않음")
+            
+        case .denied:
+            print("GPS: 권한 없음")
+            
+        default:
+            print("GPS: Default")
         }
     }
     
@@ -119,21 +137,5 @@ extension MainPageViewController: UIPageViewControllerDelegate, UIPageViewContro
             return AddedCityDatas.shared.vcDatas[nextIndex]
         }
     }
-    
-//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-//        if completed {
-//            if let currentVC = pageViewController.viewControllers?.last {
-//                let currentIndex = AddedCityDatas.shared.vcDatas.firstIndex(of: currentVC)
-//                if currentIndex == 0 || currentIndex == (AddedCityDatas.shared.vcDatas.count - 1) {
-//                    // 현재 페이지가 첫 페이지이거나 마지막 페이지인 경우, bounce 효과를 비활성화합니다.
-//                    for view in pageViewController.view.subviews {
-//                        if let scrollView = view as? UIScrollView {
-//                            scrollView.bounces = false
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
     
 }

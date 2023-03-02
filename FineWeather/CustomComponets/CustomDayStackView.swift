@@ -81,7 +81,7 @@ class CustomDayStackView: UIStackView {
                 
                 // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {
-                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
+//                    print("i = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
 //                    print("i = \(response.response?.body?.items.item[index+5])")
 //                    print("i = \(response.response?.body?.items.item[index+6])")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
@@ -124,7 +124,7 @@ class CustomDayStackView: UIStackView {
                     
                 } else {
                     index += 1
-                    print("i+1 = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
+//                    print("i+1 = response.response?.body?.items.item[\(index)](\(i+1))\nvalue = \(response.response?.body?.items.item[index])\n")
 //                    print("i+1 = \(response.response?.body?.items.item[index+5])")
 //                    print("i+1 = \(response.response?.body?.items.item[index+6])")
                     guard let tempTmp = response.response?.body?.items.item[index].fcstValue else {return}
