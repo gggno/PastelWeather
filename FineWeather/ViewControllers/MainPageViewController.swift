@@ -17,24 +17,35 @@ class MainPageViewController: UIViewController {
     
     let realm = try! Realm()
     
-        lazy var firstVC: UIViewController = {
-            let mainVC = MainViewController()
-            // 첫번째 뷰인 것을 확인하는 용도
-            mainVC.firstViewConfirm = true
-            
-            let vc = UINavigationController(rootViewController: mainVC)
+    lazy var currentLocationVC: UIViewController = {
+        let mainVC = MainViewController()
+        // 첫번째 뷰인 것을 확인하는 용도
+        mainVC.firstViewConfirm = true
+        
+        let vc = UINavigationController(rootViewController: mainVC)
+        
+        return vc
+    }()
     
-            return vc
-        }()
+    lazy var gpsNotDeterminedVC: UIViewController = {
+        let mainVC = MainViewController()
+        // gps가 확인되지 않을 때를 확인하는 용도
+        mainVC.gpsNotDeterminedComfirm = true
+        
+        let vc = UINavigationController(rootViewController: mainVC)
+        
+        return vc
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("MainPageViewController viewDidLoad() called")
         requestGPSPermission()
-        // 첫번째뷰(현재위치) 페이지뷰에 추가
-        AddedCityDatas.shared.vcDatas.append(firstVC)
-        // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-        dbVCAppend(viewcontrollers: dbVCSetting())
+        
+//        AddedCityDatas.shared.vcDatas.append(currentLocationVC)
+//        // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+//        dbVCAppend(viewcontrollers: dbVCSetting())
         
         initPageViewController()
         
@@ -88,18 +99,25 @@ class MainPageViewController: UIViewController {
     
     func requestGPSPermission() {
         switch CLLocationManager.authorizationStatus() {
-        
         case .authorizedAlways, .authorizedWhenInUse:
             print("GPS: 권한 있음")
-            
+            // 첫번째뷰(현재위치) 페이지뷰에 추가
+            AddedCityDatas.shared.vcDatas.append(currentLocationVC)
+            // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+            dbVCAppend(viewcontrollers: currentVCIndbVCSetting())
         case .restricted, .notDetermined:
             print("GPS: 아직 선택하지 않음")
-            
+            // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+            AddedCityDatas.shared.vcDatas.append(gpsNotDeterminedVC)
+            dbVCAppend(viewcontrollers: currentVCNotIndbVCSetting())
         case .denied:
             print("GPS: 권한 없음")
-            
+            // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+            dbVCAppend(viewcontrollers: currentVCNotIndbVCSetting())
         default:
             print("GPS: Default")
+            // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+            dbVCAppend(viewcontrollers: currentVCIndbVCSetting())
         }
     }
     

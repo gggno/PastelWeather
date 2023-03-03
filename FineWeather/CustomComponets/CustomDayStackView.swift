@@ -77,7 +77,7 @@ class CustomDayStackView: UIStackView {
                 var tmp = ""
                 var sky = ""
                 var pty = ""
-                var weatherImageView = UIImageView()
+                let weatherImageView = UIImageView()
                 
                 // TMN, TMX면 인덱스를 +1
                 if response.response?.body?.items.item[index].category == "TMP" {

@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
     var doubleLon = 0.0 // 미세먼지 조회 때 사용
     
     var firstViewConfirm: Bool = false // 첫번째뷰(현재 위치)확인 때 사용
+    var gpsNotDeterminedComfirm: Bool = false // GPS가 확인되지 않을 때 사용
 
     private let naverUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
     private let kakaoUrl = "https://dapi.kakao.com/v2/local/geo/transcoord.json"
@@ -49,6 +50,11 @@ class MainViewController: UIViewController {
         // 첫번째 뷰 현재위치를 기반으로 세팅
         if firstViewConfirm == true {
             firstVCLocationSetting()
+        }
+        
+        // gps가 확인되지 않을 때 뷰 세팅
+        if gpsNotDeterminedComfirm == true {
+            gpsNotDeterminedVCSetting()
         }
         
         // MARK: - 메인화면 내비게이션 요소 설정
@@ -215,6 +221,11 @@ class MainViewController: UIViewController {
                 dbDatas[0].doubleLon = doubleLon
             }
         }
+    }
+    
+    func gpsNotDeterminedVCSetting() {
+        print("MainViewController - gpsNotDeterminedVCSetting() called")
+
     }
     
     func loadBannerAd() {
