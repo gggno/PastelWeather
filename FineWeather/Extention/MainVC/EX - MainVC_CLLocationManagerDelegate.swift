@@ -110,6 +110,7 @@ extension MainViewController: CLLocationManagerDelegate {
     
     // 타이틀에 현재 위치 나타내기
     func convertCurrentAddress(from coordinate:CLLocation) {
+        print("STATE")
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(coordinate) { (placemarks, error) in
             if let someError = error {
@@ -122,17 +123,16 @@ extension MainViewController: CLLocationManagerDelegate {
             let subState = placemark.subAdministrativeArea ?? ""
             let city = placemark.locality ?? ""
             
-            let dbDatas = self.realm.objects(LocalDB.self)
-            
+            guard let dbData = self.realm.objects(LocalDB.self).filter("currentVCConfirm == true").first else {return}
+            print("currentVCConfirm == true dbData(cityData를 위한): \(dbData)")
             if subState == "" {
                 if state == city {
                     // 현재위치 도시이름 출력
-                    
                     self.title = state
                     
                     // 로컬 DB에 현재위치 도시이름 저장
                     try! self.realm.write{
-                        dbDatas[0].cityName = state
+                        dbData.cityName = state
                     }
                 } else {
                     // 현재위치 도시이름 출력
@@ -140,7 +140,7 @@ extension MainViewController: CLLocationManagerDelegate {
                     
                     // 로컬 DB에 현재위치 도시이름 저장
                     try! self.realm.write{
-                        dbDatas[0].cityName = "\(state) \(city)"
+                        dbData.cityName = "\(state) \(city)"
                     }
                 }
             } else {
@@ -149,7 +149,7 @@ extension MainViewController: CLLocationManagerDelegate {
                 
                 // 로컬 DB에 현재위치 도시이름 저장
                 try! self.realm.write{
-                    dbDatas[0].cityName = "\(state) \(subState)"
+                    dbData.cityName = "\(state) \(subState)"
                 }
             }
         }

@@ -202,19 +202,19 @@ class MainViewController: UIViewController {
         print("int lat: \(lat), int lon: \(lon)")
         
         let dbDatas = realm.objects(LocalDB.self)
-        let localDB = LocalDB()
-        var changeLocalDB = LocalDB()
+        let currentDB = LocalDB()
+        print("STATE2")
         
-        localDB.lat = lat
-        localDB.lon = lon
-        localDB.doubleLat = doubleLat
-        localDB.doubleLon = doubleLon
-        localDB.currentVCConfirm = true
+        currentDB.lat = lat
+        currentDB.lon = lon
+        currentDB.doubleLat = doubleLat
+        currentDB.doubleLon = doubleLon
+        currentDB.currentVCConfirm = true
         
         if dbDatas.isEmpty { // DB에 값이 아무것도 없을때
             print("first type 0")
             try! realm.write{
-                realm.add(localDB)
+                realm.add(currentDB)
                 print(dbDatas)
                 print("로컬 DB 데이터 추가")
             }
@@ -227,12 +227,15 @@ class MainViewController: UIViewController {
                     dbDatas[0].lon = lon
                     dbDatas[0].doubleLat = doubleLat
                     dbDatas[0].doubleLon = doubleLon
+                    // city는 주소 찾는 함수에서 함
                     print(dbDatas)
                     
                 } else { // 첫번째에 현재위치 데이터가 없어서 첫번째로 변경
                     print("first type 2")
                     print("dbCount: \(dbDatas.count)")
-                    if dbDatas.count > 0 { // 로컬 DB 데이터가 1개 이상일떄
+                    
+                    // 순서: 마지막 행 데이터 저장 -> 저장된 데이터 행 하나씩 움직임 -> 첫번째 데이터 업데이트 -> 마지막 행 add
+                    if dbDatas.count > 1 { // 로컬 DB 데이터가 2개 이상일떄
                         let lastData = LocalDB()
                         
                         lastData.lat = dbDatas[dbDatas.count-1].lat
@@ -262,7 +265,30 @@ class MainViewController: UIViewController {
                         realm.add(lastData)
                         print("lastData: \(lastData)")
                         print("final DbDatas: \(dbDatas)")
+                    } else { // 로컬 DB 데이터가 1개일때
+                        print("로컬 DB 데이터가 1개일떄")
+                        let lastDB = LocalDB()
+                        
+                        // 로컬 DB에 저장되어 있는 데이터를 lastDB변수에 저장
+                        lastDB.lat = dbDatas[0].lat
+                        lastDB.lon = dbDatas[0].lon
+                        lastDB.doubleLat = dbDatas[0].doubleLat
+                        lastDB.doubleLon = dbDatas[0].doubleLon
+                        lastDB.cityName = dbDatas[0].cityName
+                        
+                        // 현재위치 데이터를 첫번째 행으로 저장
+                        dbDatas[0].lat = currentDB.lat
+                        dbDatas[0].lon = currentDB.lon
+                        dbDatas[0].doubleLat = currentDB.doubleLat
+                        dbDatas[0].doubleLon = currentDB.doubleLon
+                        dbDatas[0].cityName = currentDB.cityName
+                        dbDatas[0].currentVCConfirm = true
+                        
+                        // 두번째 행에 lastDB add
+                        realm.add(lastDB)
+                        print(dbDatas)
                     }
+                       
                 }
             }
         }
