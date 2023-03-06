@@ -18,6 +18,7 @@ class MainPageViewController: UIViewController {
     let realm = try! Realm()
     
     lazy var currentLocationVC: UIViewController = {
+        
         let mainVC = MainViewController()
         // 첫번째 뷰인 것을 확인하는 용도
         mainVC.firstViewConfirm = true
@@ -43,10 +44,6 @@ class MainPageViewController: UIViewController {
         print("MainPageViewController viewDidLoad() called")
         requestGPSPermission()
         
-//        AddedCityDatas.shared.vcDatas.append(currentLocationVC)
-//        // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-//        dbVCAppend(viewcontrollers: dbVCSetting())
-        
         initPageViewController()
         
         NotificationCenter.default.addObserver(self, selector: #selector(deliveredVC(_:)), name: NSNotification.Name("sendVC"), object: nil)
@@ -55,6 +52,7 @@ class MainPageViewController: UIViewController {
     
     // 페이지뷰 설정
     func initPageViewController() {
+        print("MainPageViewController - initPageViewController() called")
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
@@ -97,27 +95,65 @@ class MainPageViewController: UIViewController {
         }
     }
     
+    // GPS 권한에 따른 처리
     func requestGPSPermission() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedAlways, .authorizedWhenInUse:
             print("GPS: 권한 있음")
-            // 첫번째뷰(현재위치) 페이지뷰에 추가
+            // 첫번째뷰(현재위치) 먼저 페이지뷰에 추가
             AddedCityDatas.shared.vcDatas.append(currentLocationVC)
+            
             // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-            dbVCAppend(viewcontrollers: currentVCIndbVCSetting())
+            dbVCAppend(viewcontrollers: dbVCSetting())
+            
         case .restricted, .notDetermined:
             print("GPS: 아직 선택하지 않음")
             // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-            AddedCityDatas.shared.vcDatas.append(gpsNotDeterminedVC)
-            dbVCAppend(viewcontrollers: currentVCNotIndbVCSetting())
+            let dbDatas = realm.objects(LocalDB.self)
+            
+            if !dbDatas.isEmpty && dbDatas[0].currentVCConfirm == true { // 권한을 허용한 후 다시 권한을 해제하면 현재 위치의 데이터 삭제
+                print("GPS: 아직 선택하지 않음 현재 위치 데이터 삭제")
+                try! realm.write({
+                    print("GPS: 아직 선택하지 않음 현재 위치 로컬 DB 데이터 삭제")
+                    realm.delete(dbDatas[0])
+                })
+            }
+            // 로컬 DB에 저장된 도시들 페이지뷰에 추가
+            if dbDatas.isEmpty { // 로컬 DB에 데이터가 없으면 gpsNotDeterminedVC 추가
+                pageViewController.delegate = self
+                pageViewController.dataSource = self
+                
+                pageViewController.setViewControllers([gpsNotDeterminedVC], direction: .forward, animated: true)
+                
+            } else {
+                dbVCAppend(viewcontrollers: dbVCSetting())
+            }
         case .denied:
             print("GPS: 권한 없음")
             // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-            dbVCAppend(viewcontrollers: currentVCNotIndbVCSetting())
+            let dbDatas = realm.objects(LocalDB.self)
+            
+            if !dbDatas.isEmpty && dbDatas[0].currentVCConfirm == true { // 권한을 허용한 후 다시 권한을 해제하면 현재 위치의 데이터 삭제
+                try! realm.write({
+                    print("GPS: 권한 없음 로컬 DB 첫번째 데이터 삭제")
+                    realm.delete(dbDatas[0])
+                })
+            }
+            
+            if dbDatas.isEmpty { // 로컬 DB에 데이터가 없으면 gpsNotDeterminedVC 추가
+                print("GPS: 권한 없음 isEmpty")
+                pageViewController.delegate = self
+                pageViewController.dataSource = self
+                
+                pageViewController.setViewControllers([gpsNotDeterminedVC], direction: .forward, animated: true)
+                
+            } else { // 로컬 DB에 데이터가 있으면 불러오기
+                dbVCAppend(viewcontrollers: dbVCSetting())
+            }
         default:
             print("GPS: Default")
             // 로컬 DB에 저장된 도시들 페이지뷰에 추가
-            dbVCAppend(viewcontrollers: currentVCIndbVCSetting())
+            dbVCAppend(viewcontrollers: dbVCSetting())
         }
     }
     

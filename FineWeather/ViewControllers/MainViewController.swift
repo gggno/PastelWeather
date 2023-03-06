@@ -203,22 +203,67 @@ class MainViewController: UIViewController {
         
         let dbDatas = realm.objects(LocalDB.self)
         let localDB = LocalDB()
+        var changeLocalDB = LocalDB()
         
         localDB.lat = lat
         localDB.lon = lon
         localDB.doubleLat = doubleLat
         localDB.doubleLon = doubleLon
+        localDB.currentVCConfirm = true
         
-        if dbDatas.isEmpty { // 최초 앱을 켰을 때
+        if dbDatas.isEmpty { // DB에 값이 아무것도 없을때
+            print("first type 0")
             try! realm.write{
                 realm.add(localDB)
+                print(dbDatas)
+                print("로컬 DB 데이터 추가")
             }
         } else {
             try! realm.write{ // 그 이후 현재 위치의 저장값 변경
-                dbDatas[0].lat = lat
-                dbDatas[0].lon = lon
-                dbDatas[0].doubleLat = doubleLat
-                dbDatas[0].doubleLon = doubleLon
+                if dbDatas[0].currentVCConfirm == true { // 저장된 값이 현재위치의 데이터라면 단순히 저장값 변경
+                    print("first type 1")
+                    print(dbDatas)
+                    dbDatas[0].lat = lat
+                    dbDatas[0].lon = lon
+                    dbDatas[0].doubleLat = doubleLat
+                    dbDatas[0].doubleLon = doubleLon
+                    print(dbDatas)
+                    
+                } else { // 첫번째에 현재위치 데이터가 없어서 첫번째로 변경
+                    print("first type 2")
+                    print("dbCount: \(dbDatas.count)")
+                    if dbDatas.count > 0 { // 로컬 DB 데이터가 1개 이상일떄
+                        let lastData = LocalDB()
+                        
+                        lastData.lat = dbDatas[dbDatas.count-1].lat
+                        lastData.lon = dbDatas[dbDatas.count-1].lon
+                        lastData.doubleLat = dbDatas[dbDatas.count-1].doubleLat
+                        lastData.doubleLon = dbDatas[dbDatas.count-1].doubleLon
+                        lastData.cityName = dbDatas[dbDatas.count-1].cityName
+                        
+                        for index in (1...dbDatas.count-1).reversed() {
+                            print("로컬 DB 데이터가 1개 이상일때 \(index)")
+                            
+                            dbDatas[index].lat = dbDatas[index-1].lat
+                            dbDatas[index].lon = dbDatas[index-1].lon
+                            dbDatas[index].doubleLat = dbDatas[index-1].doubleLat
+                            dbDatas[index].doubleLon = dbDatas[index-1].doubleLon
+                            dbDatas[index].cityName = dbDatas[index-1].cityName
+
+                            print("for DbDatas: \(dbDatas)")
+                        }
+                        
+                        dbDatas[0].lat = lat
+                        dbDatas[0].lon = lon
+                        dbDatas[0].doubleLat = doubleLat
+                        dbDatas[0].doubleLon = doubleLon
+                        dbDatas[0].currentVCConfirm = true
+                        
+                        realm.add(lastData)
+                        print("lastData: \(lastData)")
+                        print("final DbDatas: \(dbDatas)")
+                    }
+                }
             }
         }
     }

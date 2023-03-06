@@ -27,7 +27,7 @@ class CityListViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.backgroundColor = .clear
-//        tableView.separatorStyle = .none
+        //        tableView.separatorStyle = .none
         tableView.rowHeight = 70
         
         return tableView
@@ -75,31 +75,29 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
-    
     // 옆으로 슬라이드하여 도시 삭제 함수
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let dbDatas = realm.objects(LocalDB.self)
             
-            // 첫번째 뷰(현재위치는 삭제 안되게)
-            if indexPath.row != 0 {
-                
-                // 로컬 DB에서 삭제
-                let dbDatas = realm.objects(LocalDB.self)
-                try! realm.write{
-                    realm.delete(dbDatas[indexPath.row])
-                }
-                
-                cityListTableView.deleteRows(at: [indexPath], with: .fade)
-
-                NotificationCenter.default.post(name: NSNotification.Name("deleteVC"), object: indexPath.row)
-            } else {
+            // 현재위치는 삭제 안되게
+            if dbDatas[0].currentVCConfirm == true && indexPath.row == 0 { // 첫번째 row가 현재위치면 삭제불가
                 let alert = UIAlertController(title: "현재 위치", message: "현재 위치는 삭제할 수 없습니다", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(okAction)
                 present(alert, animated: true)
+            } else {
+                
+                try! realm.write{
+                    realm.delete(dbDatas[indexPath.row])
+                    print("로컬 DB 데이터 삭제")
+                }
+                
+                cityListTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                NotificationCenter.default.post(name: NSNotification.Name("deleteVC"), object: indexPath.row)
             }
         }
     }
-
+    
 }

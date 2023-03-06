@@ -16,4 +16,6 @@ class LocalDB: Object {
     @objc dynamic var doubleLon: Double = 0.0
 
     @objc dynamic var cityName: String = ""
+    
+    @objc dynamic var currentVCConfirm: Bool = false
 }

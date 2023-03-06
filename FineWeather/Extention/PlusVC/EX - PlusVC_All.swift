@@ -67,6 +67,7 @@ extension PlusViewController: UITableViewDelegate {
             self.localDB.doubleLon = xy["lon"] ?? 126
             
             try! self.realm.write {
+                print("로컬 DB에 도시추가")
                 self.realm.add(self.localDB)
             }
             
