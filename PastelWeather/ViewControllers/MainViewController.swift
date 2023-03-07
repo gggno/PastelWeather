@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemYellow
+        self.view.backgroundColor = .darkGray
         
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)

@@ -27,7 +27,7 @@ class CityListViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.backgroundColor = .clear
-        //        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.rowHeight = 70
         
         return tableView

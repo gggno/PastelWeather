@@ -47,6 +47,7 @@
 		66CADB3F298BDB5C000A29A5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB3E298BDB5C000A29A5 /* UserLocation.swift */; };
 		66CC510E295ABDBE00C47EEC /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */; };
 		66E32A6729B72623003BC5F1 /* NoGPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E32A6629B72623003BC5F1 /* NoGPSViewController.swift */; };
+		66E32A6A29B7664A003BC5F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66E32A6C29B7664A003BC5F1 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,8 @@
 		66CADB3E298BDB5C000A29A5 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		66E32A6629B72623003BC5F1 /* NoGPSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGPSViewController.swift; sourceTree = "<group>"; };
+		66E32A6B29B7664A003BC5F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66E32A6D29B766B0003BC5F1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.debug.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +196,7 @@
 				66AE8F8729AC8C75006397A4 /* Font */,
 				6677E51A294A10E70045D348 /* LaunchScreen.storyboard */,
 				6677E51D294A10E70045D348 /* Info.plist */,
+				66E32A6C29B7664A003BC5F1 /* InfoPlist.strings */,
 			);
 			path = PastelWeather;
 			sourceTree = "<group>";
@@ -311,6 +315,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 6677E503294A10E60045D348;
 			productRefGroup = 6677E50D294A10E60045D348 /* Products */;
@@ -328,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66AE8F8629AC8439006397A4 /* Jalnan.ttf in Resources */,
+				66E32A6A29B7664A003BC5F1 /* InfoPlist.strings in Resources */,
 				66AE8F8B29AC8C8D006397A4 /* GmarketSansTTFLight.ttf in Resources */,
 				6677E51C294A10E70045D348 /* LaunchScreen.storyboard in Resources */,
 				6677E519294A10E70045D348 /* Assets.xcassets in Resources */,
@@ -431,6 +437,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		66E32A6C29B7664A003BC5F1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66E32A6B29B7664A003BC5F1 /* en */,
+				66E32A6D29B766B0003BC5F1 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -438,6 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -498,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
