@@ -1,6 +1,6 @@
 //
 //  SideMenuViewController.swift
-//  FineWeather
+//  PastelWeather
 //
 //  Created by 정근호 on 2022/12/19.
 //
@@ -20,10 +20,30 @@ class SideMenuViewController: UIViewController {
     
     func sideVCLayoutSetting() {
         
+        let iconImageView: UIImageView = {
+            let imageView = UIImageView()
+            
+            imageView.image = UIImage(named: "SideMenuAppIconImage")
+            
+            return imageView
+        }()
+        
+        let versionLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = "ver.1.0"
+            label.font = UIFont(name: "GmarketSansTTFLight", size: 12)
+            
+            return label
+        }()
+        
         let topView: UIView = {
             let view = UIView()
             
-            view.backgroundColor = .systemBlue
+            view.backgroundColor = .white
+            
+            view.addSubview(iconImageView)
+            view.addSubview(versionLabel)
             
             return view
         }()
@@ -33,6 +53,10 @@ class SideMenuViewController: UIViewController {
             let button = UIButton()
             
             button.backgroundColor = UIColor.white
+            
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor.black.cgColor
+            
             button.setTitleColor(.darkGray, for: .normal)
             button.setTitle("관심지역 목록/삭제", for: .normal)
             
@@ -67,6 +91,16 @@ class SideMenuViewController: UIViewController {
             return button
         }()
 //        self.view.addSubview(settingBtn)
+        
+        iconImageView.snp.makeConstraints { make in
+            make.size.equalTo(130)
+            make.center.equalToSuperview()
+        }
+        
+        versionLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(iconImageView.snp.centerX)
+            make.top.equalTo(iconImageView.snp.bottom)
+        }
         
         topView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

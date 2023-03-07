@@ -1,6 +1,6 @@
 //
 //  MainPageViewController.swift
-//  FineWeather
+//  PastelWeather
 //
 //  Created by 정근호 on 2023/02/11.
 //
@@ -29,9 +29,8 @@ class MainPageViewController: UIViewController {
     }()
     
     lazy var gpsNotDeterminedVC: UIViewController = {
-        let mainVC = MainViewController()
+        let mainVC = NoGPSViewController()
         // gps가 확인되지 않을 때를 확인하는 용도
-        mainVC.gpsNotDeterminedComfirm = true
         
         let vc = UINavigationController(rootViewController: mainVC)
         

@@ -329,7 +329,7 @@ class CustomDayStackView: UIStackView {
         stackView.distribution = .equalSpacing
         
         timeLabel.text = "정보 없음"
-        ImageView.image = UIImage(systemName: "sun.max.fill")
+//        ImageView.image = UIImage(systemName: "sun.max.fill")
         tmpLabel.text = "_ _"
         
         return stackView

@@ -46,6 +46,7 @@
 		66CADB3B298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */; };
 		66CADB3F298BDB5C000A29A5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CADB3E298BDB5C000A29A5 /* UserLocation.swift */; };
 		66CC510E295ABDBE00C47EEC /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */; };
+		66E32A6729B72623003BC5F1 /* NoGPSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E32A6629B72623003BC5F1 /* NoGPSViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		66CADB3A298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EX - MainVC_FineDustView.swift"; sourceTree = "<group>"; };
 		66CADB3E298BDB5C000A29A5 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		66CC510D295ABDBE00C47EEC /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		66E32A6629B72623003BC5F1 /* NoGPSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoGPSViewController.swift; sourceTree = "<group>"; };
 		E6B5F661445DEE313A0EF482 /* Pods-FineWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FineWeather.debug.xcconfig"; path = "Target Support Files/Pods-FineWeather/Pods-FineWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 				667D50322950A42D002453AA /* SideMenuViewController.swift */,
 				667D50302950A3C3002453AA /* SideMenuNavigation.swift */,
 				660B9ED229A3C601008A7640 /* CityListViewController.swift */,
+				66E32A6629B72623003BC5F1 /* NoGPSViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				667C9EA52997E1CB0035A085 /* MainPageViewController.swift in Sources */,
 				66CC510E295ABDBE00C47EEC /* WeatherAPI.swift in Sources */,
 				66CADB39298A89EF000A29A5 /* FineDustAPI.swift in Sources */,
+				66E32A6729B72623003BC5F1 /* NoGPSViewController.swift in Sources */,
 				66CADB3B298A8EEB000A29A5 /* EX - MainVC_FineDustView.swift in Sources */,
 				66CADB2B2987F133000A29A5 /* EX - MainVC_GADBannerViewDelegate.swift in Sources */,
 				667C9E9A2993E9150035A085 /* EX - PlusVC_All.swift in Sources */,

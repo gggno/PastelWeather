@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  FineWeather
+//  PastelWeather
 //
 //  Created by 정근호 on 2022/12/15.
 //
@@ -50,11 +50,6 @@ class MainViewController: UIViewController {
         // 첫번째 뷰 현재위치를 기반으로 세팅
         if firstViewConfirm == true {
             firstVCLocationSetting()
-        }
-        
-        // gps가 확인되지 않을 때 뷰 세팅
-        if gpsNotDeterminedComfirm == true {
-            gpsNotDeterminedVCSetting()
         }
         
         // MARK: - 메인화면 내비게이션 요소 설정

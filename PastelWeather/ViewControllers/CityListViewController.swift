@@ -1,6 +1,6 @@
 //
 //  CityListViewController.swift
-//  FineWeather
+//  PastelWeather
 //
 //  Created by 정근호 on 2023/02/21.
 //
