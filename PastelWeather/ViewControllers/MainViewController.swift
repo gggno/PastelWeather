@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
         
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
-        bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153~6014321966"
         bottomBarBannerView.rootViewController = self
         
         locationManager.delegate = self
@@ -347,7 +347,7 @@ class MainViewController: UIViewController {
     
 }
 
-#if DEBUG
+/*#if DEBUG
 import SwiftUI
 
 struct MainViewControllerPresentable: UIViewControllerRepresentable {
@@ -368,3 +368,4 @@ struct MainViewControllerPresentable_PreviewProvider: PreviewProvider {
     }
 }
 #endif
+*/

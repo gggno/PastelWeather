@@ -121,7 +121,7 @@ class CustomView: UIView {
     }
 }
 
-#if DEBUG
+/*#if DEBUG
 
 import SwiftUI
 
@@ -134,3 +134,4 @@ struct CustomView_Previews: PreviewProvider {
 }
 
 #endif
+*/
