@@ -7,38 +7,57 @@
 
 import UIKit
 import SnapKit
+import CoreLocation
 
-class NoGPSViewController: UIViewController {
+class NoGPSViewController: UIViewController, CLLocationManagerDelegate {
     
-    override func viewDidAppear(_ animated: Bool) {
-        let alertController = UIAlertController (title: "위치정보 접근", message: "현재 위치에 접근할 수 있도록 설정에서 위치 정보 접근을 허용해주세요. 😁", preferredStyle: .alert)
-
-        let settingsAction = UIAlertAction(title: "설정", style: .default) { (_) -> Void in
-
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("Settings opened: \(success)") // Prints true
-                })
-            }
-        }
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        let alertController = UIAlertController (title: "위치정보 접근", message: "현재 위치에 접근할 수 있도록 설정에서 위치 정보 접근을 허용해주세요. 😁", preferredStyle: .alert)
+//
+//        let settingsAction = UIAlertAction(title: "설정", style: .default) { (_) -> Void in
+//
+//            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+//                return
+//            }
+//
+//            if UIApplication.shared.canOpenURL(settingsUrl) {
+//                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+//                    print("Settings opened: \(success)") // Prints true
+//                })
+//            }
+//        }
+//        alertController.addAction(settingsAction)
+//        let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+//        alertController.addAction(cancelAction)
+//
+//        present(alertController, animated: true, completion: nil)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .darkGray
         
+        let locationManager = CLLocationManager()
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
         navigationItemSetting()
         noGPSVCLayoutSetting()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let lat = location.coordinate.latitude // 위도
+            let lon = location.coordinate.longitude // 경도
+            print("위도: \(lat), 경도: \(lon)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("NoGPSViewController - locationManagerError: \(error)")
     }
     
     // 레이아웃 세팅
@@ -65,7 +84,7 @@ class NoGPSViewController: UIViewController {
             
             label.numberOfLines = 0
             label.textColor = .white
-            label.text = "현재 위치 날씨를 표시할 수 없습니다.\n내 기기 위치에 접근할 수 있도록 설정에서 위치 정보 접근을 허용해주세요. 😢"
+            label.text = "현재 위치 날씨를 표시할 수 없습니다.\n내 기기 위치에 접근할 수 있도록 설정에서 위치 정보 접근을 허용해주세요. 😢\n만약 위치 정보 접근을 허용했다면 앱 재부팅시 이용가능합니다."
             label.font = UIFont(name: "GmarketSansTTFLight", size: 15)
             
             return label
