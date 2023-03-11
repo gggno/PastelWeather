@@ -40,7 +40,8 @@ class MainViewController: UIViewController {
         
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
-        bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153~6014321966"
+        // 샘플 코드 bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153~6014321966"
+        bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153/4765384126"
         bottomBarBannerView.rootViewController = self
         
         locationManager.delegate = self

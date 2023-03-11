@@ -79,7 +79,7 @@ class NoGPSViewController: UIViewController, CLLocationManagerDelegate {
             make.leading.equalToSuperview().offset(20)
         }
         
-        let guideInfo: UILabel = {
+        let guideInfoLabel: UILabel = {
             let label = UILabel()
             
             label.numberOfLines = 0
@@ -89,11 +89,12 @@ class NoGPSViewController: UIViewController, CLLocationManagerDelegate {
             
             return label
         }()
-        self.view.addSubview(guideInfo)
+        self.view.addSubview(guideInfoLabel)
         
-        guideInfo.snp.makeConstraints { make in
+        guideInfoLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(40)
-            make.leading.trailing.equalTo(20)
+            make.leading.equalTo(20)
+            make.trailing.equalTo(-20)
         }
         
         let questionMark: UILabel = {
@@ -109,7 +110,7 @@ class NoGPSViewController: UIViewController, CLLocationManagerDelegate {
         
         questionMark.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(guideInfo.snp.bottom).offset(50)
+            make.top.equalTo(guideInfoLabel.snp.bottom).offset(50)
         }
         
     }
