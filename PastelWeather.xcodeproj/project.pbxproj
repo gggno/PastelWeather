@@ -11,6 +11,9 @@
 		660B9ECF29A34C5C008A7640 /* AddedCitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B9ECE29A34C5C008A7640 /* AddedCitiesTableViewCell.swift */; };
 		660B9ED129A34CF5008A7640 /* AddedCityDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B9ED029A34CF5008A7640 /* AddedCityDatas.swift */; };
 		660B9ED329A3C601008A7640 /* CityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B9ED229A3C601008A7640 /* CityListViewController.swift */; };
+		664D785F29C85C52006CA5DA /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 664D785E29C85C52006CA5DA /* RxCocoa */; };
+		664D786129C85C52006CA5DA /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 664D786029C85C52006CA5DA /* RxRelay */; };
+		664D786329C85C52006CA5DA /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 664D786229C85C52006CA5DA /* RxSwift */; };
 		66524D7D295485B700263F00 /* CustomTempStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66524D7C295485B700263F00 /* CustomTempStackView.swift */; };
 		6657B50B29559157007D9E71 /* EX - MainVC_TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6657B50A29559157007D9E71 /* EX - MainVC_TitleView.swift */; };
 		6657B50D2955D0B1007D9E71 /* CustomDayStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6657B50C2955D0B1007D9E71 /* CustomDayStackView.swift */; };
@@ -106,7 +109,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				664D785F29C85C52006CA5DA /* RxCocoa in Frameworks */,
 				6673D6C929B0CA470026DC6D /* AppTrackingTransparency.framework in Frameworks */,
+				664D786329C85C52006CA5DA /* RxSwift in Frameworks */,
+				664D786129C85C52006CA5DA /* RxRelay in Frameworks */,
 				5620B393CD47F8533B877EAC /* Pods_PastelWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +295,11 @@
 			dependencies = (
 			);
 			name = PastelWeather;
+			packageProductDependencies = (
+				664D785E29C85C52006CA5DA /* RxCocoa */,
+				664D786029C85C52006CA5DA /* RxRelay */,
+				664D786229C85C52006CA5DA /* RxSwift */,
+			);
 			productName = FineWeather;
 			productReference = 6677E50C294A10E60045D348 /* PastelWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -318,6 +329,9 @@
 				ko,
 			);
 			mainGroup = 6677E503294A10E60045D348;
+			packageReferences = (
+				664D785D29C85C52006CA5DA /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 6677E50D294A10E60045D348 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -587,7 +601,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.geunho.PastelWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -621,7 +635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.geunho.PastelWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -655,6 +669,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		664D785D29C85C52006CA5DA /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		664D785E29C85C52006CA5DA /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 664D785D29C85C52006CA5DA /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		664D786029C85C52006CA5DA /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 664D785D29C85C52006CA5DA /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		664D786229C85C52006CA5DA /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 664D785D29C85C52006CA5DA /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6677E504294A10E60045D348 /* Project object */;
 }
