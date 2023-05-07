@@ -14,7 +14,7 @@
 - 원하지 않는 지역 삭제 기능
 ~~~
 
-### App Store Link: [🍎](https://apps.apple.com/kr/app/%ED%8C%8C%EC%8A%A4%ED%85%94%EB%82%A0%EC%94%A8/id6446118215)
+### App Store Link: [파스텔날씨](https://apps.apple.com/kr/app/%ED%8C%8C%EC%8A%A4%ED%85%94%EB%82%A0%EC%94%A8/id6446118215)
 
 ## 목차
 - [📸 스크린샷](#-스크린샷)
