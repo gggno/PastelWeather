@@ -23,7 +23,7 @@
 <br>
 
 ## 📸 스크린샷
-<img width="80%" src="https://user-images.githubusercontent.com/96887941/236639263-bfa5ce7b-2d14-4df5-a0f8-a76a93e1991c.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/96887941/236639263-bfa5ce7b-2d14-4df5-a0f8-a76a93e1991c.png"/>
 <br>
 
 ## 📱 프로젝트 시연 영상
