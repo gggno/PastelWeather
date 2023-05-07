@@ -1,10 +1,3 @@
-//
-//  MainViewController.swift
-//  PastelWeather
-//
-//  Created by 정근호 on 2022/12/15.
-//
-
 import UIKit
 import SnapKit
 import Alamofire
