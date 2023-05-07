@@ -11,13 +11,16 @@ import Alamofire
 import CoreLocation
 import GoogleMobileAds
 import RealmSwift
+import RxSwift
+import RxCocoa
+import RxRelay
 
 class MainViewController: UIViewController {
     
     let realm = try! Realm()
     
     let locationManager = CLLocationManager()
-    
+ 
     var lat = 0 // 주소 조회, 온도 조회 때 사용
     var lon = 0 // 주소 조회, 온도 조회 때 사용
     var doubleLat = 0.0 // 미세먼지 조회 때 사용
@@ -40,9 +43,10 @@ class MainViewController: UIViewController {
         
         // 하단바 광고
         bottomBarBannerView = GADBannerView(adSize: GADAdSizeBanner)
-        // 테스트 코드
-        bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153~6014321966"
-//        bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153/4765384126"
+        // 테스트 아이디
+        bottomBarBannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        // 실제 앱 아이디
+        // bottomBarBannerView.adUnitID = "ca-app-pub-8658987051030153/4765384126"
         bottomBarBannerView.rootViewController = self
         
         locationManager.delegate = self
@@ -141,7 +145,7 @@ class MainViewController: UIViewController {
         // MARK: - dayWeatherView 요소 레이아웃
         dayWeatherView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleView.snp.bottom).offset(50 )
+            make.top.equalTo(titleView.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
         }
         
@@ -152,7 +156,7 @@ class MainViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.leading.equalTo(containerView.snp.leading).offset(20)
         }
-           
+        
         // MARK: - copyrightUsedInfoLabel 요소 레이아웃
         copyrightUsedInfoLabel.snp.makeConstraints { make in
             
@@ -216,7 +220,9 @@ class MainViewController: UIViewController {
             }
         } else {
             try! realm.write{ // 그 이후 현재 위치의 저장값 변경
-                if let filterData = realm.objects(LocalDB.self).filter("currentVCConfirm == true").first { // 현재위치가 있으면(gps가 켜져있으면) 저장된 현재위치의 데이터 실시간 업데이트
+                
+                // 현재위치가 있으면(gps가 켜져있으면) 저장된 현재위치의 데이터 실시간 업데이트
+                if let filterData = realm.objects(LocalDB.self).filter("currentVCConfirm == true").first {
                     print("first type 1")
                     print(filterData)
                     
@@ -227,7 +233,9 @@ class MainViewController: UIViewController {
                     // city는 주소 찾는 함수에서 함
                     print(dbDatas)
                     
-                } else { // 첫번째에 현재위치 데이터가 없어서 첫번째로 변경 (여기부터 아래까지는 현재위치가 없을때, gps가 꺼져있다가 켜진상태이면)
+                    // 첫번째에 현재위치 데이터가 없어서 첫번째로 변경
+                    // (여기부터 아래까지는 현재위치가 없을때, gps가 꺼져있다가 켜진상태이면)
+                } else {
                     print("first type 2")
                     print("dbCount: \(dbDatas.count)")
                     
@@ -293,11 +301,6 @@ class MainViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func gpsNotDeterminedVCSetting() {
-        print("MainViewController - gpsNotDeterminedVCSetting() called")
-
     }
     
     func loadBannerAd() {

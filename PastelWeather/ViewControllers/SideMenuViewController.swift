@@ -32,7 +32,7 @@ class SideMenuViewController: UIViewController {
             let label = UILabel()
             
             label.textColor = .black
-            label.text = "ver.1.0.0"
+            label.text = "ver.1.0.2"
             label.font = UIFont(name: "GmarketSansTTFLight", size: 12)
             
             return label

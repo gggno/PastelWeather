@@ -1,15 +1,18 @@
 import Foundation
 import Alamofire
+import RxSwift
+import RxCocoa
+import RxRelay
 
-class WeatherAPI: NSObject {
+private let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+private let serviceKey = "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ=="
+
+class WeatherAPIService {
     
-    private let url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
-    private let serviceKey = "MXeg4k90bO3y47G4O/5DTg1S9OmMB+UUh8k+OLoX96qUae8mvDLTWXASHiIPn0HzjLqsmj7jr7n/lUL00YNkIQ=="
-    
-    // MARK: - titleView 세팅
-    func currentWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
+    // MARK: - titleView 세팅(현재 날씨 상태)
+    static func currentWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 현재 온도 요청
         let params: Parameters = [
-            "serviceKey" : self.serviceKey,
+            "serviceKey" : serviceKey,
             "dataType" : "JSON",
             "numOfRows" : 36,
             "pageNo" : 1,
@@ -32,7 +35,7 @@ class WeatherAPI: NSObject {
         }
     }
     
-    func minWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최저 온도 요청
+    static func minWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최저 온도 요청
         // 0000~0200이면 전날 날짜의 2000로 조회
         // 0300~2300이면 오늘 날짜의 0200로 조회(0200으로 조회해야 tmn이 나옴)
         
@@ -52,7 +55,7 @@ class WeatherAPI: NSObject {
         }
         
         let params: Parameters = [
-            "serviceKey" : self.serviceKey,
+            "serviceKey" : serviceKey,
             "dataType" : "JSON",
             "numOfRows" : settingNumOfRows,
             "pageNo" : settingPageNo,
@@ -75,7 +78,7 @@ class WeatherAPI: NSObject {
         }
     }
     
-    func maxWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
+    static func maxWeather(baseDate: String, currentTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 최고 온도 요청
         // 0000~1159이면 전날 날짜의 2000로 조회
         // 1200~2359이면 오늘 날짜의 1100로 조회
         var settingTime = "1100"
@@ -92,9 +95,9 @@ class WeatherAPI: NSObject {
             settingNumOfRows = 12
             settingPageNo = 5
         }
-
+        
         let params: Parameters = [
-            "serviceKey" : self.serviceKey,
+            "serviceKey" : serviceKey,
             "dataType" : "JSON",
             "numOfRows" : settingNumOfRows,
             "pageNo" : settingPageNo,
@@ -116,9 +119,9 @@ class WeatherAPI: NSObject {
         }
     }
     
-    func lookWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 날씨상태 텍스트(ex 맑음) 통신 요청
+    static func lookWeather(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 날씨상태 텍스트(ex 맑음) 통신 요청
         let params: Parameters = [
-            "serviceKey" : self.serviceKey,
+            "serviceKey" : serviceKey,
             "dataType" : "JSON",
             "numOfRows" : 36,
             "pageNo" : 1,
@@ -140,10 +143,10 @@ class WeatherAPI: NSObject {
         }
     }
     
-    // MARK: - dayWeatherView 세팅
-    func dayWeatherViewSetting(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 24시 날씨 통신 요청
+    // MARK: - dayWeatherView 세팅(24시 동안의 날씨 상태)
+    static func dayWeatherView(baseDate: String, baseTime: String, lat: Int, lon: Int, completion: @escaping (WeatherResponse) -> Void) { // 24시 날씨 통신 요청
         let params: Parameters = [
-            "serviceKey" : self.serviceKey,
+            "serviceKey" : serviceKey,
             "dataType" : "JSON",
             "numOfRows" : 370,
             "pageNo" : 1,
@@ -165,4 +168,17 @@ class WeatherAPI: NSObject {
             }
         }
     }
+    
+    static func dayWeatherAPIRx(lat: Int, lon: Int) -> Observable<WeatherResponse> {
+        return Observable.create() { emitter in
+                
+            WeatherAPIService.dayWeatherView(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
+                emitter.onNext(response)
+                emitter.onCompleted()
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
 }

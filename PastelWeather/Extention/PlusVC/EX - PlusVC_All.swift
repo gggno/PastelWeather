@@ -95,7 +95,10 @@ extension PlusViewController: MKLocalSearchCompleterDelegate {
         searchResults = completer.results
         // 한국 지역만 나타나게 필터 적용
         searchResults.removeAll {!$0.title.contains("대한민국")}
-        searchTableView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.searchTableView.reloadData()
+        }
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {

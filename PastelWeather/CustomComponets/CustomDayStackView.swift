@@ -13,7 +13,6 @@ import CoreLocation
 class CustomDayStackView: UIStackView {
     
     // MARK: - dayWeatherView 데이터 로직
-    let weatherAPI = WeatherAPI()
     
     func dayWeatherMakeStack(lat: Int, lon: Int) -> UIStackView {
         let stack1 = stackElement(timeLabel: dayInTimeLabel1, ImageView: dayInImageView1, tmpLabel: dayInTmpLabel1)
@@ -43,7 +42,7 @@ class CustomDayStackView: UIStackView {
         
         let stacks = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9, stack10, stack11, stack12, stack13, stack14, stack15, stack16, stack17, stack18, stack19, stack20, stack21, stack22, stack23, stack24])
         
-        weatherAPI.dayWeatherViewSetting(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
+        WeatherAPIService.dayWeatherView(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
             print("세팅 날짜: \(DateValue.baseDate), 세팅 시간: \(DateValue.baseTime)")
             var index = 12
             let timeLeg = Int(DateValue.currentTime)! - Int(DateValue.baseTime)!
@@ -538,7 +537,7 @@ class CustomDayStackView: UIStackView {
     
     let dayInTimeLabel11: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "GmarketSansTTFMedium", size: 15)
+        label.font = UIFont(name: "GmarketSSansTTFMedium", size: 15)
         label.textColor = .black
         return label
     }()

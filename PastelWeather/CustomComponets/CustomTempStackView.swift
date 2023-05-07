@@ -27,11 +27,10 @@ class CustomTempStackView: UIStackView {
     
     func tempSetting(tempName: String, tempNameColor: UIColor, lat: Int, lon: Int) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [tempNameLabel, tempLabel])
-        let weatherAPI = WeatherAPI()
         
         if tempName == "최고" {
             print("최고 온도")
-            weatherAPI.maxWeather(baseDate: DateValue.maxBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
+            WeatherAPIService.maxWeather(baseDate: DateValue.maxBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 
                 if response.response?.body?.items.item[0].baseDate == response.response?.body?.items.item[0].fcstDate {
                     print("날짜 같음max: \(String(describing: response.response?.body?.items.item[0]))")
@@ -68,7 +67,7 @@ class CustomTempStackView: UIStackView {
             
         } else if tempName == "최저" {
             print("최저 온도")
-            weatherAPI.minWeather(baseDate: DateValue.minBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
+            WeatherAPIService.minWeather(baseDate: DateValue.minBaseDate, currentTime: DateValue.currentTime, lat: lat, lon: lon) { response in
                 if let minTmp = response.response?.body?.items.item[0].fcstValue {
                     print("최저온도값: \(minTmp)")
                     self.tempNameLabel.text = tempName + ":"
@@ -88,7 +87,7 @@ class CustomTempStackView: UIStackView {
         } else if tempName == "체감온도" {
             print("체감 온도")
             
-            weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
+            WeatherAPIService.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: lat, lon: lon) { response in
                 var index = 0
                 let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
                 

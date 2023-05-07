@@ -132,10 +132,9 @@ extension MainViewController {
         }
         
         //MARK: - TitleView 데이터 로직
-        let weatherAPI = WeatherAPI()
         
         // 현재 온도 구현 로직
-        weatherAPI.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
+        WeatherAPIService.currentWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
             var index = 0
             let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
             
@@ -154,7 +153,7 @@ extension MainViewController {
         }
         
         // 날씨상태 구현 로직
-        weatherAPI.lookWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
+        WeatherAPIService.lookWeather(baseDate: DateValue.baseDate, baseTime: DateValue.baseTime, lat: self.lat, lon: self.lon) { response in
             var index = 0
             let difference = abs(Int(DateValue.currentTime)! - Int(DateValue.baseTime)!)
             
